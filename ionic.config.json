@@ -1,0 +1,7 @@
+{
+  "name": "OjoDeHorus",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
