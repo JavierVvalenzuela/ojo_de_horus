@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { AlertController, Platform } from '@ionic/angular';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Usuario } from '../model/usuario';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ServicioBDService {
-  public datebase!: SQLiteObject;
+  public database!: SQLiteObject;
 
   tablaRol: string = "CREATE TABLE IF NOT EXISTS ROL (id_rol INTEGER PRIMARY KEY,nombre_rol VARCHAR(50) NOT NULL);";
 
@@ -50,5 +52,54 @@ export class ServicioBDService {
 
     await alert.present();
   }
+
+  fetchUsuario(): Observable<Usuario[]> {
+    return this.listadoUsuarios.asObservable();
+  }
+
+  dbState() {
+    this.isBDReady.asObservable();
+  }
+
+  createBD() {
+
+    
+    this.platform.ready().then(() => { 
+      this.SQLite.create({
+        name: 'usuario.db',
+        location: 'default'  
+      }).then((db: SQLiteObject) => {
+
+
+        this.database = db;
+
+
+        this.isBDReady.next(true);
+
+      }).catch(e => {
+        this.presentAlert('Base de Datos', 'Error en crear la BD' + JSON.stringify(e)); 
+      })
+
+    });
+  }
+  async crearTablas() {
+    try {
+      // Ejecuto la creación de Tablas
+      await this.database.executeSql(this.tablaRol, []);
+      await this.database.executeSql(this.tablaCategoria, []);
+      await this.database.executeSql(this.tablaEstado, []);
+      await this.database.executeSql(this.tablaUsuario, []);
+      await this.database.executeSql(this.tablaPost, []);
+      await this.database.executeSql(this.tablaComentario, []);
+      await this.database.executeSql(this.tablaPostCategoria, []);
+      await this.database.executeSql(this.tablaFavoritos, []);
   
+      // Inserciones por defecto (puedes agregar registros predeterminados aquí si es necesario)
+  
+      // Modifico el estado de la base de datos
+      this.isBDReady.next(true);
+    } catch (e) {
+      this.presentAlert('Creación de Tablas', 'Error en crear las tablas: ' + JSON.stringify(e));
+    }
+  }
 }
