@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Iniciar Sesión</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<div class="logo-container">
+  <img src="assets/img/ojo de horus.png" alt="Ojo de Horus" class="logo-img">
+</div>
+
+<ion-content class="login-content">
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <ion-item>
+      <ion-label position="floating">Usuario</ion-label>
+      <ion-input type="text" required [(ngModel)]="nick" name="nick"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input type="password" required [(ngModel)]="password" name="password"></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" type="submit" [disabled]="!loginForm.form.valid">Iniciar Sesión</ion-button>
+    <ion-button expand="full" [routerDirection]="'root'" [routerLink]="'/registro'">Registrarse</ion-button>
+  </form>
+</ion-content>

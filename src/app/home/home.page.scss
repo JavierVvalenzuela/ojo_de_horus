@@ -1,27 +1,50 @@
-#container {
-  text-align: center;
+ion-content {
+  .welcome-section {
+    text-align: center;
+    margin-bottom: 20px;
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
+    h1 {
+      font-size: 2rem;
+      font-weight: bold;
+    }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
+    .user-name {
+      color: #3880ff; /* Color principal */
+    }
+  }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
+  .welcome-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
 
-  color: #8c8c8c;
+  .about-section {
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
 
-  margin: 0;
-}
+    h3 {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      color: #3880ff;
+    }
 
-#container a {
-  text-decoration: none;
+    p, ul {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    ul {
+      list-style-type: disc;
+      margin-left: 20px;
+    }
+  }
+
+  ion-button {
+    margin-top: 20px;
+  }
 }

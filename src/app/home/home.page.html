@@ -1,20 +1,63 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title></ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <!-- Barra de búsqueda fuera del ion-buttons -->
+    <ion-searchbar slot="end"></ion-searchbar>
+
+    <!-- Botón de inicio de sesión fuera de los botones de navegación -->
+    <ion-button slot="end" [routerDirection]="'root'" [routerLink]="'/login'">Inicio de sesión</ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<ion-content class="ion-padding">
+  <!-- Saludo con el nombre del usuario -->
+  <div class="welcome-section">
+    <h1>Bienvenido<span class="user-name"></span>!</h1>
   </div>
+
+  <img src="https://westerlygloom.wordpress.com/wp-content/uploads/2016/10/cropped-portada-para-facebook-invaders.jpg"
+    alt="Portada de bienvenida" class="welcome-image">
+
+  <!-- Sección "Sobre nosotros" -->
+  <div class="about-section">
+    <h2>Sobre nosotros</h2>
+    <p>
+      En Ojo de horus, somos una comunidad apasionada de entusiastas de los videojuegos de EA Sports. Nuestro objetivo
+      es proporcionar un espacio dinámico y vibrante donde jugadores de todas partes del mundo puedan conectarse,
+      compartir sus experiencias y disfrutar de discusiones apasionadas sobre los juegos que aman.
+    </p>
+    <p>
+      Desde los icónicos juegos de fútbol de FIFA hasta los intensos desafíos de la serie Madden NFL, nuestra
+      plataforma está diseñada para ser el lugar de referencia para todas las noticias, estrategias, y debates sobre
+      los títulos de EA Sports. Ya seas un jugador veterano o nuevo en la serie, encontrarás aquí una comunidad
+      acogedora y dispuesta a ayudar.
+    </p>
+
+    <h3>¿Qué Ofrecemos?</h3>
+    <ul>
+      <li>Foros Activos: Participa en conversaciones sobre tácticas, jugadores, y eventos recientes.</li>
+      <li>Noticias y Actualizaciones: Mantente al tanto de las últimas noticias y actualizaciones.</li>
+      <li>Recursos y Guías: Accede a guías útiles, trucos y estrategias para mejorar tu juego.</li>
+      <li>Eventos y Torneos: Únete a nuestros eventos y torneos para competir con otros entusiastas.</li>
+    </ul>
+
+    <p>
+      Tu voz y tus ideas son importantes para nosotros. En Ojo de horus, cada miembro tiene la oportunidad de
+      contribuir y hacer crecer nuestra comunidad. Ya sea que estés buscando consejos, quieras discutir las últimas
+      actualizaciones o simplemente desees conocer a otros jugadores, aquí encontrarás tu lugar.
+    </p>
+
+    <p>
+      ¡Gracias por ser parte de Ojo de horus! Estamos emocionados de tenerte con nosotros y esperamos que disfrutes de
+      tu experiencia en nuestra comunidad.
+    </p>
+  </div>
+
+  <!-- Botón para explorar contenido -->
+  <ion-button expand="full" color="primary" (click)="navigateToMenu()">Explorar contenido</ion-button>
 </ion-content>

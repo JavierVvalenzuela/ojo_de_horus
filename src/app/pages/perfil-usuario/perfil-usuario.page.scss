@@ -1,0 +1,43 @@
+ion-content {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;     /* Centra verticalmente */
+    padding: 0;             /* Elimina el padding adicional */
+  }
+  
+  .profile-card {
+    width: 100%;
+    max-width: 600px;        /* Define el ancho máximo del card */
+    margin: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgb(31, 18, 204); /* Sombra ligera para efecto de profundidad */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;               /* Espacio entre los elementos del card */
+  
+    .profile-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;  /* Redondea el avatar */
+    }
+  
+    ion-item {
+      --highlight-height: 2px;
+      --highlight-color: #3880ff; /* Color de resaltado */
+    }
+  
+    ion-input {
+      --padding-start: 0;
+    }
+  
+    ion-card-header {
+      ion-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+    }
+  }
+  
+  
+  

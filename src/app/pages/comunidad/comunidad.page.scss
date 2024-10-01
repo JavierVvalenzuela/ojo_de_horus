@@ -1,0 +1,64 @@
+/* Estilos para el contenedor principal de la comunidad */
+.community-container {
+    padding: 20px;
+  
+    .join-community {
+      text-align: center;
+      margin-bottom: 20px;
+  
+      .community-avatar {
+        margin: 0 auto;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+      }
+  
+      h2 {
+        margin-top: 10px;
+        font-size: 24px;
+        font-weight: bold;
+      }
+  
+      p {
+        margin: 10px 0;
+        font-size: 16px;
+        color: #555;
+      }
+  
+      ion-button {
+        margin-top: 20px;
+      }
+    }
+  
+    ion-list {
+      ion-card {
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+        ion-card-header {
+          ion-avatar {
+            margin-right: 15px;
+          }
+  
+          ion-card-title {
+            font-size: 18px;
+            font-weight: bold;
+          }
+        }
+  
+        ion-card-content {
+          p {
+            font-size: 14px;
+            color: #666;
+          }
+  
+          ion-button {
+            margin-top: 10px;
+          }
+        }
+      }
+    }
+  }
+  

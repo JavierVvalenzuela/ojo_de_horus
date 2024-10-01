@@ -1,0 +1,38 @@
+ion-content {
+    .card-custom {
+      margin-bottom: 20px;
+  
+      ion-card-title {
+        font-size: 1.4rem;
+        display: flex;
+        align-items: center;
+        ion-icon {
+          margin-right: 10px;
+        }
+      }
+  
+      img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        margin-bottom: 15px;
+      }
+  
+      .button-group {
+        display: flex;
+        justify-content: space-between;
+  
+        .left-buttons {
+          display: flex;
+          ion-button {
+            margin-right: 10px;
+          }
+        }
+  
+        .right-button {
+          margin-left: auto;
+        }
+      }
+    }
+  }
+  

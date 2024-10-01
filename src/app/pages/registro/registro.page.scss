@@ -1,0 +1,43 @@
+ion-content {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;     /* Centra verticalmente */
+    height: 100%;            /* Ocupa el 100% de la altura del contenedor */
+    padding: 0;             /* Elimina el padding adicional */
+  }
+  
+  .registro-content {
+    width: 100%;
+    max-width: 400px;        /* Define el ancho máximo del formulario */
+    padding: 20px;
+    border: 2px solid #3880ff;  /* Marco azul alrededor del formulario */
+    border-radius: 10px;     /* Bordes redondeados */
+    background-color: #ffffff; /* Fondo blanco para el formulario */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera para efecto de profundidad */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;               /* Espacio entre los elementos del formulario */
+    
+    ion-item {
+      --highlight-height: 2px;
+      --highlight-color: #3880ff; /* Color de resaltado */
+    }
+  
+    ion-input {
+      --padding-start: 0;
+    }
+  
+    ion-button {
+      margin-top: 10px;
+      --background: #3880ff; /* Color de fondo del botón */
+      --color: #fff;         /* Color del texto del botón */
+      --border-radius: 5px; /* Bordes redondeados del botón */
+    }
+    
+    ion-button:last-child {
+      margin-top: 20px;
+      --background: #f4f5f8; /* Fondo blanco para el botón de registrarse */
+      --color: #3880ff;     /* Color del texto del botón */
+    }
+  }
+  
