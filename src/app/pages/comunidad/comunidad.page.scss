@@ -1,64 +1,86 @@
 /* Estilos para el contenedor principal de la comunidad */
-.community-container {
-    padding: 20px;
-  
-    .join-community {
-      text-align: center;
-      margin-bottom: 20px;
-  
-      .community-avatar {
-        margin: 0 auto;
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-      }
-  
-      h2 {
-        margin-top: 10px;
-        font-size: 24px;
-        font-weight: bold;
-      }
-  
-      p {
-        margin: 10px 0;
-        font-size: 16px;
-        color: #555;
-      }
-  
-      ion-button {
-        margin-top: 20px;
+ion-header {
+  background-color: black; /* Fondo negro para el encabezado */
+  ion-toolbar {
+    background-color: black; /* Asegurando que la barra de herramientas sea negra */
+    color: gold; /* Color dorado para el texto del toolbar */
+
+    ion-title {
+      color: gold; /* Títulos dorados */
+    }
+
+    ion-buttons {
+      ion-menu-button,
+      ion-back-button {
+        color: gold; /* Color dorado para los botones de menú y retroceso */
       }
     }
-  
+  }
+}
+
+ion-content {
+  background-color: black; /* Fondo negro */
+  color: white; /* Texto blanco */
+
+  .community-container {
+    padding: 16px;
+
+    .join-community {
+      background-color: rgba(255, 215, 0, 0.8); /* Fondo dorado semitransparente para la sección de unirse */
+      padding: 16px;
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+
+      h2 {
+        color: black; /* Título negro */
+        margin-bottom: 8px;
+      }
+
+      p {
+        color: black; /* Texto negro */
+        margin-bottom: 16px;
+      }
+
+      ion-button {
+        background-color: gold; /* Botón dorado */
+        color: black; /* Texto negro en el botón */
+        --border-radius: 5px; /* Bordes redondeados */
+      }
+    }
+
     ion-list {
       ion-card {
-        margin-bottom: 20px;
-        border: 1px solid #ddd;
+        background-color: rgba(255, 255, 255, 0.1); /* Fondo semitransparente para las tarjetas */
+        margin-bottom: 16px;
         border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+
         ion-card-header {
-          ion-avatar {
-            margin-right: 15px;
-          }
-  
-          ion-card-title {
-            font-size: 18px;
-            font-weight: bold;
-          }
+          background-color: rgba(255, 215, 0, 0.8); /* Fondo dorado semitransparente para el encabezado de la tarjeta */
+          border-radius: 8px 8px 0 0; /* Bordes redondeados en la parte superior */
         }
-  
+
+        ion-card-title {
+          color: black; /* Título negro en la tarjeta */
+        }
+
         ion-card-content {
+          color: white; /* Texto blanco en el contenido de la tarjeta */
+          padding: 16px;
+
           p {
-            font-size: 14px;
-            color: #666;
+            margin-bottom: 8px; /* Espaciado entre párrafos */
           }
-  
+
           ion-button {
-            margin-top: 10px;
+            background-color: gold; /* Botón dorado en la tarjeta */
+            color: black; /* Texto negro en el botón */
+            --border-radius: 5px; /* Bordes redondeados */
           }
         }
       }
     }
   }
-  
+}

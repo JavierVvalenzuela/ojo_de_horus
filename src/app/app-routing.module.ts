@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
+
 const routes: Routes = [
   {
     path: 'home',
@@ -85,7 +86,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/administrador/administrador.module').then( m => m.AdministradorPageModule)
   },
   {
-    path: '',
+    path: '**',
     loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
   },
 ];

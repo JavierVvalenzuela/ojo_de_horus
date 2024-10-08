@@ -1,13 +1,50 @@
-ion-content {
+ion-header {
+  background-color: #d4af37; /* Fondo dorado */
+  color: #000; /* Texto negro */
+
+  ion-toolbar {
+    --background: transparent; /* Fondo transparente del toolbar para que herede el dorado */
+    color: #000; /* Color del texto e iconos dentro del toolbar */
+
+    ion-title, ion-buttons, ion-searchbar, ion-button {
+      color: #000; /* Asegurarse de que el texto e iconos sean negros */
+    }
+
+    ion-menu-button, ion-back-button {
+      color: #000; /* Iconos del menú y back en negro */
+    }
+
+    ion-searchbar {
+      --background: #fff; /* Fondo blanco del cuadro de búsqueda */
+      --color: #000; /* Texto negro dentro del searchbar */
+    }
+
+    ion-button {
+      --background: #fff; /* Fondo blanco para el botón de inicio de sesión */
+      color: #000; /* Texto negro en el botón */
+      border-radius: 10px; /* Bordes redondeados */
+    }
+  }
+}
+
+ion-content { 
+  background-color: #000; /* Fondo negro */
+  color: #fff; /* Texto blanco */
+
   .card-custom {
     margin-bottom: 20px;
+    border: 2px solid #d4af37; /* Borde dorado */
+    border-radius: 10px; /* Bordes redondeados */
 
     ion-card-title {
       font-size: 1.4rem;
       display: flex;
       align-items: center;
+      color: #d4af37; /* Texto dorado para el título */
+
       ion-icon {
         margin-right: 10px;
+        color: #d4af37; /* Icono dorado */
       }
     }
 
@@ -16,6 +53,7 @@ ion-content {
       height: auto;
       border-radius: 10px;
       margin-bottom: 15px;
+      border: 2px solid #d4af37; /* Borde dorado en imágenes */
     }
 
     .button-group {
@@ -24,17 +62,24 @@ ion-content {
 
       .left-buttons {
         display: flex;
+
         ion-button {
           margin-right: 10px;
+          color: #000; /* Texto del botón negro */
+          --background: #d4af37; /* Botones dorados */
+          border-radius: 10px;
         }
       }
 
       .right-button {
         margin-left: auto;
+
+        ion-button {
+          color: #000; /* Texto del botón negro */
+          --background: #d4af37; /* Botón dorado */
+          border-radius: 10px;
+        }
       }
-      
     }
-    
   }
-  
 }

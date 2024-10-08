@@ -1,13 +1,24 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>notFound</ion-title>
+    <ion-title>Página No Encontrada</ion-title>
+    <ion-buttons slot="start">
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">notFound</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <div class="not-found-container">
+    <h1>Oh, parece que te has desviado de tu camino, apasionado de EA Sports</h1>
+    <p>
+      Lamentablemente, la página que estás buscando no existe o ha sido movida. Es posible que hayas ingresado una dirección incorrecta o que el enlace que seguiste ya no sea válido. Sin embargo, no te preocupes, siempre puedes volver al menú principal y seguir explorando todo el contenido que hemos preparado especialmente para ti.
+    </p>
+    <p>
+      Si crees que esto es un error, por favor revisa la dirección o utiliza los recursos disponibles en el menú principal para encontrar lo que necesitas. Apreciamos tu comprensión y te invitamos a continuar disfrutando de tu experiencia en nuestra comunidad dedicada a los fanáticos de EA Sports.
+    </p>
+
+    <ion-button expand="block" color="light" routerLink="/home">
+      Volver al Menú Principal
+    </ion-button>
+  </div>
 </ion-content>
+

@@ -1,37 +1,70 @@
+ion-header {
+  background-color: black; /* Fondo negro para el encabezado */
+  ion-toolbar {
+    background-color: black; /* Asegurando que la barra de herramientas sea negra */
+    color: gold; /* Color dorado para el texto del toolbar */
+
+    ion-title {
+      color: gold; /* Títulos dorados */
+    }
+
+    ion-buttons {
+      ion-menu-button,
+      ion-back-button {
+        color: gold; /* Color dorado para los botones de menú y retroceso */
+      }
+    }
+  }
+}
+
 ion-content {
-    --padding-start: 0;
-    --padding-end: 0;
-    --padding-top: 0;
-    --padding-bottom: 0;
-  
-    .legal-card {
-      margin: 15px;
-      padding: 10px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(17, 0, 248, 0.945);
-  
-      ion-card-header {
-        background-color: #620b94;
-      }
-  
-      ion-card-title {
-        color: var(--title-color, #f0e6e6); // Cambia el color del título
-      }
-  
-      ion-card-content {
-        .legal-text {
-          p {
-            margin-bottom: 15px;
-            line-height: 1.6;
-  
-            strong {
-              color: var(--highlight-color, #3880ff); // Cambia el color del texto destacado
-              display: block;
-              margin-bottom: 5px;
-            }
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  background-color: black; /* Fondo negro */
+  background-image: linear-gradient(transparent 10%, gold 10%, gold 20%, transparent 20%, transparent 30%, gold 30%, gold 40%, transparent 40%, transparent 50%, gold 50%, gold 60%, transparent 60%, transparent 70%, gold 70%, gold 80%, transparent 80%, transparent 90%, gold 90%); /* Líneas doradas */
+
+  .legal-card {
+    margin: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(248, 223, 0, 0.945);
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo semi-transparente para las tarjetas */
+
+    ion-card-header {
+      background-color: gold; /* Color del encabezado de la tarjeta */
+    }
+
+    ion-card-title {
+      color: rgb(0, 0, 0); /* Títulos dorados */
+    }
+
+    ion-card-content {
+      color: white; /* Texto blanco */
+
+      .legal-text {
+        p {
+          margin-bottom: 15px;
+          line-height: 1.6;
+
+          strong {
+            color: var(--highlight-color, gold); /* Color dorado para el texto destacado */
+            display: block;
+            margin-bottom: 5px;
           }
         }
       }
     }
   }
-  
+
+  .custom-header {
+    background-color: black; /* Fondo negro para el encabezado */
+    ion-toolbar {
+      color: gold; /* Color dorado para el texto del toolbar */
+      ion-title {
+        color: gold; /* Títulos dorados */
+      }
+    }
+  }
+}

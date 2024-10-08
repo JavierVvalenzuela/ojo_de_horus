@@ -1,43 +1,63 @@
+ion-header {
+  background-color: #cc9226; /* Fondo dorado para el header */
+  color: #000;               /* Color del texto negro para el header */
+}
+
+ion-toolbar {
+  --background: #cc9226; /* Fondo dorado para la barra de herramientas */
+}
+
+ion-menu-button {
+  --color: #000000; /* Color del texto del botón blanco */
+}
+
 ion-content {
-    display: flex;
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center;     /* Centra verticalmente */
-    padding: 0;             /* Elimina el padding adicional */
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center;     /* Centra verticalmente */
+  padding: 0;             /* Elimina el padding adicional */
+  background-color: #000; /* Fondo negro */
+}
+
+.profile-card {
+  width: 100%;
+  max-width: 600px;        /* Define el ancho máximo del card */
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(204, 146, 38, 0.5); /* Sombra dorada para efecto de profundidad */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;               /* Espacio entre los elementos del card */
+  background-color: #1c1c1c; /* Fondo gris oscuro para el card */
+  border: 2px solid #cc9226; /* Borde dorado para el card */
+  border-radius: 10px;     /* Bordes redondeados */
+
+  .profile-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;  /* Redondea el avatar */
   }
-  
-  .profile-card {
-    width: 100%;
-    max-width: 600px;        /* Define el ancho máximo del card */
-    margin: 20px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgb(31, 18, 204); /* Sombra ligera para efecto de profundidad */
-    display: flex;
-    flex-direction: column;
-    gap: 15px;               /* Espacio entre los elementos del card */
-  
-    .profile-avatar {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;  /* Redondea el avatar */
-    }
-  
+
+  ion-item {
+    --highlight-height: 2px;
+    --highlight-color: #cc9226; /* Color de resaltado dorado */
+  }
+
+  ion-input {
+    --padding-start: 0;
+    color: #fff; /* Color del texto del input */
+    background-color: #333; /* Fondo gris oscuro para el input */
+    border: 1px solid #cc9226; /* Borde dorado para el input */
+  }
+
+  ion-card-header {
     ion-item {
-      --highlight-height: 2px;
-      --highlight-color: #3880ff; /* Color de resaltado */
-    }
-  
-    ion-input {
-      --padding-start: 0;
-    }
-  
-    ion-card-header {
-      ion-item {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-      }
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      color: #f7f7f7; /* Color del texto del header */
     }
   }
-  
-  
+}
+
   

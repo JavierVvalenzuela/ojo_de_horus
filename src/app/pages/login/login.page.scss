@@ -6,46 +6,75 @@
   height: 100vh;
   padding: 0 20px;
   box-sizing: border-box;
-  background-color: #000;
-  color: #fff;
+  background-color: #000; // Fondo negro
+  color: #fff; // Texto en blanco
 }
 
 .logo-container {
-display: flex;
-justify-content: center;
-margin-bottom: 20px;
-margin-top: 5%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-top: 5%;
 }
 
 .logo-img {
-width: 150px;
-height: auto;
+  width: 150px;
+  height: auto;
 }
 
 form {
   width: 100%;
-  max-width: 5000px;
+  max-width: 500px; // Ajustado a un valor razonable
+  margin: auto; // Centra el formulario en la página
   padding: 20px;
   border-radius: 10px;
-  background-color: #cc9226;
+  background-color: #1a1a1a; // Fondo oscuro para el formulario
   display: flex;
   flex-direction: column;
   gap: 25px;
   align-items: stretch;
-  box-shadow: 0 2px 10px rgb(255, 230, 1);
+  box-shadow: 0 2px 10px rgba(255, 230, 1, 0.5); // Sombra dorada
+
+  // Detalles para los inputs y botones
+  ion-item {
+    --highlight-height: 2px;
+    --highlight-color: #000; // Color negro para el highlight
+  }
+
+  ion-input {
+    --padding-start: 0;
+    color: #fff; // Texto blanco en los inputs
+    background: rgba(255, 255, 255, 0.1); // Fondo semi-transparente para el input
+  }
+
+  ion-button {
+    margin-top: 5px;
+    background: #d4af37; // Fondo dorado para el botón
+    color: #000; // Texto en negro para el botón
+    border-radius: 5px; // Bordes redondeados
+
+    &:disabled {
+      background: rgba(212, 175, 55, 0.5); // Fondo dorado semi-transparente cuando está deshabilitado
+    }
+  }
 }
 
-ion-item {
-  --highlight-height: 2px;
-  --highlight-color: #000103;
-}
+// Estilos para el header
+ion-header {
+  background-color: #d4af37; // Fondo dorado
+  color: #000; // Texto negro
 
-ion-input {
-  --padding-start: 0;
-}
-
-ion-button {
-  margin-top: 5px;
-  background: #01050f;
-}
+  ion-toolbar {
+    --background: transparent; // Hacer que el toolbar sea transparente para mostrar el dorado
+  }
   
+  ion-title {
+    color: #000; // Texto en negro para el título
+  }
+  
+  ion-buttons {
+    ion-back-button, ion-menu-button {
+      color: #000; // Botones de menú y atrás en negro
+    }
+  }
+}

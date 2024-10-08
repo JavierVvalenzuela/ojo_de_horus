@@ -1,0 +1,32 @@
+ion-content {
+    background-color: #000; /* Fondo negro */
+    color: #fff; /* Texto blanco */
+  }
+  
+  .not-found-container {
+    text-align: center;
+    margin-top: 50px;
+    border: 2px solid #d4af37; /* Borde dorado */
+    padding: 20px;
+    border-radius: 10px;
+  
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #d4af37; /* Color dorado para el título */
+    }
+  
+    p {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: #fff; /* Texto blanco */
+    }
+  }
+  
+  ion-button {
+    margin-top: 20px;
+    color: #000; /* Texto del botón negro */
+    --background: #d4af37; /* Botón dorado */
+    border-radius: 10px;
+  }
+  
