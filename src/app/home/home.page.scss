@@ -20,8 +20,8 @@ ion-header {
     }
 
     ion-button {
-      --background: #fff; /* Fondo blanco para el botón de inicio de sesión */
-      color: #000; /* Texto negro en el botón */
+      --background: #000000; /* Fondo blanco para el botón de inicio de sesión */
+      text-align: center;
       border-radius: 10px; /* Bordes redondeados */
     }
   }
@@ -29,7 +29,9 @@ ion-header {
 
 
 ion-content {
-  background-color: #000; /* Fondo negro */
+  background-color: #000000; /* Fondo negro */
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  --background: transparent;
 
   .welcome-section {
     text-align: center;
@@ -39,11 +41,9 @@ ion-content {
       font-size: 2rem;
       font-weight: bold;
       color: #cc9226; /* Color dorado para el título */
+      font-family:Georgia, 'Times New Roman', Times, serif;
     }
 
-    .user-name {
-      color: #cc9226; /* Color dorado para el nombre de usuario */
-    }
   }
 
   .welcome-image {
@@ -59,12 +59,14 @@ ion-content {
       font-size: 1.8rem;
       margin-bottom: 15px;
       color: #cc9226; /* Color dorado */
+      font-family:Georgia, 'Times New Roman', Times, serif;
     }
 
     h3 {
       margin-top: 20px;
       font-size: 1.5rem;
       color: #cc9226; /* Color dorado */
+      font-family:Georgia, 'Times New Roman', Times, serif;
     }
 
     p,
@@ -72,7 +74,10 @@ ion-content {
       font-size: 1rem;
       line-height: 1.6;
       margin-bottom: 15px;
-      color: #f7f7f7; /* Color blanco para el texto */
+      color: #ffffff; /* Color blanco para el texto */
+      background-color: #000000;
+      border: 5px solid #cc9226;
+      padding: 4%;
     }
 
     ul {

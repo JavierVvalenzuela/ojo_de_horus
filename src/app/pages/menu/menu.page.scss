@@ -30,6 +30,7 @@ ion-header {
 ion-content { 
   background-color: #000; /* Fondo negro */
   color: #fff; /* Texto blanco */
+  --background: transparent;
 
   .card-custom {
     margin-bottom: 20px;
