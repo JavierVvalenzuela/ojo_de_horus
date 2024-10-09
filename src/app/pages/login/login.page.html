@@ -24,6 +24,11 @@
       <ion-input type="password" required [(ngModel)]="password" name="password"></ion-input>
     </ion-item>
 
+    <!-- Mensaje de error -->
+    <p *ngIf="errorMessage" style="color: red; margin-top: 10px;">
+      {{ errorMessage }}
+    </p>
+
     <ion-button expand="full" type="submit" [disabled]="!loginForm.form.valid">Iniciar Sesión</ion-button>
     <ion-button expand="full" [routerDirection]="'root'" [routerLink]="'/registro'">Registrarse</ion-button>
   </form>

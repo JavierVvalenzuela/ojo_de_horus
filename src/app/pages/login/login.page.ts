@@ -9,6 +9,7 @@ import { NavController } from '@ionic/angular';
 export class LoginPage implements OnInit {
   nick: string = '';
   password: string = '';
+  errorMessage: string = '';  // Variable para almacenar el mensaje de error
 
   // Lista de usuarios predefinidos
   private static predefinedUsers: any[] = [
@@ -18,22 +19,59 @@ export class LoginPage implements OnInit {
 
   constructor(private navCtrl: NavController) {}
 
-  ngOnInit() {
-    // Inicializa cualquier configuración si es necesario
-  }
+  ngOnInit() {}
 
   onSubmit() {
-    // Busca el usuario en la lista predefinida
+    
+    this.errorMessage = '';
+
+    
+    if (!this.areFieldsFilled(this.nick, this.password)) {
+      this.errorMessage = 'Los campos deben tener entre 3 y 15 caracteres.';
+      return;
+    }
+
+    
+    if (!this.isNickValid(this.nick) || !this.isPasswordValid(this.password)) {
+      this.errorMessage = 'Uno o ambos campos son incorrectos.';
+      return;
+    }
+
+    
     const user = LoginPage.predefinedUsers.find((u: any) => u.nick === this.nick && u.password === this.password);
 
     if (user) {
       console.log('Inicio de sesión exitoso');
-      // Redirige a la página home si las credenciales coinciden
       this.navCtrl.navigateRoot('/home');
     } else {
-      console.log('Credenciales incorrectas');
-      // Muestra una alerta si las credenciales no coinciden
-      alert('Usuario o contraseña incorrectos');
-    }
-  }
+      this.errorMessage = 'Usuario o contraseña incorrectos.';
+    }
+  }
+
+  
+  areFieldsFilled(nick: string, password: string): boolean {
+    const minLength = 3;
+    const maxLength = 15;
+    return (
+      nick.length >= minLength && nick.length <= maxLength &&
+      password.length >= minLength && password.length <= maxLength
+    );
+  }
+
+  
+  isPasswordValid(password: string): boolean {
+    const minLength = 3;
+    const maxLength = 15;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    const validLength = password.length >= minLength && password.length <= maxLength;
+    return hasUpperCase && hasSpecialChar && validLength;
+  }
+
+
+  isNickValid(nick: string): boolean {
+    const minLength = 3;
+    const maxLength = 15;
+    return nick.length >= minLength && nick.length <= maxLength;
+  }
 }
