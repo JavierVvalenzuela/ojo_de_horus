@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { ServicioBDService } from '../../services/servicio-bd.service'; 
+import { Usuario } from '../../model/usuario'; 
 
 @Component({
   selector: 'app-login',
@@ -9,36 +11,34 @@ import { NavController } from '@ionic/angular';
 export class LoginPage implements OnInit {
   nick: string = '';
   password: string = '';
-  errorMessage: string = '';  // Variable para almacenar el mensaje de error
+  errorMessage: string = '';  
 
-  // Lista de usuarios predefinidos
-  private static predefinedUsers: any[] = [
-    { nick: 'Diego', password: '1234' },
-    { nick: 'Javier', password: '12345' }
-  ];
+  usuarios: Usuario[] = []; 
 
-  constructor(private navCtrl: NavController) {}
+  constructor(private navCtrl: NavController, private servicioBD: ServicioBDService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loadUsers(); 
+  }
+
+  async loadUsers() {
+    this.usuarios = await this.servicioBD.getAllUsuarios(); 
+  }
 
   onSubmit() {
-    
     this.errorMessage = '';
 
-    
     if (!this.areFieldsFilled(this.nick, this.password)) {
       this.errorMessage = 'Los campos deben tener entre 3 y 15 caracteres.';
       return;
     }
 
-    
     if (!this.isNickValid(this.nick) || !this.isPasswordValid(this.password)) {
       this.errorMessage = 'Uno o ambos campos son incorrectos.';
       return;
     }
 
-    
-    const user = LoginPage.predefinedUsers.find((u: any) => u.nick === this.nick && u.password === this.password);
+    const user = this.usuarios.find((u: Usuario) => u.nick_u === this.nick && u.contrasena_u === this.password);
 
     if (user) {
       console.log('Inicio de sesión exitoso');
@@ -48,7 +48,6 @@ export class LoginPage implements OnInit {
     }
   }
 
-  
   areFieldsFilled(nick: string, password: string): boolean {
     const minLength = 3;
     const maxLength = 15;
@@ -58,7 +57,6 @@ export class LoginPage implements OnInit {
     );
   }
 
-  
   isPasswordValid(password: string): boolean {
     const minLength = 3;
     const maxLength = 15;
@@ -67,7 +65,6 @@ export class LoginPage implements OnInit {
     const validLength = password.length >= minLength && password.length <= maxLength;
     return hasUpperCase && hasSpecialChar && validLength;
   }
-
 
   isNickValid(nick: string): boolean {
     const minLength = 3;
