@@ -21,8 +21,13 @@ export class RegistroPage implements OnInit {
 
   constructor(private navCtrl: NavController, private servicioBD: ServicioBDService) { 
     const today = new Date();
+    
+    // Calcular la fecha máxima (hoy)
     this.maxDate = today.toISOString().split('T')[0]; 
-    this.minDate = new Date(today.getFullYear() - 100, today.getMonth(), today.getDate()).toISOString().split('T')[0]; 
+
+    // Calcular la fecha mínima (hace 120 años)
+    const minDate120YearsAgo = new Date(today.getFullYear() - 120, today.getMonth(), today.getDate());
+    this.minDate = minDate120YearsAgo.toISOString().split('T')[0]; 
   }
 
   ngOnInit() { }
@@ -47,6 +52,13 @@ export class RegistroPage implements OnInit {
 
     if (!this.isDateValid(this.user.birthdate)) {
       this.errorMessage = 'Por favor, ingrese una fecha válida.';
+      return;
+    }
+
+    // Validar que la fecha de nacimiento sea entre 15 y 120 años atrás
+    const isAgeValid = this.isAgeInRange(this.user.birthdate);
+    if (!isAgeValid) {
+      this.errorMessage = 'La fecha de nacimiento debe ser entre 15 y 120 años atrás.';
       return;
     }
 
@@ -94,5 +106,18 @@ export class RegistroPage implements OnInit {
     const currentDate = new Date();
     const selectedDate = new Date(date);
     return selectedDate <= currentDate; 
+  }
+
+  // Nueva función para validar la edad
+  isAgeInRange(date: string): boolean {
+    const currentDate = new Date();
+    const selectedDate = new Date(date);
+    
+    // Calcular la fecha que corresponde a 15 años atrás
+    const minDate = new Date(currentDate.getFullYear() - 15, currentDate.getMonth(), currentDate.getDate());
+    // Calcular la fecha que corresponde a 120 años atrás
+    const maxDate = new Date(currentDate.getFullYear() - 120, currentDate.getMonth(), currentDate.getDate());
+
+    return selectedDate <= minDate && selectedDate >= maxDate; 
   }
 }
