@@ -62,8 +62,7 @@
       <ion-button *ngIf="isOwner" color="primary" expand="full" (click)="updateUser()">
         Actualizar Información
       </ion-button>
-
-      <!-- Botón de eliminar que solo se muestra si el usuario es administrador -->
+      
       <ion-button *ngIf="isAdmin" color="danger" expand="full" (click)="deleteUser()">
         Eliminar Usuario
       </ion-button>
