@@ -1,19 +1,22 @@
 ion-header {
     ion-toolbar {
-      background-color: #000; // Fondo negro
+      background-color: rgb(0, 0, 0); // Fondo negro
+      --background:#d4af37 ;
       ion-title {
-        color: #d4af37; // Dorado
+        color: #000000; // Dorado
+        
       }
     }
   }
   
   ion-content {
-    background-color: #000; // Fondo negro
+    background-color: #ffffff; // Fondo negro
+    --background: #000000;
     --ion-item-background: transparent; // Fondo transparente para los ítems
   
     ion-list {
       ion-item {
-        color: #fff; // Texto blanco
+        color: #ffffff; // Texto blanco
         ion-icon {
           color: #d4af37; // Íconos dorados
         }
@@ -26,7 +29,7 @@ ion-header {
         ion-select {
           color: #d4af37; // Select dorado
           ion-select-option {
-            color: #000; // Texto de opciones negro
+            color: #ff0000; // Texto de opciones negro
           }
         }
       }

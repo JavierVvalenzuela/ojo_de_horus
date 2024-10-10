@@ -5,9 +5,11 @@ ion-header {
   ion-toolbar {
     --background: transparent; /* Fondo transparente del toolbar para que herede el dorado */
     color: #000; /* Color del texto e iconos dentro del toolbar */
+    font-family: Georgia, 'Times New Roman', Times, serif;
 
     ion-title, ion-buttons, ion-searchbar, ion-button {
-      color: #000; /* Asegurarse de que el texto e iconos sean negros */
+      color: #000; /* Asegurarse de que el texto e icono sean negros */
+      font-family: Georgia, 'Times New Roman', Times, serif;
     }
 
     ion-menu-button, ion-back-button {
@@ -20,7 +22,7 @@ ion-header {
     }
 
     ion-button {
-      --background: #fff; /* Fondo blanco para el botón de inicio de sesión */
+      --background: #000000; /* Fondo blanco para el botón de inicio de sesión */
       color: #000; /* Texto negro en el botón */
       border-radius: 10px; /* Bordes redondeados */
     }
@@ -30,17 +32,30 @@ ion-header {
 ion-content { 
   background-color: #000; /* Fondo negro */
   color: #fff; /* Texto blanco */
+  --background: transparent;
+
+  h1{
+    color: #fff;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+    border: 4px solid #d4af37;
+    font-size: 60px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
 
   .card-custom {
     margin-bottom: 20px;
     border: 2px solid #d4af37; /* Borde dorado */
     border-radius: 10px; /* Bordes redondeados */
+    text-align: center;
 
     ion-card-title {
       font-size: 1.4rem;
       display: flex;
       align-items: center;
       color: #d4af37; /* Texto dorado para el título */
+      font-family: Georgia, 'Times New Roman', Times, serif;
 
       ion-icon {
         margin-right: 10px;
@@ -68,6 +83,7 @@ ion-content {
           color: #000; /* Texto del botón negro */
           --background: #d4af37; /* Botones dorados */
           border-radius: 10px;
+          font-family: Georgia, 'Times New Roman', Times, serif;
         }
       }
 
