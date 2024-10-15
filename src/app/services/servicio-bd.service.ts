@@ -13,10 +13,10 @@ export class ServicioBDService {
   tablaRol: string = "CREATE TABLE IF NOT EXISTS ROL (id_rol INTEGER PRIMARY KEY AUTOINCREMENT, nombre_rol VARCHAR(50) NOT NULL);";
   tablaCategoria: string = "CREATE TABLE IF NOT EXISTS CATEGORIA (id_categoria INTEGER PRIMARY KEY AUTOINCREMENT, nombre_cat VARCHAR(50) NOT NULL);";
   tablaEstado: string = "CREATE TABLE IF NOT EXISTS ESTADO (id_estado INTEGER PRIMARY KEY AUTOINCREMENT, nombre_e VARCHAR(50) NOT NULL);";
-  tablaUsuario: string = `CREATE TABLE IF NOT EXISTS USUARIO (id_usuario INTEGER PRIMARY KEY AUTOINCREMENT, nombre_u VARCHAR(50) NOT NULL, apellido_u VARCHAR(50) NOT NULL, nick_u VARCHAR(50) NOT NULL, correo_u VARCHAR(100) NOT NULL,  contrasena_u VARCHAR(50) NOT NULL, tocken_u VARCHAR(255), estado_cuenta_u CHAR(1) NOT NULL, razon_ban_u TEXT, id_rol INTEGER NOT NULL, FOREIGN KEY(id_rol) REFERENCES ROL(id_rol));`;
+  tablaUsuario: string = `CREATE TABLE IF NOT EXISTS USUARIO (id_usuario INTEGER PRIMARY KEY AUTOINCREMENT, nombre_u VARCHAR(50) NOT NULL, apellido_u VARCHAR(50) NOT NULL, nick_u VARCHAR(50) NOT NULL, correo_u VARCHAR(100) NOT NULL, contrasena_u VARCHAR(50) NOT NULL, tocken_u VARCHAR(255), estado_cuenta_u CHAR(1) NOT NULL, razon_ban_u TEXT, id_rol INTEGER NOT NULL, FOREIGN KEY(id_rol) REFERENCES ROL(id_rol));`;
   tablaPost: string = `CREATE TABLE IF NOT EXISTS POST (id_post INTEGER PRIMARY KEY AUTOINCREMENT, titulo_post VARCHAR(50) NOT NULL, contenido_post TEXT NOT NULL, f_creacion_post DATE NOT NULL, imagen_post BLOB, id_usuario INTEGER NOT NULL, id_estado INTEGER NOT NULL, FOREIGN KEY(id_usuario) REFERENCES USUARIO(id_usuario), FOREIGN KEY(id_estado) REFERENCES ESTADO(id_estado));`;
   tablaComentario: string = `CREATE TABLE IF NOT EXISTS COMENTARIO (id_coment INTEGER PRIMARY KEY AUTOINCREMENT, contenido_coment TEXT NOT NULL, f_creacion_coment DATE NOT NULL, imagen_coment BLOB, id_estado INTEGER NOT NULL, id_post INTEGER NOT NULL, FOREIGN KEY(id_estado) REFERENCES ESTADO(id_estado), FOREIGN KEY(id_post) REFERENCES POST(id_post));`;
-  tablaPostCategoria: string = `CREATE TABLE IF NOT EXISTS POST_CATEGORIA (id_post_c INTEGER PRIMARY KEY AUTOINCREMENT, id_categoria INTEGER NOT NULL,id_post INTEGER NOT NULL, FOREIGN KEY(id_categoria) REFERENCES CATEGORIA(id_categoria), FOREIGN KEY(id_post) REFERENCES POST(id_post));`;
+  tablaPostCategoria: string = `CREATE TABLE IF NOT EXISTS POST_CATEGORIA (id_post_c INTEGER PRIMARY KEY AUTOINCREMENT, id_categoria INTEGER NOT NULL, id_post INTEGER NOT NULL, FOREIGN KEY(id_categoria) REFERENCES CATEGORIA(id_categoria), FOREIGN KEY(id_post) REFERENCES POST(id_post));`;
   tablaFavoritos: string = `CREATE TABLE IF NOT EXISTS FAVORITOS (id_fav INTEGER PRIMARY KEY AUTOINCREMENT, f_creacion_fav DATE NOT NULL, id_usuario INTEGER NOT NULL, id_post INTEGER NOT NULL, FOREIGN KEY(id_usuario) REFERENCES USUARIO(id_usuario), FOREIGN KEY(id_post) REFERENCES POST(id_post));`;
 
   listadoUsuarios = new BehaviorSubject<Usuario[]>([]);
@@ -56,7 +56,7 @@ export class ServicioBDService {
         this.database = db;
         this.crearTablas(); 
         this.isBDReady.next(true);
-      }).catch(e => {
+      }).catch((e: any) => {
         this.presentAlert('Error de Base de Datos', `No se pudo crear la base de datos: ${e.message}`);
       });
     });
@@ -73,7 +73,7 @@ export class ServicioBDService {
       await this.database.executeSql(this.tablaPostCategoria, []);
       await this.database.executeSql(this.tablaFavoritos, []);
       this.isBDReady.next(true);
-    } catch (e) {
+    } catch (e: any) {
       this.presentAlert('Error de Tablas', `No se pudieron crear las tablas: ${e.message}`);
     }
   }
@@ -88,7 +88,7 @@ export class ServicioBDService {
         usuarios.push(result.rows.item(i));
       }
       return usuarios;
-    } catch (e) {
+    } catch (e: any) {
       this.presentAlert('Error', `No se pudieron obtener los usuarios: ${e.message}`);
       return [];
     }
@@ -102,7 +102,7 @@ export class ServicioBDService {
         return result.rows.item(0);
       }
       return null;
-    } catch (e) {
+    } catch (e: any) {
       this.presentAlert('Error', `No se pudo obtener el usuario: ${e.message}`);
       return null;
     }
