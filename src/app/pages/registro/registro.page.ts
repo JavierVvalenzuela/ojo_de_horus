@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { ServicioBDService } from '../../services/servicio-bd.service'; 
+import { Usuario } from '../../model/usuario'; 
 
 @Component({
   selector: 'app-registro',
@@ -18,14 +19,15 @@ export class RegistroPage implements OnInit {
   errorMessage: string = '';  
   minDate: string;  
   maxDate: string;  
+  usuariosRegistrados: Usuario[] = []; 
 
   constructor(private navCtrl: NavController, private servicioBD: ServicioBDService) { 
     const today = new Date();
     
-    // Calcular la fecha máxima (hoy)
+    
     this.maxDate = today.toISOString().split('T')[0]; 
 
-    // Calcular la fecha mínima (hace 120 años)
+    
     const minDate120YearsAgo = new Date(today.getFullYear() - 120, today.getMonth(), today.getDate());
     this.minDate = minDate120YearsAgo.toISOString().split('T')[0]; 
   }
@@ -55,7 +57,7 @@ export class RegistroPage implements OnInit {
       return;
     }
 
-    // Validar que la fecha de nacimiento sea entre 15 y 120 años atrás
+    
     const isAgeValid = this.isAgeInRange(this.user.birthdate);
     if (!isAgeValid) {
       this.errorMessage = 'La fecha de nacimiento debe ser entre 15 y 120 años atrás.';
@@ -71,10 +73,24 @@ export class RegistroPage implements OnInit {
 
     const correo = `${this.user.nick}@example.com`; 
     const apellido = ''; 
-    const idRol = 1; 
+    const idRol = 3; 
+    const id_usuario = this.usuariosRegistrados.length + 1; 
+    
     await this.servicioBD.insertarUsuario(this.user.name, apellido, this.user.nick, correo, this.user.password, idRol);
     
-    console.log('Usuario registrado:', this.user);
+
+    const nuevoUsuario = new Usuario();
+    nuevoUsuario.id_usuario = id_usuario;
+    nuevoUsuario.nombre_u = this.user.name;
+    nuevoUsuario.apellido_u = apellido;
+    nuevoUsuario.nick_u = this.user.nick;
+    nuevoUsuario.correo_u = correo;
+    nuevoUsuario.contrasena_u = this.user.password;
+    nuevoUsuario.estado_cuenta_u = 'A'; 
+    nuevoUsuario.id_rol = idRol;
+
+    this.usuariosRegistrados.push(nuevoUsuario);
+
     this.resetForm(); 
     this.navCtrl.navigateRoot('/login'); 
   }
@@ -108,14 +124,14 @@ export class RegistroPage implements OnInit {
     return selectedDate <= currentDate; 
   }
 
-  // Nueva función para validar la edad
+  
   isAgeInRange(date: string): boolean {
     const currentDate = new Date();
     const selectedDate = new Date(date);
     
-    // Calcular la fecha que corresponde a 15 años atrás
+   
     const minDate = new Date(currentDate.getFullYear() - 15, currentDate.getMonth(), currentDate.getDate());
-    // Calcular la fecha que corresponde a 120 años atrás
+    
     const maxDate = new Date(currentDate.getFullYear() - 120, currentDate.getMonth(), currentDate.getDate());
 
     return selectedDate <= minDate && selectedDate >= maxDate; 
