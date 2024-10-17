@@ -3,7 +3,7 @@ ion-header {
   background-color: rgb(0, 0, 0); /* Fondo negro para el encabezado */
   ion-toolbar {
     --background: transparent;
-    background-color: gold; /* Asegurando que la barra de herramientas sea negra */
+    background-color: #ffc400 ; /* Asegurando que la barra de herramientas sea negra */
     color: rgb(0, 0, 0); /* Color dorado para el texto del toolbar */
 
     ion-title {
@@ -61,7 +61,7 @@ ion-content {
         
 
         ion-card-header {
-          background-color: gold; /* Fondo dorado semitransparente para el encabezado de la tarjeta */
+          background-color: #ffc400; /* Fondo dorado semitransparente para el encabezado de la tarjeta */
           border-radius: 8px 8px 0 0; /* Bordes redondeados en la parte superior */
           font-family: Georgia, 'Times New Roman', Times, serif;
         }

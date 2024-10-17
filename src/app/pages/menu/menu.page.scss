@@ -40,12 +40,19 @@ ion-content {
     margin-bottom: 20px;
     border: 2px solid #d4af37; /* Borde dorado */
     border-radius: 10px; /* Bordes redondeados */
+    font-family: Georgia, 'Times New Roman', Times, serif;
 
+    p{
+      color: #000;
+      font-size:medium;
+    }
+    
     ion-card-title {
       font-size: 1.4rem;
       display: flex;
       align-items: center;
       color: #d4af37; /* Texto dorado para el título */
+      font-family: Georgia, 'Times New Roman', Times, serif;
 
       ion-icon {
         margin-right: 10px;
@@ -73,6 +80,7 @@ ion-content {
           color: #000; /* Texto del botón negro */
           --background: #d4af37; /* Botones dorados */
           border-radius: 10px;
+          font-family: Georgia, 'Times New Roman', Times, serif;
         }
       }
 

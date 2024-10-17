@@ -8,17 +8,32 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./perfil-usuario.page.scss'],
 })
 export class PerfilUsuarioPage implements OnInit {
-  user = {
-    id_usuario: 1,
-    nombre_u: 'Diego',
-    apellido_u: 'Mellado',
-    nick_u: 'Invitado15484631',
-    correo_u: 'di.mellado@duocuc.cl',
-    contrasena_u: 'securePass123',
-    estado_cuenta_u: 'A', 
-    razon_ban_u: null as string | null, 
-    id_rol: 1 
+  user: {
+    id_usuario: number;
+    nombre_u: string;
+    apellido_u: string;
+    nick_u: string;
+    correo_u: string;
+    contrasena_u: string;
+    estado_cuenta_u: string;
+    razon_ban_u: string | null;
+    id_rol: number;
+    phone?: string;     // Nueva propiedad
+    address?: string;   // Nueva propiedad
+  } = {
+    id_usuario: 0,
+    nombre_u: '',
+    apellido_u: '',
+    nick_u: '',
+    correo_u: '',
+    contrasena_u: '',
+    estado_cuenta_u: '',
+    razon_ban_u: null,
+    id_rol: 0,
+    phone: '',          // Inicializar la nueva propiedad
+    address: '',        // Inicializar la nueva propiedad
   };
+  
 
   isAdmin: boolean = false;
   isOwner: boolean = true; 

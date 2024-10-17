@@ -1,10 +1,6 @@
-ion-header {
-  background-color: #cc9226; /* Fondo dorado para el header */
-  color: #000;               /* Color del texto negro para el header */
-}
-
 ion-toolbar {
   --background: #cc9226; /* Fondo dorado para la barra de herramientas */
+
 }
 
 ion-title {
@@ -23,7 +19,7 @@ ion-content {
   align-items: center;     /* Centra verticalmente */
   height: 100%;            /* Ocupa el 100% de la altura del contenedor */
   padding: 0;              /* Elimina el padding adicional */
-  background-color: #000;  /* Fondo negro */
+  --background: transparent;
 }
 
 .registro-content {
@@ -33,11 +29,18 @@ ion-content {
   border: 2px solid #cc9226; /* Marco dorado alrededor del formulario */
   border-radius: 10px;     /* Bordes redondeados */
   background-color: #1c1c1c; /* Fondo gris oscuro para el formulario */
-  box-shadow: 0 4px 8px rgba(204, 146, 38, 0.5); /* Sombra dorada para efecto de profundidad */
+  box-shadow: 0 4px 8px rgba(255, 166, 0, 0.918); /* Sombra dorada para efecto de profundidad */
   display: flex;
   flex-direction: column;
   gap: 15px;               /* Espacio entre los elementos del formulario */
   margin: 0 auto;         /* Centra el formulario horizontalmente */
+
+
+  .spaced-label {
+    margin-bottom: 8px; /* Espacio entre la etiqueta y el input */
+    font-weight: bold;  /* Opción: para mejorar la legibilidad */
+  }
+  
 
   ion-item {
     --highlight-height: 2px;
@@ -53,14 +56,13 @@ ion-content {
 
   ion-button {
     margin-top: 10px;
-    --background: #cc9226; /* Color de fondo dorado del botón */
+    --background: #ffa703; /* Color de fondo dorado del botón */
     --color: #fff;         /* Color del texto del botón */
     --border-radius: 5px; /* Bordes redondeados del botón */
   }
 
   ion-button:last-child {
     margin-top: 20px;
-    --background: #f4f5f8; /* Fondo claro para el botón de registrarse */
     --color: #cc9226;      /* Color del texto dorado del botón */
   }
 }

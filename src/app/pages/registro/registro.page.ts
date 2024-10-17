@@ -12,7 +12,7 @@ export class RegistroPage implements OnInit {
   user: any = {
     nick: '',
     password: '',
-    name: '',
+    confirmPassword: '',
     birthdate: ''
   };
 

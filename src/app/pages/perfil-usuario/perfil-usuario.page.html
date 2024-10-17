@@ -1,9 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Perfil de Usuario</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
       <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Perfil de Usuario</ion-title>
+    <ion-buttons slot="end">
       <ion-searchbar></ion-searchbar>
       <ion-button [routerDirection]="'root'" [routerLink]="'/login'">Inicio de sesión</ion-button>
     </ion-buttons>
@@ -11,7 +13,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-card class="profile-card">
+  <ion-card class="profile-card card-custom">
     <ion-card-header>
       <ion-item lines="none">
         <ion-avatar slot="start" class="profile-avatar">
@@ -19,7 +21,7 @@
         </ion-avatar>
         <ion-label>
           <h2>Nombre de Usuario</h2>
-          <p>{{ user.username }}</p>
+          <p>{{ user.nick_u }}</p>
         </ion-label>
       </ion-item>
     </ion-card-header>
@@ -29,7 +31,7 @@
         <ion-item>
           <ion-label position="stacked">Nombre Completo</ion-label>
           <ion-input 
-            [(ngModel)]="user.fullName" 
+            [(ngModel)]="user.nombre_u"
             [readonly]="!isOwner">
           </ion-input>
         </ion-item>
@@ -37,7 +39,7 @@
         <ion-item>
           <ion-label position="stacked">Correo Electrónico</ion-label>
           <ion-input 
-            [(ngModel)]="user.email" 
+            [(ngModel)]="user.correo_u"
             [readonly]="!isOwner">
           </ion-input>
         </ion-item>
@@ -59,13 +61,14 @@
         </ion-item>
       </ion-list>
 
-      <ion-button *ngIf="isOwner" color="primary" expand="full" (click)="updateUser()">
+      <ion-button *ngIf="isOwner" color="primary" expand="block" (click)="updateUser()">
         Actualizar Información
       </ion-button>
       
-      <ion-button *ngIf="isAdmin" color="danger" expand="full" (click)="deleteUser()">
+      <ion-button *ngIf="isAdmin" color="danger" expand="block" (click)="deleteUser()">
         Eliminar Usuario
       </ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>
+

@@ -1,47 +1,47 @@
 ion-header {
   background-color: black; /* Fondo negro para el encabezado */
   ion-toolbar {
-    background-color: black; /* Asegurando que la barra de herramientas sea negra */
-    color: gold; /* Color dorado para el texto del toolbar */
-
+    background-color: #d4af37; /* Asegurando que la barra de herramientas sea negra */
+    --background: transparent;
+    
     ion-title {
-      color: gold; /* Títulos dorados */
+      color: black;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+
     }
 
     ion-buttons {
       ion-menu-button,
       ion-back-button {
-        color: gold; /* Color dorado para los botones de menú y retroceso */
+        color: rgb(0, 0, 0); /* Color dorado para los botones de menú y retroceso */
       }
     }
   }
 }
 
 ion-content {
-  --padding-start: 0;
-  --padding-end: 0;
-  --padding-top: 0;
-  --padding-bottom: 0;
   background-color: black; /* Fondo negro */
-  background-image: linear-gradient(transparent 10%, gold 10%, gold 20%, transparent 20%, transparent 30%, gold 30%, gold 40%, transparent 40%, transparent 50%, gold 50%, gold 60%, transparent 60%, transparent 70%, gold 70%, gold 80%, transparent 80%, transparent 90%, gold 90%); /* Líneas doradas */
+ 
 
   .legal-card {
     margin: 15px;
     padding: 10px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(248, 223, 0, 0.945);
-    background-color: rgba(0, 0, 0, 0.8); /* Fondo semi-transparente para las tarjetas */
+    box-shadow: 0 7px 9px rgb(245, 200, 0);
+    background-color: black;
 
     ion-card-header {
-      background-color: gold; /* Color del encabezado de la tarjeta */
+      background-color: #d4af37 /* Color del encabezado de la tarjeta */
     }
 
     ion-card-title {
       color: rgb(0, 0, 0); /* Títulos dorados */
+      font-family: Georgia, 'Times New Roman', Times, serif;
     }
 
     ion-card-content {
       color: white; /* Texto blanco */
+      font-family: Georgia, 'Times New Roman', Times, serif;
 
       .legal-text {
         p {
@@ -49,7 +49,7 @@ ion-content {
           line-height: 1.6;
 
           strong {
-            color: var(--highlight-color, gold); /* Color dorado para el texto destacado */
+            color: var(--highlight-color, #d4af37); /* Color dorado para el texto destacado */
             display: block;
             margin-bottom: 5px;
           }
@@ -61,9 +61,9 @@ ion-content {
   .custom-header {
     background-color: black; /* Fondo negro para el encabezado */
     ion-toolbar {
-      color: gold; /* Color dorado para el texto del toolbar */
+      color: #d4af37; /* Color dorado para el texto del toolbar */
       ion-title {
-        color: gold; /* Títulos dorados */
+        color: #d4af37; /* Títulos dorados */
       }
     }
   }

@@ -8,10 +8,12 @@ ion-header {
 
     ion-title, ion-buttons, ion-searchbar, ion-button {
       color: #000; /* Asegurarse de que el texto e iconos sean negros */
+      font-family: Georgia, 'Times New Roman', Times, serif;
     }
 
     ion-menu-button, ion-back-button {
       color: #000; /* Iconos del menú y back en negro */
+      background-color: #d4af37;
     }
 
     ion-searchbar {

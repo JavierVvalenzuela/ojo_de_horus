@@ -8,13 +8,15 @@
   box-sizing: border-box;
   background-color: #000; // Fondo negro
   color: #fff; // Texto en blanco
+  --background: transparent;
 }
 
 .logo-container {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
-  margin-top: 5%;
+  background-color: #000;
+  padding-top: 5%;
+  padding-bottom: 5%;
 }
 
 .logo-img {
@@ -33,7 +35,7 @@ form {
   flex-direction: column;
   gap: 25px;
   align-items: stretch;
-  box-shadow: 0 2px 10px rgba(255, 230, 1, 0.5); // Sombra dorada
+  box-shadow: 0 2px 10px rgb(255, 230, 0); // Sombra dorada
 
   // Detalles para los inputs y botones
   ion-item {
@@ -43,15 +45,19 @@ form {
 
   ion-input {
     --padding-start: 0;
-    color: #fff; // Texto blanco en los inputs
+    color: #000000; // Texto blanco en los inputs
     background: rgba(255, 255, 255, 0.1); // Fondo semi-transparente para el input
   }
 
+  ion-label{
+    font-family: Georgia, 'Times New Roman', Times, serif;  }
+
+    
   ion-button {
     margin-top: 5px;
     background: #d4af37; // Fondo dorado para el botón
-    color: #000; // Texto en negro para el botón
-    border-radius: 5px; // Bordes redondeados
+    color: #000000; // Texto en negro para el botón
+    border-radius: 10px; // Bordes redondeados
 
     &:disabled {
       background: rgba(212, 175, 55, 0.5); // Fondo dorado semi-transparente cuando está deshabilitado
@@ -62,7 +68,6 @@ form {
 // Estilos para el header
 ion-header {
   background-color: #d4af37; // Fondo dorado
-  color: #000; // Texto negro
 
   ion-toolbar {
     --background: transparent; // Hacer que el toolbar sea transparente para mostrar el dorado
@@ -75,6 +80,7 @@ ion-header {
   ion-buttons {
     ion-back-button, ion-menu-button {
       color: #000; // Botones de menú y atrás en negro
+
     }
   }
 }

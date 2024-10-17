@@ -1,5 +1,12 @@
+ion-toolbar{
+  background-color: #d4af37;
+  --background: transparent;
+  color: #000;
+}
+
 ion-content {
   background-color: #000; // Fondo negro
+  --background: transparent;
 
   h1 {
     font-size: 2rem;
@@ -7,6 +14,7 @@ ion-content {
     color: #d4af37; // Dorado
     margin-bottom: 15px;
     text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
 
   p {
@@ -14,6 +22,7 @@ ion-content {
     line-height: 1.6;
     color: #f7f7f7; // Texto blanco
     margin-bottom: 15px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
 
   h3 {
@@ -21,10 +30,12 @@ ion-content {
     font-weight: bold;
     color: #d4af37; // Dorado
     margin-top: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
 
   strong {
     color: #d4af37; // Dorado
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   }
 
   p + h3 {
@@ -38,6 +49,7 @@ ion-content {
     margin-left: 20px;
     font-size: 1rem;
     color: #f7f7f7; // Texto blanco
+    font-family: Georgia, 'Times New Roman', Times, serif;
 
     li {
       margin-bottom: 10px;

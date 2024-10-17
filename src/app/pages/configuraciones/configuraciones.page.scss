@@ -1,9 +1,9 @@
 ion-header {
     ion-toolbar {
       background-color: rgb(0, 0, 0); // Fondo negro
-      --background:#d4af37 ;
+      --background:#ffc400 ;
       ion-title {
-        color: #000000; // Dorado
+        color: #000000;
         
       }
     }
@@ -12,7 +12,7 @@ ion-header {
   ion-content {
     background-color: #ffffff; // Fondo negro
     --background: #000000;
-    --ion-item-background: transparent; // Fondo transparente para los ítems
+    --ion-item-background: transparent;
   
     ion-list {
       ion-item {
@@ -21,18 +21,19 @@ ion-header {
           color: #d4af37; // Íconos dorados
         }
         ion-button {
-          color: #d4af37; // Botones dorados
+          color: #ffc400; // Botones dorados
+          font-family: Georgia, 'Times New Roman', Times, serif;
         }
         ion-toggle {
-          color: #d4af37; // Toggle dorado
+          color: #ffc400; // Toggle dorado
         }
         ion-select {
-          color: #d4af37; // Select dorado
-          ion-select-option {
-            color: #ff0000; // Texto de opciones negro
+          color: #ffc400; // Select dorado
+          }
+        ion-label {
+          font-family: Georgia, 'Times New Roman', Times, serif;
           }
         }
       }
     }
-  }
   

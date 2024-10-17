@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Cámara
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Toma una foto</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- Botón para tomar la foto -->
+      <ion-button expand="full" (click)="takePicture()">
+        Tomar Foto
+      </ion-button>
+
+      <!-- Mostrar la imagen capturada -->
+      <div *ngIf="imagen">
+        <ion-img [src]="imagen"></ion-img>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

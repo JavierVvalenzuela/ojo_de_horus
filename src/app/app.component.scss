@@ -1,0 +1,65 @@
+ion-avatar {
+    margin: 5px;
+  }
+    
+    ion-label {
+      margin-left: 10px;
+      font-size: 16px;
+      transition: color 0.5s ease; /* Transición suave del color */
+    }
+
+  ion-item {
+    --background: transparent;
+    color: goldenrod; /* Color del texto */
+    margin: 5px 0; /* Separación de botones*/
+    font-size: 17px; /* Tamaño del texto */
+  
+    ion-icon {
+      margin-right: 10px;
+      font-size: 20px; /* Tamaño de los íconos */
+      color:#f0b906; /* Color de los íconos */
+      transition: color 0.5s ease; /* Transición suave del color */
+    }
+  
+    &:hover {
+        --background: #f0b906; /* Color del fondo al pasar el mouse */
+        
+        ion-icon {
+          color: black; /* Cambiar el color del ícono a negro al pasar el mouse */
+        }
+      }
+    }
+  
+  ion-list {
+    padding: 100px; /* Margen para que no esté tan pegado */
+    background-color: #000000;
+  }
+  
+
+  ion-menu {
+    --ion-toolbar-background: #ffc400; /* Fondo de la toolbar del menú */
+    --ion-text-color: #000000; /* Color de texto al pasar el mouse */
+    }
+  
+  ion-item {
+    border-radius: 50px; /* Bordes redondeados en los items del menú */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transiciones para suavizar los cambios */
+  }
+  
+  
+  ion-list {
+    padding: 10px;
+  }
+  
+  .logo-container {
+    background-color: #000000; /* Asegúrate de que el fondo sea negro */
+    padding-bottom: 10px; /* Controla el espacio inferior */
+    display: flex; /* Alineación */
+    justify-content: center; /* Centrar el logo horizontalmente */
+    padding-top: 253px;
+  }
+  
+  .logo-img {
+    width: 80px; /* Ajusta este valor para hacer el logo más pequeño o más grande */
+    height: auto; /* Mantiene la proporción del logo */
+  }

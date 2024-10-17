@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true"> 
   <ion-toolbar>
     <ion-title>Registro</ion-title>
     <ion-buttons slot="start">
@@ -11,7 +11,7 @@
 <ion-content class="registro-content">
   <form (ngSubmit)="onSubmit()" #registroForm="ngForm">
     <ion-item>
-      <ion-label position="floating">Usuario</ion-label>
+      <ion-label position="stacked" class="spaced-label">Usuario</ion-label>
       <ion-input 
         type="text" 
         required 
@@ -19,18 +19,9 @@
         name="nick">
       </ion-input>
     </ion-item>
-    <p *ngIf="user.nick.length === 0 && registroForm.controls['nick']?.touched" style="color: red; margin-top: 5px;">
-      Este campo es obligatorio.
-    </p>
-    <p *ngIf="user.nick.length < 3 && registroForm.controls['nick']?.touched" style="color: red; margin-top: 5px;">
-      El usuario debe tener al menos 3 caracteres.
-    </p>
-    <p *ngIf="user.nick.length > 15 && registroForm.controls['nick']?.touched" style="color: red; margin-top: 5px;">
-      El usuario no debe exceder los 15 caracteres.
-    </p>
 
     <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
+      <ion-label position="stacked" class="spaced-label">Contraseña</ion-label>
       <ion-input 
         type="password" 
         required 
@@ -38,31 +29,19 @@
         name="password">
       </ion-input>
     </ion-item>
-    <p *ngIf="user.password.length === 0 && registroForm.controls['password']?.touched" style="color: red; margin-top: 5px;">
-      Este campo es obligatorio.
-    </p>
-    <p *ngIf="user.password.length < 3 && registroForm.controls['password']?.touched" style="color: red; margin-top: 5px;">
-      La contraseña debe tener al menos 3 caracteres.
-    </p>
-    <p *ngIf="user.password.length > 15 && registroForm.controls['password']?.touched" style="color: red; margin-top: 5px;">
-      La contraseña no debe exceder los 15 caracteres.
-    </p>
 
     <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
+      <ion-label position="stacked" class="spaced-label">Confirmar Contraseña</ion-label>
       <ion-input 
-        type="text" 
+        type="password" 
         required 
-        [(ngModel)]="user.name" 
-        name="name">
+        [(ngModel)]="user.confirmPassword"
+        name="confirmPassword">
       </ion-input>
     </ion-item>
-    <p *ngIf="user.name.length === 0 && registroForm.controls['name']?.touched" style="color: red; margin-top: 5px;">
-      Este campo es obligatorio.
-    </p>
 
     <ion-item>
-      <ion-label position="floating">Fecha de Cumpleaños</ion-label>
+      <ion-label position="stacked" class="spaced-label">Fecha de Cumpleaños</ion-label>
       <ion-input 
         type="date" 
         required 
@@ -72,9 +51,6 @@
         [max]="maxDate">
       </ion-input>
     </ion-item>
-    <p *ngIf="!user.birthdate && registroForm.controls['birthdate']?.touched" style="color: red; margin-top: 5px;">
-      Este campo es obligatorio.
-    </p>
 
     <ion-button expand="full" type="submit" [disabled]="!registroForm.form.valid">Registrar</ion-button>
   </form>
