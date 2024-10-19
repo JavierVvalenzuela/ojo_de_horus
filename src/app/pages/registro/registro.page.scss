@@ -1,68 +1,71 @@
-ion-toolbar {
-  --background: #cc9226; /* Fondo dorado para la barra de herramientas */
+ion-header {
+  background-color: #d4af37; // Color dorado
+  color: black; // Color del texto
 
-}
+  ion-toolbar {
+    --background: transparent; // Hacer que el fondo de la barra de herramientas sea transparente para mostrar el color dorado
+    color: black; // Asegurarse de que el texto del toolbar sea negro
 
-ion-title {
-  color: #000; /* Color del texto del título negro */
-}
-
-ion-buttons {
-  ion-menu-button {
-    color: #000; /* Color del botón del menú desplegable negro */
+    ion-title {
+      color: black; // Color del título
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
   }
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  background-color: #000;
+  padding-top: 10%;
+}
+
+.logo-img {
+  width: 150px;
+  height: auto;
 }
 
 ion-content {
-  display: flex;
-  justify-content: center; /* Centra horizontalmente */
-  align-items: center;     /* Centra verticalmente */
-  height: 100%;            /* Ocupa el 100% de la altura del contenedor */
-  padding: 0;              /* Elimina el padding adicional */
-  --background: transparent;
-}
+  --background: #000000; /* Color de fondo suave */
 
-.registro-content {
-  width: 100%;
-  max-width: 400px;        /* Define el ancho máximo del formulario */
-  padding: 20px;
-  border: 2px solid #cc9226; /* Marco dorado alrededor del formulario */
-  border-radius: 10px;     /* Bordes redondeados */
-  background-color: #1c1c1c; /* Fondo gris oscuro para el formulario */
-  box-shadow: 0 4px 8px rgba(255, 166, 0, 0.918); /* Sombra dorada para efecto de profundidad */
-  display: flex;
-  flex-direction: column;
-  gap: 15px;               /* Espacio entre los elementos del formulario */
-  margin: 0 auto;         /* Centra el formulario horizontalmente */
-
-
-  .spaced-label {
-    margin-bottom: 8px; /* Espacio entre la etiqueta y el input */
-    font-weight: bold;  /* Opción: para mejorar la legibilidad */
+  .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10%;
   }
-  
+
+  form {
+    background-color: #000000; /* Fondo blanco para el formulario */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgb(255, 174, 0); /* Sombra ligera */
+    max-width: 400px; /* Limitar el ancho del formulario */
+    width: 100%; /* Asegura que se mantenga receptivo */
+  }
 
   ion-item {
-    --highlight-height: 2px;
-    --highlight-color: #cc9226; /* Color de resaltado dorado */
+    --background: #f0f0f0; /* Fondo de los campos */
+    --border-radius: 5px;
+    margin-bottom: 15px;
   }
 
-  ion-input {
-    --padding-start: 0;
-    color: #fff; /* Color del texto del input */
-    background-color: #333; /* Fondo gris oscuro para el input */
-    border: 1px solid #cc9226; /* Borde dorado para el input */
+  .spaced-label {
+    font-weight: bold;
+    color: #333; /* Color del texto de la etiqueta */
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
 
   ion-button {
-    margin-top: 10px;
-    --background: #ffa703; /* Color de fondo dorado del botón */
-    --color: #fff;         /* Color del texto del botón */
-    --border-radius: 5px; /* Bordes redondeados del botón */
+    --background: #a67c00; /* Color del botón */
+    margin-top: 15px;
+    border-radius: 5px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
 
-  ion-button:last-child {
-    margin-top: 20px;
-    --color: #cc9226;      /* Color del texto dorado del botón */
+  ion-input {
+    --padding-start: 10px; /* Espacio interior del input */
+    --color: #000000; /* Color del texto */
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
 }

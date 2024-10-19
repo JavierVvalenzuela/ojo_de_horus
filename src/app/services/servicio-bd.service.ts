@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { AlertController, Platform } from '@ionic/angular';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, filter, Observable, take } from 'rxjs';
 import { Usuario } from '../model/usuario';
 
 @Injectable({
@@ -10,6 +10,7 @@ import { Usuario } from '../model/usuario';
 export class ServicioBDService {
   public database!: SQLiteObject;
 
+  // Definición de tablas
   tablaRol: string = "CREATE TABLE IF NOT EXISTS ROL (id_rol INTEGER PRIMARY KEY AUTOINCREMENT, nombre_rol VARCHAR(50) NOT NULL);";
   tablaCategoria: string = "CREATE TABLE IF NOT EXISTS CATEGORIA (id_categoria INTEGER PRIMARY KEY AUTOINCREMENT, nombre_cat VARCHAR(50) NOT NULL);";
   tablaEstado: string = "CREATE TABLE IF NOT EXISTS ESTADO (id_estado INTEGER PRIMARY KEY AUTOINCREMENT, nombre_e VARCHAR(50) NOT NULL);";
@@ -56,6 +57,7 @@ export class ServicioBDService {
         this.database = db;
         this.crearTablas(); 
         this.isBDReady.next(true);
+        this.createInitialUser(); // Crear usuario inicial
       }).catch((e: any) => {
         this.presentAlert('Error de Base de Datos', `No se pudo crear la base de datos: ${e.message}`);
       });
@@ -81,8 +83,10 @@ export class ServicioBDService {
   async getAllUsuarios(): Promise<Usuario[]> {
     const query = 'SELECT * FROM USUARIO';
     const usuarios: Usuario[] = [];
-
+  
     try {
+      await this.isBDReady.pipe(filter((ready: any) => ready), take(1)).toPromise();
+  
       const result = await this.database.executeSql(query, []);
       for (let i = 0; i < result.rows.length; i++) {
         usuarios.push(result.rows.item(i));
@@ -118,16 +122,26 @@ export class ServicioBDService {
       this.presentAlert('Error', 'El nombre de usuario ya existe. Por favor, elige otro.');
       return;
     }
-
-    const query = `INSERT INTO USUARIO (nombre_u, apellido_u, nick_u, correo_u, contrasena_u, estado_cuenta_u, id_rol) 
-                 VALUES (?, ?, ?, ?, ?, 'A', ?)`; 
-
+  
     try {
+      await this.isBDReady.pipe(filter(ready => ready), take(1)).toPromise();
+  
+      const query = `INSERT INTO USUARIO (nombre_u, apellido_u, nick_u, correo_u, contrasena_u, estado_cuenta_u, id_rol) 
+                   VALUES (?, ?, ?, ?, ?, 'A', ?)`;
+  
       await this.database.executeSql(query, [nombre, apellido, nick, correo, contrasena, idRol]);
       this.presentAlert('Éxito', 'Usuario insertado correctamente.');
       this.cargarUsuarios();
     } catch (e: any) { 
       this.presentAlert('Error', `Error al insertar usuario: ${e.message}`);
+    }
+  }
+
+  // usuario Diego
+  private async createInitialUser() {
+    const nick = 'Diego';
+    if (!(await this.usuarioExists(nick))) {
+      await this.insertarUsuario('Diego', 'Mellado', nick, 'diego@example.com', 'Diego170', 1); // Cambiar el idRol
     }
   }
 

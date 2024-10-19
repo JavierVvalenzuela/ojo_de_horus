@@ -23,11 +23,8 @@ export class RegistroPage implements OnInit {
 
   constructor(private navCtrl: NavController, private servicioBD: ServicioBDService) { 
     const today = new Date();
-    
-    
     this.maxDate = today.toISOString().split('T')[0]; 
 
-    
     const minDate120YearsAgo = new Date(today.getFullYear() - 120, today.getMonth(), today.getDate());
     this.minDate = minDate120YearsAgo.toISOString().split('T')[0]; 
   }
@@ -37,51 +34,54 @@ export class RegistroPage implements OnInit {
   async onSubmit() {
     this.errorMessage = '';
 
-    if (!this.user.nick || !this.user.password || !this.user.name || !this.user.birthdate) {
+    // Validar campos requeridos
+    if (!this.user.nick || !this.user.password || !this.user.confirmPassword || !this.user.birthdate) {
       this.errorMessage = 'Todos los campos son obligatorios.';
       return;
     }
 
-    if (!this.areFieldsFilled(this.user.nick, this.user.password)) {
-      this.errorMessage = 'Los campos de usuario y contraseña deben tener entre 3 y 15 caracteres.';
+    // Validar longitud del usuario
+    if (this.user.nick.length > 16) {
+      this.errorMessage = 'El nombre de usuario no puede exceder los 16 caracteres.';
       return;
     }
 
-    if (!this.isNickValid(this.user.nick) || !this.isPasswordValid(this.user.password)) {
-      this.errorMessage = 'Uno o ambos campos son incorrectos.';
+    // Validar longitud y formato de la contraseña
+    if (!this.isPasswordValid(this.user.password)) {
+      this.errorMessage = 'La contraseña debe tener un máximo de 12 caracteres, incluir al menos una mayúscula y un carácter especial.';
       return;
     }
 
-    if (!this.isDateValid(this.user.birthdate)) {
-      this.errorMessage = 'Por favor, ingrese una fecha válida.';
+    // Validar confirmación de contraseña
+    if (this.user.password !== this.user.confirmPassword) {
+      this.errorMessage = 'La confirmación de la contraseña no coincide.';
       return;
     }
 
-    
-    const isAgeValid = this.isAgeInRange(this.user.birthdate);
-    if (!isAgeValid) {
-      this.errorMessage = 'La fecha de nacimiento debe ser entre 15 y 120 años atrás.';
+    // Validar fecha de nacimiento
+    if (!this.isDateValid(this.user.birthdate) || !this.isAgeInRange(this.user.birthdate)) {
+      this.errorMessage = 'La fecha de nacimiento debe ser válida y el usuario debe tener al menos 10 años.';
       return;
     }
 
+    // Verificar si el usuario ya existe
     const userExists = await this.servicioBD.getUserByNick(this.user.nick);
-
     if (userExists) {
       this.errorMessage = 'El nombre de usuario ya está en uso.';
       return;
     }
 
+    // Continuar con la creación del usuario
     const correo = `${this.user.nick}@example.com`; 
     const apellido = ''; 
     const idRol = 3; 
     const id_usuario = this.usuariosRegistrados.length + 1; 
     
-    await this.servicioBD.insertarUsuario(this.user.name, apellido, this.user.nick, correo, this.user.password, idRol);
-    
+    await this.servicioBD.insertarUsuario(this.user.nick, apellido, this.user.nick, correo, this.user.password, idRol);
 
     const nuevoUsuario = new Usuario();
     nuevoUsuario.id_usuario = id_usuario;
-    nuevoUsuario.nombre_u = this.user.name;
+    nuevoUsuario.nombre_u = this.user.nick; // Asume que 'name' es igual a 'nick'
     nuevoUsuario.apellido_u = apellido;
     nuevoUsuario.nick_u = this.user.nick;
     nuevoUsuario.correo_u = correo;
@@ -99,22 +99,13 @@ export class RegistroPage implements OnInit {
     this.user = {
       nick: '',
       password: '',
-      name: '',
+      confirmPassword: '',
       birthdate: ''
     };
   }
 
-  areFieldsFilled(nick: string, password: string): boolean {
-    return nick.length >= 3 && nick.length <= 15 && password.length >= 3 && password.length <= 15;
-  }
-
-  isNickValid(nick: string): boolean {
-    const nickPattern = /^[a-zA-Z0-9]*$/; 
-    return nickPattern.test(nick);
-  }
-
   isPasswordValid(password: string): boolean {
-    const passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{3,15}$/; 
+    const passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{1,12}$/; // Cambiado a 12 caracteres
     return passwordPattern.test(password);
   }
 
@@ -124,16 +115,13 @@ export class RegistroPage implements OnInit {
     return selectedDate <= currentDate; 
   }
 
-  
   isAgeInRange(date: string): boolean {
     const currentDate = new Date();
     const selectedDate = new Date(date);
     
-   
-    const minDate = new Date(currentDate.getFullYear() - 15, currentDate.getMonth(), currentDate.getDate());
+    const minDate = new Date(currentDate.getFullYear() - 10, currentDate.getMonth(), currentDate.getDate());
     
-    const maxDate = new Date(currentDate.getFullYear() - 120, currentDate.getMonth(), currentDate.getDate());
-
-    return selectedDate <= minDate && selectedDate >= maxDate; 
+    return selectedDate <= minDate; 
   }
 }
+

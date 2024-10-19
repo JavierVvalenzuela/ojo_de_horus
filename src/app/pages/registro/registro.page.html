@@ -8,50 +8,70 @@
   </ion-toolbar>
 </ion-header>
 
+<div class="logo-container">
+  <img src="assets/img/ojo de horus.png" alt="Ojo de Horus" class="logo-img">
+</div>
+
+
 <ion-content class="registro-content">
-  <form (ngSubmit)="onSubmit()" #registroForm="ngForm">
-    <ion-item>
-      <ion-label position="stacked" class="spaced-label">Usuario</ion-label>
-      <ion-input 
-        type="text" 
-        required 
-        [(ngModel)]="user.nick" 
-        name="nick">
-      </ion-input>
-    </ion-item>
+  <div class="form-container">
+    <form (ngSubmit)="onSubmit()" #registroForm="ngForm">
+      <ion-item>
+        <ion-label position="stacked" class="spaced-label">Usuario</ion-label>
+        <ion-input 
+          type="text" 
+          required 
+          [(ngModel)]="user.nick" 
+          name="nick">
+        </ion-input>
+      </ion-item>
+      <div *ngIf="errorMessage && user.nick === ''" class="error-message">{{ errorMessage }}</div>
 
-    <ion-item>
-      <ion-label position="stacked" class="spaced-label">Contraseña</ion-label>
-      <ion-input 
-        type="password" 
-        required 
-        [(ngModel)]="user.password" 
-        name="password">
-      </ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label position="stacked" class="spaced-label">Contraseña</ion-label>
+        <ion-input 
+          type="password" 
+          required 
+          [(ngModel)]="user.password" 
+          name="password">
+        </ion-input>
+      </ion-item>
+      <div *ngIf="errorMessage && user.password === ''" class="error-message">{{ errorMessage }}</div>
 
-    <ion-item>
-      <ion-label position="stacked" class="spaced-label">Confirmar Contraseña</ion-label>
-      <ion-input 
-        type="password" 
-        required 
-        [(ngModel)]="user.confirmPassword"
-        name="confirmPassword">
-      </ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label position="stacked" class="spaced-label">Confirmar Contraseña</ion-label>
+        <ion-input 
+          type="password" 
+          required 
+          [(ngModel)]="user.confirmPassword"
+          name="confirmPassword">
+        </ion-input>
+      </ion-item>
+      <div *ngIf="errorMessage && (user.confirmPassword !== user.password)" class="error-message">{{ errorMessage }}</div>
 
-    <ion-item>
-      <ion-label position="stacked" class="spaced-label">Fecha de Cumpleaños</ion-label>
-      <ion-input 
-        type="date" 
-        required 
-        [(ngModel)]="user.birthdate" 
-        name="birthdate"
-        [min]="minDate" 
-        [max]="maxDate">
-      </ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label position="stacked" class="spaced-label">Fecha de Cumpleaños</ion-label>
+        <ion-input 
+          type="date" 
+          required 
+          [(ngModel)]="user.birthdate" 
+          name="birthdate"
+          [min]="minDate" 
+          [max]="maxDate">
+        </ion-input>
+      </ion-item>
+      <div *ngIf="errorMessage && user.birthdate === ''" class="error-message">{{ errorMessage }}</div>
 
-    <ion-button expand="full" type="submit" [disabled]="!registroForm.form.valid">Registrar</ion-button>
-  </form>
+      <ion-button expand="full" type="submit" [disabled]="!registroForm.form.valid">Registrar</ion-button>
+    </form>
+  </div>
 </ion-content>
+
+<!-- Estilo para los mensajes de error -->
+<style>
+  .error-message {
+    color: red; /* Cambia el color a lo que prefieras */
+    font-size: 12px; /* Tamaño del texto de error */
+    margin-top: 5px; /* Espaciado superior */
+  }
+</style>

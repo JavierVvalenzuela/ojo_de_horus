@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { ServicioBDService } from '../../services/servicio-bd.service'; 
 import { Usuario } from '../../model/usuario'; 
+import { filter, take } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -22,29 +23,38 @@ export class LoginPage implements OnInit {
   }
 
   async loadUsers() {
-    this.usuarios = await this.servicioBD.getAllUsuarios(); 
+    try {
+      // Esperar a que la base de datos esté lista antes de intentar cargar los usuarios
+      await this.servicioBD.dbState().pipe(filter(ready => ready), take(1)).toPromise();
+      this.usuarios = await this.servicioBD.getAllUsuarios(); 
+      console.log('Usuarios cargados:', this.usuarios); // Log de usuarios cargados
+    } catch (error) {
+      console.error('Error al cargar usuarios:', error);
+    }
   }
-
+  
   onSubmit() {
     this.errorMessage = '';
 
-    if (!this.areFieldsFilled(this.nick, this.password)) {
-      this.errorMessage = 'Los campos deben tener entre 3 y 15 caracteres.';
-      return;
-    }
+    // Limpieza de los campos de entrada
+    const cleanedNick = this.nick.trim();
+    const cleanedPassword = this.password.trim();
 
-    if (!this.isNickValid(this.nick) || !this.isPasswordValid(this.password)) {
-      this.errorMessage = 'Uno o ambos campos son incorrectos.';
-      return;
-    }
-
-    const user = this.usuarios.find((u: Usuario) => u.nick_u === this.nick && u.contrasena_u === this.password);
+    // Agrega log para verificar valores
+    console.log('Nick ingresado:', cleanedNick);
+    console.log('Contraseña ingresada:', cleanedPassword);
+    
+    const user = this.usuarios.find((u: Usuario) => 
+      u.nick_u === cleanedNick && 
+      u.contrasena_u === cleanedPassword
+    );
 
     if (user) {
       console.log('Inicio de sesión exitoso');
       this.navCtrl.navigateRoot('/home');
     } else {
       this.errorMessage = 'Usuario o contraseña incorrectos.';
+      console.log('Usuario no encontrado:', cleanedNick);
     }
   }
 
@@ -72,3 +82,4 @@ export class LoginPage implements OnInit {
     return nick.length >= minLength && nick.length <= maxLength;
   }
 }
+
