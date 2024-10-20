@@ -41,7 +41,7 @@ export class RegistroPage implements OnInit {
     }
 
     // Validar longitud del usuario
-    if (this.user.nick.length > 16) {
+    if (this.user.nick.length >= 15) {
       this.errorMessage = 'El nombre de usuario no puede exceder los 16 caracteres.';
       return;
     }
@@ -58,7 +58,7 @@ export class RegistroPage implements OnInit {
       return;
     }
 
-    // Validar fecha de nacimiento
+    // Insertar fecha de nacimiento
     if (!this.isDateValid(this.user.birthdate) || !this.isAgeInRange(this.user.birthdate)) {
       this.errorMessage = 'La fecha de nacimiento debe ser válida y el usuario debe tener al menos 10 años.';
       return;

@@ -26,7 +26,7 @@ ion-header {
 }
 
 ion-content {
-  --background: #000000; /* Color de fondo suave */
+  --background: #000000; /* Color de fondo */
 
   .form-container {
     display: flex;
@@ -59,7 +59,6 @@ ion-content {
   ion-button {
     --background: #a67c00; /* Color del botón */
     margin-top: 15px;
-    border-radius: 5px;
     font-family: Georgia, 'Times New Roman', Times, serif;
   }
 

@@ -6,7 +6,6 @@ ion-header {
     --background: transparent; /* Fondo transparente del toolbar para que herede el dorado */
     color: #000; /* Color del texto e iconos dentro del toolbar */
 
-
     ion-title, ion-buttons, ion-searchbar, ion-button {
       color: #000; /* Asegurarse de que el texto e iconos sean negros */
     }
@@ -34,7 +33,17 @@ ion-content {
   background-color: #000; /* Fondo negro */
   color: #fff; /* Texto blanco */
   --background: transparent;
-  
+
+  .post-item {
+    border: 2px solid #d4af37; /* Borde dorado */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 15px; /* Espaciado interno */
+    margin-bottom: 20px; /* Espaciado entre publicaciones */
+  }
+
+  h2{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
 
   .card-custom {
     margin-bottom: 20px;
@@ -42,9 +51,9 @@ ion-content {
     border-radius: 10px; /* Bordes redondeados */
     font-family: Georgia, 'Times New Roman', Times, serif;
 
-    p{
+    p {
       color: #000;
-      font-size:medium;
+      font-size: medium;
     }
     
     ion-card-title {
@@ -79,7 +88,7 @@ ion-content {
           margin-right: 10px;
           color: #000; /* Texto del botón negro */
           --background: #d4af37; /* Botones dorados */
-          border-radius: 10px;
+          border-radius: 10px; /* Bordes redondeados */
           font-family: Georgia, 'Times New Roman', Times, serif;
         }
       }
@@ -90,9 +99,20 @@ ion-content {
         ion-button {
           color: #000; /* Texto del botón negro */
           --background: #d4af37; /* Botón dorado */
-          border-radius: 10px;
+          border-radius: 10px; /* Bordes redondeados */
         }
       }
     }
+  }
+
+  ion-button.image-upload {
+    --background: transparent; /* Fondo transparente */
+    color: #d4af37; /* Color dorado para el icono */
+    border: none; /* Sin borde */
+  }
+
+  ion-button.publish {
+    --background: #d4af37; /* Botón dorado */
+    border-radius: 20px; /* Bordes más redondeados */
   }
 }

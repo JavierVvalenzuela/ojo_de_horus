@@ -73,10 +73,10 @@ export class LoginPage implements OnInit {
   }
 
   isPasswordValid(password: string): boolean {
-    const minLength = 3;
-    const maxLength = 15;
+    const minLength = 8;
+    const maxLength = 12;
     const hasUpperCase = /[A-Z]/.test(password);
-    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    const hasSpecialChar = /[1!@#$%^&*(),.?":{}|<>]/.test(password);
     const validLength = password.length >= minLength && password.length <= maxLength;
     return hasUpperCase && hasSpecialChar && validLength;
   }

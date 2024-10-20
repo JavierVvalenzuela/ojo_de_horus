@@ -50,7 +50,7 @@
       <div *ngIf="errorMessage && (user.confirmPassword !== user.password)" class="error-message">{{ errorMessage }}</div>
 
       <ion-item>
-        <ion-label position="stacked" class="spaced-label">Fecha de Cumpleaños</ion-label>
+        <ion-label position="stacked" class="spaced-label">Fecha de Nacimiento</ion-label>
         <ion-input 
           type="date" 
           required 
@@ -73,5 +73,6 @@
     color: red; /* Cambia el color a lo que prefieras */
     font-size: 12px; /* Tamaño del texto de error */
     margin-top: 5px; /* Espaciado superior */
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
 </style>

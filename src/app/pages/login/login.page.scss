@@ -6,7 +6,7 @@
   height: 100vh;
   padding: 0 20px;
   box-sizing: border-box;
-  background-color: #000; // Fondo negro
+  background-color: #000; // Fondo negro para toda la página
   color: #fff; // Texto en blanco
   --background: transparent;
 }
@@ -15,49 +15,50 @@
   display: flex;
   justify-content: center;
   background-color: #000;
-  padding-top: 5%;
-  padding-bottom: 5%;
+  padding-top: 10%;
 }
+
 
 .logo-img {
   width: 150px;
   height: auto;
 }
 
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10%;
+}
 form {
-  width: 100%;
-  max-width: 500px; // Ajustado a un valor razonable
-  margin: auto; // Centra el formulario en la página
+  background-color: #000000; /* Fondo blanco para el formulario */
   padding: 20px;
   border-radius: 10px;
-  background-color: #1a1a1a; // Fondo oscuro para el formulario
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  align-items: stretch;
-  box-shadow: 0 2px 10px rgb(255, 230, 0); // Sombra dorada
+  box-shadow: 0 4px 8px rgb(255, 174, 0); /* Sombra ligera */
+  max-width: 400px; /* Limitar el ancho del formulario */
+  width: 100%; /* Asegura que se mantenga receptivo */
 
-  // Detalles para los inputs y botones
   ion-item {
-    --highlight-height: 2px;
-    --highlight-color: #000; // Color negro para el highlight
+    --background: #f0f0f0; /* Fondo de los campos */
+    --border-radius: 5px;
+    margin-bottom: 15px;
   }
 
   ion-input {
-    --padding-start: 0;
-    color: #000000; // Texto blanco en los inputs
-    background: rgba(255, 255, 255, 0.1); // Fondo semi-transparente para el input
+    --padding-start: 10px; /* Espacio interior del input */
+    --color: #000000; /* Color del texto */
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
 
-  ion-label{
-    font-family: Georgia, 'Times New Roman', Times, serif;  }
+  ion-label {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #000000; // color para las etiquetas
+  }
 
-    
   ion-button {
-    margin-top: 5px;
-    background: #d4af37; // Fondo dorado para el botón
-    color: #000000; // Texto en negro para el botón
-    border-radius: 10px; // Bordes redondeados
+    --background: #a67c00; /* Color del botón */
+    margin-top: 15px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 
     &:disabled {
       background: rgba(212, 175, 55, 0.5); // Fondo dorado semi-transparente cuando está deshabilitado
@@ -65,7 +66,6 @@ form {
   }
 }
 
-// Estilos para el header
 ion-header {
   background-color: #d4af37; // Fondo dorado
 
@@ -79,8 +79,7 @@ ion-header {
   
   ion-buttons {
     ion-back-button, ion-menu-button {
-      color: #000; // Botones de menú y atrás en negro
-
+      color: #000; // Botones en negro
     }
   }
 }

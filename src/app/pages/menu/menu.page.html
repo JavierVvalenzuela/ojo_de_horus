@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true"> 
   <ion-toolbar>
     <ion-title>Menu</ion-title>
     <ion-buttons slot="start">
@@ -6,10 +6,8 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
 
-    <!-- Barra de búsqueda fuera de los botones de navegación -->
     <ion-searchbar slot="end"></ion-searchbar>
 
-    <!-- Botón de inicio de sesión fuera de los botones de navegación -->
     <ion-button slot="end" [routerDirection]="'root'" [routerLink]="'/login'">Inicio de sesión</ion-button>
   </ion-toolbar>
 </ion-header>
@@ -21,11 +19,19 @@
     </ion-avatar>
     <ion-label>
       <h2>Nuevo Post</h2>
-      <ion-input placeholder="Escribe aquí tu mensaje..." lines="full"></ion-input>
-      <ion-button expand="full" color="primary">Publicar</ion-button>
+      <ion-input placeholder="¿En que estas pensando hoy?" lines="full" [(ngModel)]="postMessage"></ion-input>
+      
+      <div class="button-group">
+        <ion-button expand="full" class="publish" (click)="publishPost()">Publicar</ion-button>
+        <ion-button class="image-upload" (click)="fileInput.click()">
+          <ion-icon name="image"></ion-icon>
+        </ion-button>
+        <input type="file" #fileInput accept="image/*" (change)="onImageSelected($event)" style="display: none;">
+      </div>
+      
     </ion-label>
   </ion-item>
-  
+
   <!-- Primera tarjeta -->
   <ion-card class="card-custom">
     <ion-card-header>
@@ -36,7 +42,7 @@
       <img src="https://sonic-city.net/wp-content/uploads/2023/09/event_230913_01_eye-400x200.jpg" alt="Publicación de Diego">
       <div class="button-group">
         <div class="left-buttons">
-          <ion-button color="primary">
+          <ion-button color="primary" (click)="likePost()">
             <ion-icon name="heart"></ion-icon>
             Like
           </ion-button>
@@ -63,7 +69,7 @@
       <img src="https://bloximages.newyork1.vip.townnews.com/dailytitan.com/content/tncms/assets/v3/editorial/1/72/1729f514-750b-11ed-9197-63ac3554bf6d/638ea5dbb40ba.image.jpg?resize=400%2C200" alt="Publicación de Maria">
       <div class="button-group">
         <div class="left-buttons">
-          <ion-button color="primary">
+          <ion-button color="primary" (click)="likePost()">
             <ion-icon name="heart"></ion-icon>
             Like
           </ion-button>
@@ -90,7 +96,7 @@
       <img src="https://i0.wp.com/magicvalleycomiccon.com/wp-content/uploads/2024/07/Fortnite.jpg?fit=400%2C200&ssl=1" alt="Publicación de Juan">
       <div class="button-group">
         <div class="left-buttons">
-          <ion-button color="primary">
+          <ion-button color="primary" (click)="likePost()">
             <ion-icon name="heart"></ion-icon>
             Like
           </ion-button>
