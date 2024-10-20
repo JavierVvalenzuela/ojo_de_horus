@@ -12,68 +12,70 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card class="profile-card card-custom">
-    <ion-card-header>
-      <ion-item lines="none">
-        <ion-avatar slot="start" class="profile-avatar">
-          <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="Foto de perfil" />
-        </ion-avatar>
-        <ion-label>
-          <h2>Nombre de Usuario</h2>
-          <p>{{ user.nick_u }}</p>
-        </ion-label>
-      </ion-item>
-    </ion-card-header>
-
-    <ion-card-content>
-      <ion-list>
-        <!-- Nombre Completo -->
-        <ion-item>
-          <ion-label position="stacked">Nombre Completo</ion-label>
-          <ion-input 
-            [(ngModel)]="user.nombre_u"
-            [readonly]="!isOwner">
-          </ion-input>
+<ion-content class="content-bg">
+  <div class="content-wrapper">
+    <ion-card class="profile-card card-custom">
+      <ion-card-header>
+        <ion-item lines="none">
+          <ion-avatar slot="start" class="profile-avatar">
+            <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="Foto de perfil" />
+          </ion-avatar>
+          <ion-label>
+            <h2>Nombre de Usuario</h2>
+            <p>{{ user.nick_u }}</p>
+          </ion-label>
         </ion-item>
+      </ion-card-header>
 
-        <!-- Correo Electrónico -->
-        <ion-item>
-          <ion-label position="stacked">Correo Electrónico</ion-label>
-          <ion-input 
-            [(ngModel)]="user.correo_u"
-            [readonly]="!isOwner">
-          </ion-input>
-        </ion-item>
+      <ion-card-content>
+        <ion-list>
+          <!-- Nombre Completo -->
+          <ion-item>
+            <ion-label position="stacked">Nombre Completo</ion-label>
+            <ion-input 
+              [(ngModel)]="user.nombre_u"
+              [readonly]="!isOwner">
+            </ion-input>
+          </ion-item>
 
-        <!-- Teléfono -->
-        <ion-item>
-          <ion-label position="stacked">Teléfono</ion-label>
-          <ion-input 
-            [(ngModel)]="user.phone" 
-            [readonly]="!isOwner">
-          </ion-input>
-        </ion-item>
+          <!-- Correo Electrónico -->
+          <ion-item>
+            <ion-label position="stacked">Correo Electrónico</ion-label>
+            <ion-input 
+              [(ngModel)]="user.correo_u"
+              [readonly]="!isOwner">
+            </ion-input>
+          </ion-item>
 
-        <!-- Dirección -->
-        <ion-item>
-          <ion-label position="stacked">Dirección</ion-label>
-          <ion-input 
-            [(ngModel)]="user.address" 
-            [readonly]="!isOwner">
-          </ion-input>
-        </ion-item>
-      </ion-list>
+          <!-- Teléfono -->
+          <ion-item>
+            <ion-label position="stacked">Teléfono</ion-label>
+            <ion-input 
+              [(ngModel)]="user.phone" 
+              [readonly]="!isOwner">
+            </ion-input>
+          </ion-item>
 
-      <!-- Botón Actualizar Información solo visible para el dueño de la cuenta -->
-      <ion-button *ngIf="isOwner" color="primary" expand="block" (click)="updateUser()">
-        Actualizar Información
-      </ion-button>
-      
-      <!-- Botón Eliminar Usuario solo visible para administradores -->
-      <ion-button *ngIf="isAdmin" color="danger" expand="block" (click)="deleteUser()">
-        Eliminar Usuario
-      </ion-button>
-    </ion-card-content>
-  </ion-card>
+          <!-- Dirección -->
+          <ion-item>
+            <ion-label position="stacked">Dirección</ion-label>
+            <ion-input 
+              [(ngModel)]="user.address" 
+              [readonly]="!isOwner">
+            </ion-input>
+          </ion-item>
+        </ion-list>
+
+        <!-- Botón Actualizar Información solo visible para el dueño de la cuenta -->
+        <ion-button *ngIf="isOwner" color="primary" expand="block" (click)="updateUser()">
+          Actualizar Información
+        </ion-button>
+        
+        <!-- Botón Eliminar Usuario solo visible para administradores -->
+        <ion-button *ngIf="isAdmin" color="danger" expand="block" (click)="deleteUser()">
+          Eliminar Usuario
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

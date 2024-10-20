@@ -1,61 +1,78 @@
 ion-header {
   background-color: #cc9226; /* Fondo dorado para el header */
   color: #000;               /* Color del texto negro para el header */
+  font-family: Georgia, 'Times New Roman', Times, serif; /* Fuente aplicada al header */
 }
 
 ion-toolbar {
   --background: #cc9226; /* Fondo dorado para la barra de herramientas */
+  font-family: Georgia, 'Times New Roman', Times, serif; /* Fuente aplicada a la barra de herramientas */
 }
 
 ion-menu-button {
-  --color: #000000; /* Color del texto del botón blanco */
+  --color: #000000; /* Color del texto del botón negro */
 }
 
-ion-content {
+ion-content.content-bg {
   display: flex;
   justify-content: center; /* Centra horizontalmente */
   align-items: center;     /* Centra verticalmente */
   padding: 0;             /* Elimina el padding adicional */
-  background-color: #000; /* Fondo negro */
-}
+  background-color: #000; /* Fondo negro para toda la ventana */
+  --background: #000000;
+  font-family: Georgia, 'Times New Roman', Times, serif; /* Fuente aplicada a todo el contenido */
 
-.profile-card {
-  width: 100%;
-  max-width: 600px;        /* Define el ancho máximo del card */
-  margin: 20px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgb(204, 38, 38); /* Sombra dorada para efecto de profundidad */
-  display: flex;
-  flex-direction: column;
-  gap: 15px;               /* Espacio entre los elementos del card */
-  background-color: #1c1c1c; /* Fondo gris oscuro para el card */
-  border: 2px solid #ff0000; /* Borde dorado para el card */
-  border-radius: 10px;     /* Bordes redondeados */
-
-  .profile-avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;  /* Redondea el avatar */
+  .content-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
   }
 
-  ion-item {
-    --highlight-height: 2px;
-    --highlight-color: #cc9226; /* Color de resaltado dorado */
-  }
+  .profile-card {
+    width: 100%;
+    max-width: 600px;        /* Ancho máximo del card */
+    margin: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgb(255, 153, 0); /* Sombra dorada */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;               /* Espacio entre los elementos del card */
+    background-color: #000000; /* Fondo negro para el card */
+    border: 2px solid #d4af37; /* Borde dorado para el card */
+    border-radius: 10px;     /* Bordes redondeados */
 
-  ion-input {
-    --padding-start: 0;
-    color: #fff; /* Color del texto del input */
-    background-color: #333; /* Fondo gris oscuro para el input */
-    border: 1px solid #cc9226; /* Borde dorado para el input */
-  }
+    .profile-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;  /* Redondea el avatar */
+    }
 
-  ion-card-header {
     ion-item {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      color: #f7f7f7; /* Color del texto del header */
+      --highlight-height: 2px;
+      --highlight-color: #cc9226; /* Color de resaltado dorado */
+      font-family: Georgia, 'Times New Roman', Times, serif; /* Fuente aplicada a los items */
+    }
+
+    ion-input {
+      --padding-start: 0;
+      color: #000000; /* Color del texto del input */
+      background-color: #fdfdfd; /* Fondo claro para el input */
+      border: 1px solid #d4af37; /* Borde dorado para el input */
+      border-radius: 5px; /* Bordes redondeados para el input */
+      font-family: Georgia, 'Times New Roman', Times, serif; /* Fuente aplicada al input */
+    }
+
+    ion-card-header {
+      ion-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        color: #000000; /* Color del texto del header */
+        font-family: Georgia, 'Times New Roman', Times, serif; /* Fuente aplicada al header del card */
+      }
     }
   }
 }
+
+
+
