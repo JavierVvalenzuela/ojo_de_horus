@@ -13,44 +13,44 @@ export class LoginPage implements OnInit {
   nick: string = '';
   password: string = '';
   errorMessage: string = '';  
-
-  usuarios: Usuario[] = []; // Lista de usuarios
+  usuarios: Usuario[] = [];
+  isLoading: boolean = true;
 
   constructor(private navCtrl: NavController, private servicioBD: ServicioBDService) {}
 
-  ngOnInit() {
-    this.loadUsers(); 
+  async ngOnInit() {
+    await this.loadUsers();
   }
 
   async loadUsers() {
     try {
-      // Esperar a que la base de datos esté lista
       await this.servicioBD.dbState().pipe(filter(ready => ready), take(1)).toPromise();
-      
-      // Obtener usuarios de la base de datos sin llamar como función
-      const usuarios = await this.getUsuarios; 
-      this.usuarios = usuarios; // Actualizar la lista local de usuarios
-      console.log('Usuarios cargados:', usuarios); 
+      this.usuarios = await this.servicioBD.getAllUsuarios();
+      console.log('Usuarios cargados:', this.usuarios);
+      this.isLoading = false;
     } catch (error) {
       console.error('Error al cargar usuarios:', error);
+      this.errorMessage = 'Error al cargar usuarios. Por favor, intente nuevamente.';
+      this.isLoading = false;
     }
   }
 
-  get getUsuarios() {
-    return this.servicioBD.getAllUsuarios(); // No se necesita paréntesis
-  }
+  async onSubmit() {
+    if (this.isLoading) {
+      this.errorMessage = 'Por favor, espere mientras se cargan los datos.';
+      return;
+    }
 
-  onSubmit() {
     this.errorMessage = '';
 
-    const cleanedNick = this.nick.trim();
+    const cleanedNick = this.nick.trim().toLowerCase();
     const cleanedPassword = this.password.trim();
 
     console.log('Nick ingresado:', cleanedNick);
     console.log('Contraseña ingresada:', cleanedPassword);
     
     const user = this.usuarios.find((u: Usuario) => 
-      u.nick_u === cleanedNick && 
+      u.nick_u.toLowerCase() === cleanedNick && 
       u.contrasena_u === cleanedPassword
     );
 
