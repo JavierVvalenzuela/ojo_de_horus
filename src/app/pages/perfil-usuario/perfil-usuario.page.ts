@@ -53,7 +53,7 @@ export class PerfilUsuarioPage implements OnInit {
   }
 
   async loadUserData() {
-    const loggedInUser = await this.dbService.getLoggedInUser(); // Suponemos que este método existe
+    const loggedInUser = await this.dbService.getLoggedInUser(); 
     const profileNick = this.route.snapshot.paramMap.get('nick') || loggedInUser?.nick_u;
 
     if (profileNick) {
@@ -141,15 +141,16 @@ export class PerfilUsuarioPage implements OnInit {
               this.user.estado_cuenta_u = data.action;
               this.user.razon_ban_u = data.reason;
               this.updateUser();
+              return true; 
             } else {
               this.dbService.presentAlert('Error', 'La razón no puede estar vacía.');
-              return false;
+              return false; 
             }
           }
         }
       ]
     });
-
+    
     await alert.present();
   }
 
