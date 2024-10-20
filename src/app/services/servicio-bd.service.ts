@@ -11,7 +11,6 @@ import { Usuario } from '../model/usuario';
 export class ServicioBDService {
   public database!: SQLiteObject;
 
-  // Definición de tablas
   tablaRol: string = "CREATE TABLE IF NOT EXISTS ROL (id_rol INTEGER PRIMARY KEY AUTOINCREMENT, nombre_rol VARCHAR(50) NOT NULL);";
   tablaCategoria: string = "CREATE TABLE IF NOT EXISTS CATEGORIA (id_categoria INTEGER PRIMARY KEY AUTOINCREMENT, nombre_cat VARCHAR(50) NOT NULL);";
   tablaEstado: string = "CREATE TABLE IF NOT EXISTS ESTADO (id_estado INTEGER PRIMARY KEY AUTOINCREMENT, nombre_e VARCHAR(50) NOT NULL);";
@@ -166,5 +165,44 @@ export class ServicioBDService {
   private async cargarUsuarios() {
     const usuarios = await this.getAllUsuarios();
     this.listadoUsuarios.next(usuarios);
+  }
+
+  async getLoggedInUser(): Promise<Usuario | null> {
+    const loggedInUserId = localStorage.getItem('loggedInUserId');
+    if (loggedInUserId) {
+      const query = 'SELECT * FROM USUARIO WHERE id_usuario = ?';
+      try {
+        const result = await this.database.executeSql(query, [loggedInUserId]);
+        return result.rows.length > 0 ? result.rows.item(0) : null;
+      } catch (e: any) {
+        this.presentAlert('Error', `No se pudo obtener el usuario logueado: ${e.message}`);
+        return null;
+      }
+    }
+    return null;
+  }
+
+  async deleteUser(userId: number) {
+    const query = `DELETE FROM USUARIO WHERE id_usuario = ?`;
+
+    try {
+      await this.database.executeSql(query, [userId]);
+      this.presentAlert('Éxito', 'Usuario eliminado correctamente.');
+      await this.cargarUsuarios();
+    } catch (e: any) {
+      this.presentAlert('Error', `Error al eliminar usuario: ${e.message}`);
+    }
+  }
+
+  async banUser(nick: string, razon: string) {
+    const query = `UPDATE USUARIO SET estado_cuenta_u = 'B', razon_ban_u = ? WHERE nick_u = ?`;
+
+    try {
+      await this.database.executeSql(query, [razon, nick]);
+      this.presentAlert('Éxito', 'Usuario baneado correctamente.');
+      await this.cargarUsuarios();
+    } catch (e: any) {
+      this.presentAlert('Error', `Error al banear usuario: ${e.message}`);
+    }
   }
 }

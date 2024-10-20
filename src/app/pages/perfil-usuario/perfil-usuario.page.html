@@ -5,10 +5,6 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Perfil de Usuario</ion-title>
-    <ion-buttons slot="end">
-      <ion-searchbar></ion-searchbar>
-      <ion-button [routerDirection]="'root'" [routerLink]="'/login'">Inicio de sesión</ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -21,7 +17,7 @@
             <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="Foto de perfil" />
           </ion-avatar>
           <ion-label>
-            <h2>Nombre de Usuario</h2>
+            <h2>{{ user.nombre_u }} {{ user.apellido_u }}</h2>
             <p>{{ user.nick_u }}</p>
           </ion-label>
         </ion-item>
@@ -29,12 +25,21 @@
 
       <ion-card-content>
         <ion-list>
-          <!-- Nombre Completo -->
+          <!-- Nombre -->
           <ion-item>
-            <ion-label position="stacked">Nombre Completo</ion-label>
+            <ion-label position="stacked">Nombre</ion-label>
             <ion-input 
               [(ngModel)]="user.nombre_u"
-              [readonly]="!isOwner">
+              [readonly]="!canModify">
+            </ion-input>
+          </ion-item>
+
+          <!-- Apellido -->
+          <ion-item>
+            <ion-label position="stacked">Apellido</ion-label>
+            <ion-input 
+              [(ngModel)]="user.apellido_u"
+              [readonly]="!canModify">
             </ion-input>
           </ion-item>
 
@@ -43,7 +48,7 @@
             <ion-label position="stacked">Correo Electrónico</ion-label>
             <ion-input 
               [(ngModel)]="user.correo_u"
-              [readonly]="!isOwner">
+              [readonly]="!canModify">
             </ion-input>
           </ion-item>
 
@@ -52,7 +57,7 @@
             <ion-label position="stacked">Teléfono</ion-label>
             <ion-input 
               [(ngModel)]="user.phone" 
-              [readonly]="!isOwner">
+              [readonly]="!canModify">
             </ion-input>
           </ion-item>
 
@@ -61,18 +66,33 @@
             <ion-label position="stacked">Dirección</ion-label>
             <ion-input 
               [(ngModel)]="user.address" 
-              [readonly]="!isOwner">
+              [readonly]="!canModify">
             </ion-input>
+          </ion-item>
+
+          <!-- Estado de la cuenta (solo visible para admin y moderador) -->
+          <ion-item *ngIf="isAdmin || isModerator">
+            <ion-label position="stacked">Estado de la cuenta</ion-label>
+            <ion-input [value]="user.estado_cuenta_u === 'A' ? 'Activa' : (user.estado_cuenta_u === 'S' ? 'Suspendida' : 'Baneada')" readonly></ion-input>
+          </ion-item>
+
+          <!-- Razón de suspensión/baneo (solo visible si está suspendida o baneada) -->
+          <ion-item *ngIf="(isAdmin || isModerator) && (user.estado_cuenta_u === 'S' || user.estado_cuenta_u === 'B')">
+            <ion-label position="stacked">Razón de suspensión/baneo</ion-label>
+            <ion-input [value]="user.razon_ban_u" readonly></ion-input>
           </ion-item>
         </ion-list>
 
-        <!-- Botón Actualizar Información solo visible para el dueño de la cuenta -->
-        <ion-button *ngIf="isOwner" color="primary" expand="block" (click)="updateUser()">
+        <!-- Botones de acción -->
+        <ion-button *ngIf="canModify" color="primary" expand="block" (click)="updateUser()">
           Actualizar Información
         </ion-button>
         
-        <!-- Botón Eliminar Usuario solo visible para administradores -->
-        <ion-button *ngIf="isAdmin" color="danger" expand="block" (click)="deleteUser()">
+        <ion-button *ngIf="canSuspendOrBan" color="warning" expand="block" (click)="suspendOrBanUser()">
+          Suspender/Banear Usuario
+        </ion-button>
+
+        <ion-button *ngIf="canDelete" color="danger" expand="block" (click)="deleteUser()">
           Eliminar Usuario
         </ion-button>
       </ion-card-content>
