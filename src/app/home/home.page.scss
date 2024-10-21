@@ -1,6 +1,6 @@
 ion-header {
   background-color: #d4af37; /* Fondo dorado */
-  color: #000; /* Texto negro */
+  color: #000000; /* Texto negro */
 
   ion-toolbar {
     --background: transparent; /* Fondo transparente del toolbar para heredar el dorado */
@@ -21,7 +21,7 @@ ion-header {
     }
 
     ion-searchbar {
-      --background: #fff; /* Fondo blanco para el cuadro de búsqueda */
+      --background: #ffffff; /* Fondo blanco para el cuadro de búsqueda */
       --color: #000; /* Texto negro dentro del searchbar */
     }
 
@@ -34,8 +34,10 @@ ion-header {
 }
 
 ion-content {
-  background-color: #000; /* Fondo negro */
+  background-color: #000000; /* Fondo negro */
+  color: #ffffff; /* Color blanco para el texto en el contenido */
   font-family: Georgia, 'Times New Roman', Times, serif;
+  --background: transparent;
 
   .welcome-section {
     text-align: center;
