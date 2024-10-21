@@ -3,37 +3,39 @@ ion-header {
   color: #000; /* Texto negro */
 
   ion-toolbar {
-    --background: transparent; /* Fondo transparente del toolbar para que herede el dorado */
+    --background: transparent; /* Fondo transparente del toolbar para heredar el dorado */
     color: #000; /* Color del texto e iconos dentro del toolbar */
 
-    ion-title, ion-buttons, ion-searchbar, ion-button {
-      color: #000; /* Asegurarse de que el texto e iconos sean negros */
+    ion-title,
+    ion-buttons,
+    ion-searchbar,
+    ion-button {
+      color: #000; /* Asegura que el texto e iconos sean negros */
       font-family: Georgia, 'Times New Roman', Times, serif;
     }
 
-    ion-menu-button, ion-back-button {
+    ion-menu-button,
+    ion-back-button {
       color: #000; /* Iconos del menú y back en negro */
-      background-color: #d4af37;
+      background-color: #d4af37; /* Fondo dorado para los botones */
     }
 
     ion-searchbar {
-      --background: #fff; /* Fondo blanco del cuadro de búsqueda */
+      --background: #fff; /* Fondo blanco para el cuadro de búsqueda */
       --color: #000; /* Texto negro dentro del searchbar */
     }
 
     ion-button {
-      --background: #000000; /* Fondo blanco para el botón de inicio de sesión */
+      --background: #000; /* Fondo negro para el botón */
       text-align: center;
       border-radius: 10px; /* Bordes redondeados */
     }
   }
 }
 
-
 ion-content {
-  background-color: #000000; /* Fondo negro */
-  font-family:Georgia, 'Times New Roman', Times, serif;
-  --background: transparent;
+  background-color: #000; /* Fondo negro */
+  font-family: Georgia, 'Times New Roman', Times, serif;
 
   .welcome-section {
     text-align: center;
@@ -43,9 +45,7 @@ ion-content {
       font-size: 2rem;
       font-weight: bold;
       color: #cc9226; /* Color dorado para el título */
-      font-family:Georgia, 'Times New Roman', Times, serif;
     }
-
   }
 
   .welcome-image {
@@ -57,18 +57,20 @@ ion-content {
   }
 
   .about-section {
-    h2 {
-      font-size: 1.8rem;
+    h2,
+    h3 {
       margin-bottom: 15px;
       color: #cc9226; /* Color dorado */
-      font-family:Georgia, 'Times New Roman', Times, serif;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    h2 {
+      font-size: 1.8rem;
     }
 
     h3 {
       margin-top: 20px;
       font-size: 1.5rem;
-      color: #cc9226; /* Color dorado */
-      font-family:Georgia, 'Times New Roman', Times, serif;
     }
 
     p,
@@ -76,10 +78,9 @@ ion-content {
       font-size: 1rem;
       line-height: 1.6;
       margin-bottom: 15px;
-      color: #ffffff; /* Color blanco para el texto */
-      background-color: #000000;
-      border: 5px solid #cc9226;
+      color: #fff; /* Color blanco para el texto */
       padding: 4%;
+      border: 5px solid #cc9226; /* Borde dorado */
     }
 
     ul {
@@ -94,3 +95,4 @@ ion-content {
     color: #000; /* Texto negro para el botón */
   }
 }
+
