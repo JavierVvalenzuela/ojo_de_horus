@@ -30,8 +30,7 @@ ion-header {
 }
 
 ion-content { 
-  background-color: #000; /* Fondo negro */
-  color: #fff; /* Texto blanco */
+  background-color: #000000; /* Fondo negro */
   --background: transparent;
 
   .post-item {
@@ -50,9 +49,10 @@ ion-content {
     border: 2px solid #d4af37; /* Borde dorado */
     border-radius: 10px; /* Bordes redondeados */
     font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: #000;
 
     p {
-      color: #000;
+      color: #ffffff;
       font-size: medium;
     }
     

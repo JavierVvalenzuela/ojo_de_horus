@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Seguridad</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/configuraciones"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="stacked">Pregunta de seguridad</ion-label>
+      <ion-select [(ngModel)]="selectedQuestion" name="securityQuestion" required>
+        <ion-select-option value="pet">¿Cuál es el nombre de tu primera mascota?</ion-select-option>
+        <ion-select-option value="school">¿En qué escuela primaria estudiaste?</ion-select-option>
+        <ion-select-option value="city">¿En qué ciudad naciste?</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Respuesta</ion-label>
+      <ion-input type="text" [(ngModel)]="securityAnswer" name="securityAnswer" required></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" class="ion-margin-top">Guardar configuración de seguridad</ion-button>
+  </form>
+</ion-content>

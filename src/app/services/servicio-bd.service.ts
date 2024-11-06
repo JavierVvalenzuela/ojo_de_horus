@@ -9,12 +9,29 @@ import { Usuario } from '../model/usuario';
   providedIn: 'root'
 })
 export class ServicioBDService {
+  resetPassword(nick: string, newPassword: string) {
+    throw new Error('Method not implemented.');
+  }
   public database!: SQLiteObject;
 
   tablaRol: string = "CREATE TABLE IF NOT EXISTS ROL (id_rol INTEGER PRIMARY KEY AUTOINCREMENT, nombre_rol VARCHAR(50) NOT NULL);";
   tablaCategoria: string = "CREATE TABLE IF NOT EXISTS CATEGORIA (id_categoria INTEGER PRIMARY KEY AUTOINCREMENT, nombre_cat VARCHAR(50) NOT NULL);";
   tablaEstado: string = "CREATE TABLE IF NOT EXISTS ESTADO (id_estado INTEGER PRIMARY KEY AUTOINCREMENT, nombre_e VARCHAR(50) NOT NULL);";
-  tablaUsuario: string = `CREATE TABLE IF NOT EXISTS USUARIO (id_usuario INTEGER PRIMARY KEY AUTOINCREMENT, nombre_u VARCHAR(50) NOT NULL, apellido_u VARCHAR(50) NOT NULL, nick_u VARCHAR(50) NOT NULL UNIQUE, correo_u VARCHAR(100) NOT NULL, contrasena_u VARCHAR(50) NOT NULL, pregunta_respaldo_u VARCHAR(255), imagen_perfil_u BLOB, estado_cuenta_u CHAR(1) NOT NULL, razon_ban_u TEXT, id_rol INTEGER NOT NULL, FOREIGN KEY(id_rol) REFERENCES ROL(id_rol));`;
+  tablaUsuario: string = `CREATE TABLE IF NOT EXISTS USUARIO (
+    id_usuario INTEGER PRIMARY KEY AUTOINCREMENT, 
+    nombre_u VARCHAR(50) NOT NULL, 
+    apellido_u VARCHAR(50) NOT NULL, 
+    nick_u VARCHAR(50) NOT NULL UNIQUE, 
+    correo_u VARCHAR(100) NOT NULL, 
+    contrasena_u VARCHAR(50) NOT NULL, 
+    pregunta_seguridad VARCHAR(255),
+    respuesta_seguridad VARCHAR(255),
+    imagen_perfil_u BLOB, 
+    estado_cuenta_u CHAR(1) NOT NULL, 
+    razon_ban_u TEXT, 
+    id_rol INTEGER NOT NULL, 
+    FOREIGN KEY(id_rol) REFERENCES ROL(id_rol)
+  );`;
   tablaPost: string = `CREATE TABLE IF NOT EXISTS POST (id_post INTEGER PRIMARY KEY AUTOINCREMENT, titulo_post VARCHAR(50) NOT NULL, contenido_post TEXT NOT NULL, f_creacion_post DATE NOT NULL, imagen_post BLOB, id_usuario INTEGER NOT NULL, id_estado INTEGER NOT NULL, FOREIGN KEY(id_usuario) REFERENCES USUARIO(id_usuario), FOREIGN KEY(id_estado) REFERENCES ESTADO(id_estado));`;
   tablaComentario: string = `CREATE TABLE IF NOT EXISTS COMENTARIO (id_coment INTEGER PRIMARY KEY AUTOINCREMENT, contenido_coment TEXT NOT NULL, f_creacion_coment DATE NOT NULL, imagen_coment BLOB, id_estado INTEGER NOT NULL, id_post INTEGER NOT NULL, FOREIGN KEY(id_estado) REFERENCES ESTADO(id_estado), FOREIGN KEY(id_post) REFERENCES POST(id_post));`;
   tablaPostCategoria: string = `CREATE TABLE IF NOT EXISTS POST_CATEGORIA (id_post_c INTEGER PRIMARY KEY AUTOINCREMENT, id_categoria INTEGER NOT NULL, id_post INTEGER NOT NULL, FOREIGN KEY(id_categoria) REFERENCES CATEGORIA(id_categoria), FOREIGN KEY(id_post) REFERENCES POST(id_post));`;
@@ -205,4 +222,67 @@ export class ServicioBDService {
       this.presentAlert('Error', `Error al banear usuario: ${e.message}`);
     }
   }
+
+  async actualizarPreguntaSeguridad(nick: string, pregunta: string, respuesta: string) {
+    const query = `UPDATE USUARIO SET pregunta_seguridad = ?, respuesta_seguridad = ? WHERE nick_u = ?`;
+    
+    try {
+      await this.database.executeSql(query, [pregunta, respuesta, nick]);
+      this.presentAlert('Éxito', 'Pregunta de seguridad actualizada correctamente.');
+      await this.cargarUsuarios();
+    } catch (e: any) { 
+      this.presentAlert('Error', `Error al actualizar la pregunta de seguridad: ${e.message}`);
+    }
+  }
+
+  async obtenerPreguntaSeguridad(nick: string): Promise<string | null> {
+    const query = 'SELECT pregunta_seguridad FROM USUARIO WHERE nick_u = ?';
+    try {
+      const result = await this.database.executeSql(query, [nick]);
+      return result.rows.length > 0 ? result.rows.item(0).pregunta_seguridad : null;
+    } catch (e: any) {
+      this.presentAlert('Error', `No se pudo obtener la pregunta de seguridad: ${e.message}`);
+      return null;
+    }
+  }
+
+  async verificarRespuestaSeguridad(nick: string, respuesta: string): Promise<boolean> {
+    const query = 'SELECT respuesta_seguridad FROM USUARIO WHERE nick_u = ?';
+    try {
+      const result = await this.database.executeSql(query, [nick]);
+      if (result.rows.length > 0) {
+        const storedAnswer = result.rows.item(0).respuesta_seguridad;
+        return storedAnswer === respuesta;
+      }
+      return false;
+    } catch (e: any) {
+      this.presentAlert('Error', `Error al verificar la respuesta de seguridad: ${e.message}`);
+      return false;
+    }
+  }
+
+  async tienePreguntaSeguridad(nick: string): Promise<boolean> {
+    const query = 'SELECT pregunta_seguridad FROM USUARIO WHERE nick_u = ?';
+    try {
+      const result = await this.database.executeSql(query, [nick]);
+      return result.rows.length > 0 && result.rows.item(0).pregunta_seguridad != null;
+    } catch (e: any) {
+      this.presentAlert('Error', `Error al verificar la existencia de la pregunta de seguridad: ${e.message}`);
+      return false;
+    }
+  }
+
+  async cambiarContrasena(nick: string, nuevaContrasena: string): Promise<boolean> {
+    const query = 'UPDATE USUARIO SET contrasena_u = ? WHERE nick_u = ?';
+    try {
+      await this.database.executeSql(query, [nuevaContrasena, nick]);
+      this.presentAlert('Éxito', 'Contraseña actualizada correctamente.');
+      return true;
+    } catch (e: any) {
+      this.presentAlert('Error', `Error al cambiar la contraseña: ${e.message}`);
+      return false;
+    }
+  }
+  
+  
 }

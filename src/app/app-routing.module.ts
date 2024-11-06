@@ -96,6 +96,10 @@ const routes: Routes = [
     path: 'galeria',
     loadChildren: () => import('./pages/galeria/galeria.module').then( m => m.GaleriaPageModule)
   },
+  {
+    path: 'seguridad',
+    loadChildren: () => import('./pages/seguridad/seguridad.module').then( m => m.SeguridadPageModule)
+  },
 
 ];
 

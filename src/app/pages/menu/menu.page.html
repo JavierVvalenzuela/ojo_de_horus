@@ -5,9 +5,7 @@
       <ion-menu-button></ion-menu-button>
       <ion-back-button></ion-back-button>
     </ion-buttons>
-
     <ion-searchbar slot="end"></ion-searchbar>
-
     <ion-button slot="end" [routerDirection]="'root'" [routerLink]="'/login'">Inicio de sesión</ion-button>
   </ion-toolbar>
 </ion-header>
@@ -19,7 +17,12 @@
     </ion-avatar>
     <ion-label>
       <h2>Nuevo Post</h2>
-      <ion-input placeholder="¿En que estas pensando hoy?" lines="full" [(ngModel)]="postMessage"></ion-input>
+      <!-- Imagen de vista previa -->
+      <div *ngIf="selectedImageSrc">
+        <img [src]="selectedImageSrc" alt="Vista previa de imagen" style="width: 100%; margin-bottom: 8px;">
+      </div>
+      <!-- Entrada de texto del post -->
+      <ion-input placeholder="¿En qué estás pensando hoy?" lines="full" [(ngModel)]="postMessage"></ion-input>
       
       <div class="button-group">
         <ion-button expand="full" class="publish" (click)="publishPost()">Publicar</ion-button>
@@ -28,72 +31,17 @@
         </ion-button>
         <input type="file" #fileInput accept="image/*" (change)="onImageSelected($event)" style="display: none;">
       </div>
-      
     </ion-label>
   </ion-item>
 
-  <!-- Primera tarjeta -->
-  <ion-card class="card-custom">
+  <!-- Ejemplo de publicaciones existentes -->
+  <ion-card *ngFor="let post of posts" class="card-custom">
     <ion-card-header>
-      <ion-card-title><ion-icon name="person-circle"></ion-icon> Diego</ion-card-title>
-      <p>Ya me he pasado el juego de sonic, puedo afirmar que los creadores realizaron este juego pensando en la comunidad. :D</p>
+      <ion-card-title><ion-icon name="person-circle"></ion-icon> {{ post.name }}</ion-card-title>
+      <p>{{ post.message }}</p>
     </ion-card-header>
     <ion-card-content>
-      <img src="https://sonic-city.net/wp-content/uploads/2023/09/event_230913_01_eye-400x200.jpg" alt="Publicación de Diego">
-      <div class="button-group">
-        <div class="left-buttons">
-          <ion-button color="primary" (click)="likePost()">
-            <ion-icon name="heart"></ion-icon>
-            Like
-          </ion-button>
-          <ion-button color="secondary">
-            <ion-icon name="chatbubble"></ion-icon>
-            Comentario
-          </ion-button>
-        </div>
-        <ion-button class="right-button" color="tertiary">
-          <ion-icon name="share-social"></ion-icon>
-          Compartir
-        </ion-button>
-      </div>
-    </ion-card-content>
-  </ion-card>
-
-  <!-- Segunda tarjeta -->
-  <ion-card class="card-custom">
-    <ion-card-header>
-      <ion-card-title><ion-icon name="person-circle"></ion-icon> Maria</ion-card-title>
-      <p>Buen juego, si no es el goty estara muy cerca de serlo.</p>
-    </ion-card-header>
-    <ion-card-content>
-      <img src="https://bloximages.newyork1.vip.townnews.com/dailytitan.com/content/tncms/assets/v3/editorial/1/72/1729f514-750b-11ed-9197-63ac3554bf6d/638ea5dbb40ba.image.jpg?resize=400%2C200" alt="Publicación de Maria">
-      <div class="button-group">
-        <div class="left-buttons">
-          <ion-button color="primary" (click)="likePost()">
-            <ion-icon name="heart"></ion-icon>
-            Like
-          </ion-button>
-          <ion-button color="secondary">
-            <ion-icon name="chatbubble"></ion-icon>
-            Comentario
-          </ion-button>
-        </div>
-        <ion-button class="right-button" color="tertiary">
-          <ion-icon name="share-social"></ion-icon>
-          Compartir
-        </ion-button>
-      </div>
-    </ion-card-content>
-  </ion-card>
-
-  <!-- Tercera tarjeta -->
-  <ion-card class="card-custom">
-    <ion-card-header>
-      <ion-card-title><ion-icon name="person-circle"></ion-icon> Juan</ion-card-title>
-      <p>Me encanta el fortnite, lo juego todo el día....</p>
-    </ion-card-header>
-    <ion-card-content>
-      <img src="https://i0.wp.com/magicvalleycomiccon.com/wp-content/uploads/2024/07/Fortnite.jpg?fit=400%2C200&ssl=1" alt="Publicación de Juan">
+      <img *ngIf="post.image" [src]="post.image" alt="Publicación de {{ post.name }}" style="width: 100%; margin-bottom: 8px;">
       <div class="button-group">
         <div class="left-buttons">
           <ion-button color="primary" (click)="likePost()">

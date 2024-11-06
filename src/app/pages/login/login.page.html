@@ -14,33 +14,32 @@
 
 <ion-content class="login-content">
   <div class="form-container">
-  <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
-    <ion-item>
-      <ion-label position="stacked">Usuario</ion-label>
-      <ion-input type="text" required [(ngModel)]="nick" name="nick"></ion-input>
-    </ion-item>
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      <ion-item>
+        <ion-label position="stacked">Usuario</ion-label>
+        <ion-input type="text" required [(ngModel)]="nick" name="nick"></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label position="stacked">Contraseña</ion-label>
-      <ion-input type="password" required [(ngModel)]="password" name="password"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Contraseña</ion-label>
+        <ion-input type="password" required [(ngModel)]="password" name="password"></ion-input>
+      </ion-item>
 
-    <!-- Mensaje de error -->
-    <p *ngIf="errorMessage" class="error-message">
-      {{ errorMessage }}
-    </p>
+      <p *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </p>
 
-    <ion-button expand="full" type="submit" [disabled]="!loginForm.form.valid">Iniciar Sesión</ion-button>
-    <ion-button expand="full" [routerDirection]="'root'" [routerLink]="'/registro'">Registrarse</ion-button>
-  </form>
-</div>
+      <ion-button expand="full" type="submit" [disabled]="!loginForm.form.valid">Iniciar Sesión</ion-button>
+      <ion-button expand="full" [routerDirection]="'root'" [routerLink]="'/registro'">Registrarse</ion-button>
+    </form>
+  </div>
 </ion-content>
 
 <style>
   .error-message {
-    color: red; /* Cambia el color a lo que prefieras */
-    font-size: 12px; /* Tamaño del texto de error */
-    margin-top: 5px; /* Espaciado superior */
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
     font-family: Georgia, 'Times New Roman', Times, serif;
   }
 </style>
