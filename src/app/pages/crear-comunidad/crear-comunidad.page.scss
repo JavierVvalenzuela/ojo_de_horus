@@ -1,0 +1,93 @@
+.page-crear-comunidad {
+    background-color: #000000;
+    color: white;
+    --background: transparent;
+    
+    ion-header {
+      --background: #000000;
+      margin-bottom: 20px;
+      --background: transparent;
+    }
+  
+    ion-toolbar {
+      --background: #000000;
+      ion-title {
+        color: gold;
+        margin-bottom: 20px;
+        --background: transparent;
+      }
+    }
+  
+    ion-content {
+      padding: 20px;
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+  
+      ion-item {
+        --background: #000000;
+        --border-radius: 10px;
+        margin-bottom: 15px;
+        --background: transparent;
+  
+        ion-label {
+          color: gold;
+          font-weight: bold;
+        }
+  
+        ion-input,
+        ion-textarea,
+        ion-select {
+          --background: #000;
+          --border-radius: 10px;
+          --border-color: gold;
+          --color: white;
+          margin-top: 5px;
+          --background: transparent;
+        }
+  
+        ion-input {
+          --placeholder-color: rgb(255, 255, 255);
+        }
+  
+        ion-textarea {
+          --placeholder-color: rgb(255, 255, 255);
+        }
+  
+        ion-select {
+          --background: #000;
+          --border-radius: 10px;
+          --color: white;
+        }
+  
+        ion-button {
+          --background: gold;
+          --color: black;
+          --border-radius: 5px;
+        }
+  
+        .cancel-button {
+          --background: red;
+          --color: white;
+          --border-radius: 5px;
+        }
+  
+        /* Mover (privacidad) al lado derecho */
+        ion-toggle {
+          margin-left: auto;
+        }
+      }
+  
+      ion-button {
+        margin-top: 10px;
+      }
+  
+      ion-item img {
+        max-width: 100%;
+        border-radius: 10px;
+      }
+    }
+  }
+  

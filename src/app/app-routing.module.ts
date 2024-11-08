@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-
 const routes: Routes = [
   {
     path: 'home',
@@ -24,7 +23,6 @@ const routes: Routes = [
     path: 'mas-populares',
     loadChildren: () => import('./pages/mas-populares/mas-populares.module').then( m => m.MasPopularesPageModule)
   },
- 
   {
     path: 'registro',
     loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
@@ -86,9 +84,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/administrador/administrador.module').then( m => m.AdministradorPageModule)
   },
   {
-    path: '**',
-    loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
-  },  {
     path: 'camara',
     loadChildren: () => import('./pages/camara/camara.module').then( m => m.CamaraPageModule)
   },
@@ -100,7 +95,18 @@ const routes: Routes = [
     path: 'seguridad',
     loadChildren: () => import('./pages/seguridad/seguridad.module').then( m => m.SeguridadPageModule)
   },
-
+  {
+    path: 'pag-comunidad',
+    loadChildren: () => import('./pages/pag-comunidad/pag-comunidad.module').then( m => m.PagComunidadPageModule)
+  },
+  {
+    path: 'crear-comunidad',  // Este es el path para la página de crear comunidad
+    loadChildren: () => import('./pages/crear-comunidad/crear-comunidad.module').then( m => m.CrearComunidadPageModule)
+  },
+  {
+    path: '**',
+    loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
+  }
 ];
 
 @NgModule({
