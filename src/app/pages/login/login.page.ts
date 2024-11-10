@@ -11,7 +11,7 @@ import { filter, take } from 'rxjs';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  nick: string = '';
+  nick_u: string = '';
   password: string = '';
   errorMessage: string = '';
   usuarios: Usuario[] = [];
@@ -38,7 +38,7 @@ export class LoginPage implements OnInit {
   }
 
   async onSubmit() {
-    const user = await this.servicioBD.getUserByNick(this.nick);
+    const user = await this.servicioBD.getUserByNick(this.nick_u);
     if (user) {
       if (user.contrasena_u === this.password) {
         if (user.estado_cuenta_u === 'B') {

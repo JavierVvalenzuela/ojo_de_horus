@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import { Usuario } from '../model/usuario';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -130,16 +131,16 @@ export class ServicioBDService {
 
   async insertarUsuario(nombre: string, apellido: string, nick: string, correo: string, contrasena: string, idRol: number) {
     if (await this.usuarioExists(nick)) {
-      this.presentAlert('Error', 'El nombre de usuario ya existe. Por favor, elige otro.');
-      return;
+      // Aquí no se muestra la alerta, simplemente no se inserta el usuario si ya existe.
+      return; 
     }
-
+  
     try {
       await this.isBDReady.pipe(filter(ready => ready), take(1)).toPromise();
-
+  
       const query = `INSERT INTO USUARIO (nombre_u, apellido_u, nick_u, correo_u, contrasena_u, estado_cuenta_u, id_rol) 
-                   VALUES (?, ?, ?, ?, ?, 'A', ?)`;
-
+                     VALUES (?, ?, ?, ?, ?, 'A', ?)`;
+  
       await this.database.executeSql(query, [nombre, apellido, nick, correo, contrasena, idRol]);
       this.presentAlert('Éxito', 'Usuario insertado correctamente.');
       await this.cargarUsuarios();
