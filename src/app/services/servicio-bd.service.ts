@@ -4,6 +4,7 @@ import { AlertController, Platform } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import { Usuario } from '../model/usuario';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -37,6 +38,12 @@ export class ServicioBDService {
   tablaComentario: string = `CREATE TABLE IF NOT EXISTS COMENTARIO (id_coment INTEGER PRIMARY KEY AUTOINCREMENT, contenido_coment TEXT NOT NULL, f_creacion_coment DATE NOT NULL, imagen_coment BLOB, id_estado INTEGER NOT NULL, id_post INTEGER NOT NULL, FOREIGN KEY(id_estado) REFERENCES ESTADO(id_estado), FOREIGN KEY(id_post) REFERENCES POST(id_post));`;
   tablaPostCategoria: string = `CREATE TABLE IF NOT EXISTS POST_CATEGORIA (id_post_c INTEGER PRIMARY KEY AUTOINCREMENT, id_categoria INTEGER NOT NULL, id_post INTEGER NOT NULL, FOREIGN KEY(id_categoria) REFERENCES CATEGORIA(id_categoria), FOREIGN KEY(id_post) REFERENCES POST(id_post));`;
   tablaFavoritos: string = `CREATE TABLE IF NOT EXISTS FAVORITOS (id_fav INTEGER PRIMARY KEY AUTOINCREMENT, f_creacion_fav DATE NOT NULL, id_usuario INTEGER NOT NULL, id_post INTEGER NOT NULL, FOREIGN KEY(id_usuario) REFERENCES USUARIO(id_usuario), FOREIGN KEY(id_post) REFERENCES POST(id_post));`;
+  
+  //insert automaticos
+  insertRol1: string = "INSERT or IGNORE INTO rol(id_rol,nombre_rol) VALUES (1,'Administrador')";
+  insertRol2: string = "INSERT or IGNORE INTO rol(id_rol,nombre_rol) VALUES (2,'Moderador')";
+  insertRol3: string = "INSERT or IGNORE INTO rol(id_rol,nombre_rol) VALUES (3,'Usuario')";
+  insertuser: string = "INSERT or IGNORE INTO usuario(id_usuario, nombre_u, apellido_u, nick_u, correo_u, contrasena_u, estado_cuenta_u, id_rol) VALUES(1,'Diego', 'Mellado', 'diego', 'diego@example.com', 'Diego170','A',1)";
 
   private listadoUsuarios = new BehaviorSubject<Usuario[]>([]);
   private isBDReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -44,7 +51,8 @@ export class ServicioBDService {
   constructor(
     private SQLite: SQLite,
     private platform: Platform,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private router: Router
   ) {
     this.createBD();
   }
@@ -69,7 +77,7 @@ export class ServicioBDService {
   createBD() {
     this.platform.ready().then(() => {
       this.SQLite.create({
-        name: 'usuario.db',
+        name: 'usuario2.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
         this.database = db;
@@ -90,8 +98,13 @@ export class ServicioBDService {
       await this.database.executeSql(this.tablaComentario, []);
       await this.database.executeSql(this.tablaPostCategoria, []);
       await this.database.executeSql(this.tablaFavoritos, []);
+
+      await this.database.executeSql(this.insertRol1, []);
+      await this.database.executeSql(this.insertRol2, []);
+      await this.database.executeSql(this.insertRol3, []);
+      await this.database.executeSql(this.insertuser, []);
       this.isBDReady.next(true);
-      await this.createInitialUser();
+      //await this.createInitialUser();
     } catch (e: any) {
       this.presentAlert('Error de Tablas', `No se pudieron crear las tablas: ${e.message}`);
     }
@@ -129,32 +142,28 @@ export class ServicioBDService {
     return user !== null;
   }
 
-  async insertarUsuario(nombre: string, apellido: string, nick: string, correo: string, contrasena: string, idRol: number) {
-    if (await this.usuarioExists(nick)) {
-      // Aquí no se muestra la alerta, simplemente no se inserta el usuario si ya existe.
-      return; 
-    }
-  
-    try {
-      await this.isBDReady.pipe(filter(ready => ready), take(1)).toPromise();
-  
-      const query = `INSERT INTO USUARIO (nombre_u, apellido_u, nick_u, correo_u, contrasena_u, estado_cuenta_u, id_rol) 
-                     VALUES (?, ?, ?, ?, ?, 'A', ?)`;
-  
-      await this.database.executeSql(query, [nombre, apellido, nick, correo, contrasena, idRol]);
-      this.presentAlert('Éxito', 'Usuario insertado correctamente.');
-      await this.cargarUsuarios();
-    } catch (e: any) { 
-      this.presentAlert('Error', `Error al insertar usuario: ${e.message}`);
-    }
+  insertarUsuario(nombre: string, apellido: string, nick: string, correo: string, contrasena: string, idRol: number, estado: string) {
+    //verificar que no existe un nick parecido
+    this.database.executeSql('SELECT FROM usuario WHERE nick_u = ?',[nick]).then(res=>{
+      if(res.rows.length > 0){
+        this.presentAlert("Registro", "El usuario ya eta registrado");
+      }
+      else{
+        //puedo insertar ya que el usuario no existe
+        this.database.executeSql('INSERT INTO usuario(nombre_u, apellido_u, nick_u, correo_u, contrasena_u, estado_cuenta_u, id_rol) VALUES (?,?,?,?,?,?,?)',[nombre,apellido,nick,correo,contrasena,estado,idRol]).then(data=>{
+          this.presentAlert("Registro", "Usuario Registrado Correctamente");
+          this.router.navigate(['/login']);
+        })
+      }
+    })
   }
-
+/*
   private async createInitialUser() {
     const nick = 'Diego';
     if (!(await this.usuarioExists(nick))) {
       await this.insertarUsuario('Diego', 'Mellado', nick, 'diego@example.com', 'Diego170', 1);
     }
-  }
+  }*/
 
   async actualizarUsuario(usuario: Usuario) {
     const query = `UPDATE USUARIO SET nombre_u = ?, apellido_u = ?, correo_u = ?, contrasena_u = ?, estado_cuenta_u = ?, razon_ban_u = ? WHERE id_usuario = ?`;

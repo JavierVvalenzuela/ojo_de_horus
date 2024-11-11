@@ -24,7 +24,7 @@ export class RegistroPage implements OnInit {
   constructor(private navCtrl: NavController, private servicioBD: ServicioBDService) { 
     const today = new Date();
     this.maxDate = today.toISOString().split('T')[0]; 
-
+    this.resetForm();
     const minDate120YearsAgo = new Date(today.getFullYear() - 120, today.getMonth(), today.getDate());
     this.minDate = minDate120YearsAgo.toISOString().split('T')[0]; 
   }
@@ -64,14 +64,20 @@ export class RegistroPage implements OnInit {
       return;
     }
 
+    //acomodar el formulrio para que pida todos los datos y luego esas variables son las que se envian a esta funcion
+    this.servicioBD.insertarUsuario('Jose','Guitierrre', this.user.nick,'b@b.cl',this.user.password,3,'A');
+
+
     // Verificar si el usuario ya existe
+    /*
     const userExists = await this.servicioBD.getUserByNick(this.user.nick);
     if (userExists) {
       this.errorMessage = 'El nombre de usuario ya está en uso.';
       return;
-    }
+    }*/
 
     // Continuar con la creación del usuario
+    /*
     const correo = `${this.user.nick}@example.com`; 
     const apellido = ''; 
     const idRol = 3; 
@@ -81,7 +87,7 @@ export class RegistroPage implements OnInit {
 
     const nuevoUsuario = new Usuario();
     nuevoUsuario.id_usuario = id_usuario;
-    nuevoUsuario.nombre_u = this.user.nick; // Asume que 'name' es igual a 'nick'
+    nuevoUsuario.nombre_u = this.user.nick; 
     nuevoUsuario.apellido_u = apellido;
     nuevoUsuario.nick_u = this.user.nick;
     nuevoUsuario.correo_u = correo;
@@ -93,6 +99,7 @@ export class RegistroPage implements OnInit {
 
     this.resetForm(); 
     this.navCtrl.navigateRoot('/login'); 
+    */
   }
 
   resetForm() {
