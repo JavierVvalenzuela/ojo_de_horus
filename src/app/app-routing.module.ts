@@ -104,6 +104,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/crear-comunidad/crear-comunidad.module').then( m => m.CrearComunidadPageModule)
   },
   {
+    path: 'mi-comunidad',
+    loadChildren: () => import('./pages/mi-comunidad/mi-comunidad.module').then( m => m.MiComunidadPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
   }

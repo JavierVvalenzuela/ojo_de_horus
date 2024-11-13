@@ -1,0 +1,118 @@
+ion-header {
+    background-color: #d4af37; /* Fondo dorado */
+    color: #000000; /* Texto negro */
+  
+    ion-toolbar {
+      --background: transparent; /* Fondo transparente del toolbar para heredar el dorado */
+      color: #000; /* Color del texto e iconos dentro del toolbar */
+  
+      ion-title,
+      ion-buttons,
+      ion-searchbar,
+      ion-button {
+        color: #000; /* Asegura que el texto e iconos sean negros */
+        font-family: Georgia, 'Times New Roman', Times, serif;
+      }
+  
+      ion-menu-button,
+      ion-back-button {
+        color: #000; /* Iconos del menú y back en negro */
+        background-color: #d4af37; /* Fondo dorado para los botones */
+      }
+  
+      ion-searchbar {
+        --background: #ffffff; /* Fondo blanco para el cuadro de búsqueda */
+        --color: #000; /* Texto negro dentro del searchbar */
+      }
+  
+      ion-button {
+        --background: #000; /* Fondo negro para el botón */
+        text-align: center;
+        border-radius: 10px; /* Bordes redondeados */
+      }
+    }
+  }
+  
+  .mi-comunidad-content {
+    --background: #000; /* Fondo negro */
+    color: #FFD700; /* Texto dorado */
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  
+    .comunidad-header {
+      display: flex;
+      align-items: center;
+      padding: 20px;
+      background-color: #222; /* Fondo oscuro */
+      border-radius: 8px;
+      margin: 15px;
+  
+      .community-image {
+        width: 80px;
+        height: 80px;
+        border-radius: 10px; /* Bordes redondeados */
+        margin-right: 20px;
+        cursor: pointer; /* Cursor pointer cuando se puede editar */
+      }
+  
+      .community-details {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+  
+      .community-name {
+        font-size: 24px;
+        font-weight: bold;
+        color: #FFD700; /* Dorado */
+      }
+  
+      .community-description {
+        color: #FFD700; /* Dorado */
+        font-size: 18px;
+      }
+    }
+  
+    .community-info {
+      padding: 20px;
+      background-color: #333; /* Fondo gris oscuro */
+      border-radius: 8px;
+      margin: 10px 0;
+      color: #FFD700; /* Texto dorado */
+  
+      p {
+        font-size: 18px;
+        font-weight: normal;
+        color: #FFD700; /* Dorado */
+      }
+  
+      /* Bordes dorados en las secciones editables */
+      ion-input,
+      ion-textarea,
+      ion-select {
+        --background: #222; /* Fondo oscuro para los campos */
+        --border-radius: 10px;
+        --color: #FFD700; /* Bordes dorados */
+        --placeholder-color: #FFD700; /* Color dorado para el texto de placeholder */
+        --padding-start: 10px;
+      }
+    }
+  
+    .edit-buttons {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px;
+      margin-top: 20px;
+    }
+  
+    .edit-buttons ion-button {
+      --background: #d4af37; /* Fondo dorado para los botones de edición */
+      --color: #000; /* Texto negro */
+      border-radius: 10px; /* Bordes redondeados */
+    }
+  
+    /* Bordes dorados en la imagen cuando está en edición */
+    .community-image {
+      border: 2px solid #d4af37; /* Bordes dorados en la imagen */
+    }
+  }
+  

@@ -1,0 +1,68 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Mi Comunidad
+      <ion-button *ngIf="!isEditing" (click)="startEditing()" fill="clear" slot="end">
+        <ion-icon name="create"></ion-icon>
+      </ion-button>
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="mi-comunidad-content">
+  <div class="comunidad-header">
+    <img 
+      [src]="communityImage" 
+      alt="Imagen de la Comunidad" 
+      class="community-image" 
+      (click)="isEditing && changeCommunityImage()" 
+    />
+    <div class="community-details">
+      <h2 class="community-name" *ngIf="!isEditing">{{ nombre }}</h2>
+      <ion-input *ngIf="isEditing" [(ngModel)]="editedNombre" placeholder="Nombre de la comunidad"></ion-input>
+      
+      <p class="community-description" *ngIf="!isEditing">{{ descripcion }}</p>
+      <ion-textarea *ngIf="isEditing" [(ngModel)]="editedDescripcion" placeholder="Descripción"></ion-textarea>
+    </div>
+  </div>
+
+  <div class="community-info">
+    <p><strong>Categoría:</strong>
+      <span *ngIf="!isEditing">{{ categoria }}</span>
+      <ion-select *ngIf="isEditing" [(ngModel)]="editedCategoria" placeholder="Seleccionar categoría">
+        <ion-select-option *ngFor="let option of categoriaOptions" [value]="option">{{ option }}</ion-select-option>
+      </ion-select>
+    </p>
+
+    <p><strong>Privacidad:</strong>
+      <span *ngIf="!isEditing">{{ privacidad ? 'Privada' : 'Pública' }}</span>
+      <ion-select *ngIf="isEditing" [(ngModel)]="editedPrivacidad" placeholder="Seleccionar privacidad">
+        <ion-select-option value="true">Privada</ion-select-option>
+        <ion-select-option value="false">Pública</ion-select-option>
+      </ion-select>
+    </p>
+
+    <p><strong>Reglas:</strong>
+      <span *ngIf="!isEditing">{{ reglas }}</span>
+      <ion-textarea *ngIf="isEditing" [(ngModel)]="editedReglas" placeholder="Escribir reglas"></ion-textarea>
+    </p>
+
+    <p><strong>Ubicación:</strong>
+      <span *ngIf="!isEditing">{{ ubicacion }}</span>
+      <ion-input *ngIf="isEditing" [(ngModel)]="editedUbicacion" placeholder="Ubicación"></ion-input>
+    </p>
+  </div>
+
+  <div class="edit-buttons" *ngIf="isEditing">
+    <ion-button (click)="saveChanges()">Guardar</ion-button>
+    <ion-button color="danger" (click)="cancelEditing()">Cancelar</ion-button>
+  </div>
+
+  <ion-button *ngIf="!isEditing" (click)="startEditing()">Editar Perfil</ion-button>
+</ion-content>
+
+

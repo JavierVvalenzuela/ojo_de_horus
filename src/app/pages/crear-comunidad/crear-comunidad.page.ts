@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-crear-comunidad',
   templateUrl: './crear-comunidad.page.html',
-  styleUrls: ['./crear-comunidad.page.scss'] 
+  styleUrls: ['./crear-comunidad.page.scss'],
 })
 export class CrearComunidadPage {
   nombre: string = '';
@@ -27,7 +27,6 @@ export class CrearComunidadPage {
         resultType: CameraResultType.Uri,  // Usamos Uri para obtener la URL de la imagen
       });
 
-      // Verificamos si la propiedad webPath está presente y es válida
       if (image && image.webPath) {
         this.communityImage = image.webPath;  // Almacena la imagen como una URL
       } else {
@@ -38,12 +37,10 @@ export class CrearComunidadPage {
     }
   }
 
-  // Función para redirigir a la página de comunidades sin hacer cambios
   cancelar() {
     this.router.navigate(['/comunidad']);
   }
 
-  // Placeholder para el método de creación que implementarás después
   crearComunidad() {
     console.log('Comunidad creada con los siguientes datos:', {
       nombre: this.nombre,
@@ -55,7 +52,17 @@ export class CrearComunidadPage {
       communityImage: this.communityImage,
     });
 
-    // Aquí iría la lógica para crear la comunidad, tal vez enviando los datos a un servidor
-    // Redirigir a otra página después de crear la comunidad, si es necesario
+    // Redirige a la página `MiComunidad` y pasa los datos de la comunidad como estado
+    this.router.navigate(['/mi-comunidad'], {
+      state: {
+        nombre: this.nombre,
+        descripcion: this.descripcion,
+        categoria: this.categoria,
+        privacidad: this.privacidad,
+        reglas: this.reglas,
+        ubicacion: this.ubicacion,
+        communityImage: this.communityImage,
+      },
+    });
   }
 }
