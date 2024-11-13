@@ -49,8 +49,8 @@ describe('LoginPage', () => {
   });
   
   it('debería devolver false si el nombre de usuario excede los 15 caracteres', () => {
-    const resultado = componente.isNickValid('usuarioMuyLargo');  
-    expect(resultado).toBeFalse();
+    const result = componente.isNickValid('unNombreDeUsuarioExcedente');
+    expect(result).toBeFalse();  
   });
   
   it('debería devolver true si la contraseña cumple con el patrón requerido', () => {
