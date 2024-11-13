@@ -17,7 +17,6 @@ export class SeguridadPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    // Aquí podrías cargar la pregunta de seguridad anterior si es necesario
   }
 
   async onSubmit() {

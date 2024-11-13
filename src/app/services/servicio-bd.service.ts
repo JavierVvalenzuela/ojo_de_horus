@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class ServicioBDService {
-  resetPassword(nick: string, newPassword: string) {
+  resetPassword(nick_: string, newPassword: string) {
     throw new Error('Method not implemented.');
   }
   public database!: SQLiteObject;
