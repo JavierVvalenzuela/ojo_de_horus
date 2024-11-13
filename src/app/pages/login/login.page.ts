@@ -4,7 +4,6 @@ import { ServicioBDService } from '../../services/servicio-bd.service';
 import { Usuario } from '../../model/usuario';
 import { filter, take } from 'rxjs';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -37,7 +36,26 @@ export class LoginPage implements OnInit {
     });
   }
 
+  isPasswordValid(password: string): boolean {
+    const passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{1,12}$/;
+    return passwordPattern.test(password);
+  }
+
+  isNickValid(nick: string): boolean {
+    return nick.length >= 5 && nick.length <= 15;
+  }
+
   async onSubmit() {
+    if (!this.isNickValid(this.nick_u)) {
+      this.errorMessage = 'El nombre de usuario no puede exceder los 15 caracteres.';
+      return;
+    }
+
+    if (!this.isPasswordValid(this.password)) {
+      this.errorMessage = 'La contraseña debe contener una letra mayúscula, un número, un carácter especial y tener entre 1 y 12 caracteres.';
+      return;
+    }
+
     const user = await this.servicioBD.getUserByNick(this.nick_u);
     if (user) {
       if (user.contrasena_u === this.password) {

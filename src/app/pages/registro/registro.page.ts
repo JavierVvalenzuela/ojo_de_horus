@@ -41,8 +41,8 @@ export class RegistroPage implements OnInit {
     }
 
     // Validar longitud del usuario
-    if (this.user.nick.length >= 15) {
-      this.errorMessage = 'El nombre de usuario no puede exceder los 16 caracteres.';
+    if (this.user.nick.length < 5 || this.user.nick.length > 15) {
+      this.errorMessage = 'El nombre de usuario debe tener entre 5 y 15 caracteres.';
       return;
     }
 
@@ -112,7 +112,7 @@ export class RegistroPage implements OnInit {
   }
 
   isPasswordValid(password: string): boolean {
-    const passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{1,12}$/; // Cambiado a 12 caracteres
+    const passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{1,12}$/; 
     return passwordPattern.test(password);
   }
 
