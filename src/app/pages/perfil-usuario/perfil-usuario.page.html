@@ -20,6 +20,12 @@
             <h2>{{ user.nombre_u }} {{ user.apellido_u }}</h2>
             <p>{{ user.nick_u }}</p>
           </ion-label>
+          <!-- Botón de editar perfil -->
+          <ion-buttons slot="end">
+            <ion-button *ngIf="!isEditing" color="primary" (click)="startEdit()">
+              <ion-icon name="create-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
         </ion-item>
       </ion-card-header>
 
@@ -30,7 +36,7 @@
             <ion-label position="stacked">Nombre</ion-label>
             <ion-input 
               [(ngModel)]="user.nombre_u"
-              [readonly]="!canModify">
+              [readonly]="!isEditing">
             </ion-input>
           </ion-item>
 
@@ -39,7 +45,7 @@
             <ion-label position="stacked">Apellido</ion-label>
             <ion-input 
               [(ngModel)]="user.apellido_u"
-              [readonly]="!canModify">
+              [readonly]="!isEditing">
             </ion-input>
           </ion-item>
 
@@ -48,7 +54,7 @@
             <ion-label position="stacked">Correo Electrónico</ion-label>
             <ion-input 
               [(ngModel)]="user.correo_u"
-              [readonly]="!canModify">
+              [readonly]="!isEditing">
             </ion-input>
           </ion-item>
 
@@ -57,7 +63,7 @@
             <ion-label position="stacked">Teléfono</ion-label>
             <ion-input 
               [(ngModel)]="user.phone" 
-              [readonly]="!canModify">
+              [readonly]="!isEditing">
             </ion-input>
           </ion-item>
 
@@ -66,7 +72,7 @@
             <ion-label position="stacked">Dirección</ion-label>
             <ion-input 
               [(ngModel)]="user.address" 
-              [readonly]="!canModify">
+              [readonly]="!isEditing">
             </ion-input>
           </ion-item>
 
@@ -84,18 +90,16 @@
         </ion-list>
 
         <!-- Botones de acción -->
-        <ion-button *ngIf="canModify" color="primary" expand="block" (click)="updateUser()">
-          Actualizar Información
-        </ion-button>
-        
-        <ion-button *ngIf="canSuspendOrBan" color="warning" expand="block" (click)="suspendOrBanUser()">
-          Suspender/Banear Usuario
-        </ion-button>
-
-        <ion-button *ngIf="canDelete" color="danger" expand="block" (click)="deleteUser()">
-          Eliminar Usuario
-        </ion-button>
+        <div *ngIf="isEditing">
+          <ion-button color="danger" expand="block" (click)="cancelEdit()">
+            Cancelar
+          </ion-button>
+          <ion-button color="success" expand="block" (click)="saveChanges()">
+            Guardar
+          </ion-button>
+        </div>
       </ion-card-content>
     </ion-card>
   </div>
 </ion-content>
+

@@ -293,6 +293,4 @@ export class ServicioBDService {
       return false;
     }
   }
-  
-  
 }
