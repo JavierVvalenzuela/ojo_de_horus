@@ -5,7 +5,7 @@
       <ion-menu-button></ion-menu-button>
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-searchbar slot="end"></ion-searchbar>
+    <ion-searchbar slot="end" placeholder="Buscar"></ion-searchbar>
     <ion-button slot="end" [routerDirection]="'root'" [routerLink]="'/login'">Inicio de sesión</ion-button>
   </ion-toolbar>
 </ion-header>
@@ -46,7 +46,7 @@
         <div class="left-buttons">
           <ion-button color="primary" (click)="likePost()">
             <ion-icon name="heart"></ion-icon>
-            Like
+            Me Gusta
           </ion-button>
           <ion-button color="secondary">
             <ion-icon name="chatbubble"></ion-icon>
