@@ -43,7 +43,7 @@ export class ServicioBDService {
   insertRol1: string = "INSERT or IGNORE INTO rol(id_rol,nombre_rol) VALUES (1,'Administrador')";
   insertRol2: string = "INSERT or IGNORE INTO rol(id_rol,nombre_rol) VALUES (2,'Moderador')";
   insertRol3: string = "INSERT or IGNORE INTO rol(id_rol,nombre_rol) VALUES (3,'Usuario')";
-  insertuser: string = "INSERT or IGNORE INTO usuario(id_usuario, nombre_u, apellido_u, nick_u, correo_u, contrasena_u, estado_cuenta_u, id_rol) VALUES(1,'Diego', 'Mellado', 'diego', 'diego@example.com', 'Diego170','A',1)";
+  insertuser: string = "INSERT or IGNORE INTO usuario(id_usuario, nombre_u, apellido_u, nick_u, correo_u, contrasena_u, estado_cuenta_u, id_rol) VALUES(1,'Diego', 'Mellado', 'Diego_170', 'diego@example.com', 'DiegoMj.170','A',1)";
 
   private listadoUsuarios = new BehaviorSubject<Usuario[]>([]);
   private isBDReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -57,13 +57,13 @@ export class ServicioBDService {
     this.createBD();
   }
 
-  async presentAlert(titulo: string, msj: string) {
-    const alert = await this.alertController.create({
+  presentAlert(titulo: string, mensaje: string) {
+    const alert = this.alertController.create({
       header: titulo,
-      message: msj,
-      buttons: ['OK'],
+      message: mensaje,
+      buttons: ['OK']
     });
-    await alert.present();
+    alert.then(alert => alert.present());
   }
 
   fetchUsuarios(): Observable<Usuario[]> {
@@ -142,28 +142,27 @@ export class ServicioBDService {
     return user !== null;
   }
 
-  insertarUsuario(nombre: string, apellido: string, nick: string, correo: string, contrasena: string, idRol: number, estado: string) {
+  insertarUsuario(nombre: string, apellido: string, nick_u: string, correo: string, contrasena: string, idRol: number, estado: string) {
     //verificar que no existe un nick parecido
-    this.database.executeSql('SELECT FROM usuario WHERE nick_u = ?',[nick]).then(res=>{
+    this.database.executeSql('SELECT * FROM usuario WHERE nick_u = ?',[nick_u]).then(res=>{
       if(res.rows.length > 0){
-        this.presentAlert("Registro", "El usuario ya eta registrado");
+        this.presentAlert("Registro", "El usuario ya esta registrado");
       }
       else{
         //puedo insertar ya que el usuario no existe
-        this.database.executeSql('INSERT INTO usuario(nombre_u, apellido_u, nick_u, correo_u, contrasena_u, estado_cuenta_u, id_rol) VALUES (?,?,?,?,?,?,?)',[nombre,apellido,nick,correo,contrasena,estado,idRol]).then(data=>{
+        this.database.executeSql('INSERT INTO usuario(nombre_u, apellido_u, nick_u, correo_u, contrasena_u, estado_cuenta_u, id_rol) VALUES (?,?,?,?,?,?,?)',[nombre,apellido,nick_u,correo,contrasena,estado,idRol]).then(data=>{
           this.presentAlert("Registro", "Usuario Registrado Correctamente");
           this.router.navigate(['/login']);
+        }).catch((e:any)=>{
+          this.presentAlert('Error insert usuario', JSON.stringify(e));
         })
       }
+    }).catch((e:any)=>{
+      this.presentAlert('Error insert inicio', JSON.stringify(e));
     })
   }
-/*
-  private async createInitialUser() {
-    const nick = 'Diego';
-    if (!(await this.usuarioExists(nick))) {
-      await this.insertarUsuario('Diego', 'Mellado', nick, 'diego@example.com', 'Diego170', 1);
-    }
-  }*/
+
+  
 
   async actualizarUsuario(usuario: Usuario) {
     const query = `UPDATE USUARIO SET nombre_u = ?, apellido_u = ?, correo_u = ?, contrasena_u = ?, estado_cuenta_u = ?, razon_ban_u = ? WHERE id_usuario = ?`;

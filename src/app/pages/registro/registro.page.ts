@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { ServicioBDService } from '../../services/servicio-bd.service'; 
-import { Usuario } from '../../model/usuario'; 
+import { Usuario } from '../../model/usuario';
 
 @Component({
   selector: 'app-registro',
@@ -10,125 +10,75 @@ import { Usuario } from '../../model/usuario';
 })
 export class RegistroPage implements OnInit {
   user: any = {
+    nombre: '',
+    apellido: '',
     nick: '',
     password: '',
     confirmPassword: '',
-    birthdate: ''
+    email: ''
   };
 
   errorMessage: string = '';  
-  minDate: string;  
-  maxDate: string;  
   usuariosRegistrados: Usuario[] = []; 
 
   constructor(private navCtrl: NavController, private servicioBD: ServicioBDService) { 
-    const today = new Date();
-    this.maxDate = today.toISOString().split('T')[0]; 
     this.resetForm();
-    const minDate120YearsAgo = new Date(today.getFullYear() - 120, today.getMonth(), today.getDate());
-    this.minDate = minDate120YearsAgo.toISOString().split('T')[0]; 
   }
 
   ngOnInit() { }
 
   async onSubmit() {
-    this.errorMessage = '';
+    this.errorMessage = '';  // Limpiar mensaje de error antes de cada envío
 
-    // Validar campos requeridos
-    if (!this.user.nick || !this.user.password || !this.user.confirmPassword || !this.user.birthdate) {
-      this.errorMessage = 'Todos los campos son obligatorios.';
-      return;
-    }
+    // Mostrar la alerta de prueba y esperar a que se cierre
+    await this.servicioBD.presentAlert("1", "1"); //esto fue para revisar hasta donde llegaba al igual que el de abajo, depues cuando se arregle borrar
+    //revisar validaciones ya que no está dejando llegar al insert en BD
 
-    // Validar longitud del usuario
+    // Validar longitud y formato del nombre de usuario
     if (this.user.nick.length < 5 || this.user.nick.length > 15) {
       this.errorMessage = 'El nombre de usuario debe tener entre 5 y 15 caracteres.';
       return;
     }
 
-    // Validar longitud y formato de la contraseña
+    // Validar contraseña
     if (!this.isPasswordValid(this.user.password)) {
-      this.errorMessage = 'La contraseña debe tener un máximo de 12 caracteres, incluir al menos una mayúscula y un carácter especial.';
+      this.errorMessage = 'La contraseña debe tener entre 8 y 15 caracteres, incluir al menos una mayúscula y un carácter especial.';
       return;
     }
 
-    // Validar confirmación de contraseña
+    // Confirmar que las contraseñas coinciden
     if (this.user.password !== this.user.confirmPassword) {
       this.errorMessage = 'La confirmación de la contraseña no coincide.';
       return;
     }
 
-    // Insertar fecha de nacimiento
-    if (!this.isDateValid(this.user.birthdate) || !this.isAgeInRange(this.user.birthdate)) {
-      this.errorMessage = 'La fecha de nacimiento debe ser válida y el usuario debe tener al menos 10 años.';
-      return;
-    }
+   
+    await this.servicioBD.presentAlert("1", "2");  // borrar despues
 
-    //acomodar el formulrio para que pida todos los datos y luego esas variables son las que se envian a esta funcion
-    this.servicioBD.insertarUsuario('Jose','Guitierrre', this.user.nick,'b@b.cl',this.user.password,3,'A');
+    // Insertar el usuario en la base de datos
+    this.servicioBD.insertarUsuario(this.user.nombre, this.user.apellido, this.user.nick, this.user.email, this.user.password, 3, 'A');
 
-
-    // Verificar si el usuario ya existe
-    /*
-    const userExists = await this.servicioBD.getUserByNick(this.user.nick);
-    if (userExists) {
-      this.errorMessage = 'El nombre de usuario ya está en uso.';
-      return;
-    }*/
-
-    // Continuar con la creación del usuario
-    /*
-    const correo = `${this.user.nick}@example.com`; 
-    const apellido = ''; 
-    const idRol = 3; 
-    const id_usuario = this.usuariosRegistrados.length + 1; 
-    
-    await this.servicioBD.insertarUsuario(this.user.nick, apellido, this.user.nick, correo, this.user.password, idRol);
-
-    const nuevoUsuario = new Usuario();
-    nuevoUsuario.id_usuario = id_usuario;
-    nuevoUsuario.nombre_u = this.user.nick; 
-    nuevoUsuario.apellido_u = apellido;
-    nuevoUsuario.nick_u = this.user.nick;
-    nuevoUsuario.correo_u = correo;
-    nuevoUsuario.contrasena_u = this.user.password;
-    nuevoUsuario.estado_cuenta_u = 'A'; 
-    nuevoUsuario.id_rol = idRol;
-
-    this.usuariosRegistrados.push(nuevoUsuario);
-
-    this.resetForm(); 
-    this.navCtrl.navigateRoot('/login'); 
-    */
+    // Limpiar el formulario después de registrar el usuario
+    this.resetForm();
+    alert('Usuario registrado correctamente.');
   }
 
+  // Validación de la contraseña
+  isPasswordValid(password: string): boolean {
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,15}$/;
+    return passwordRegex.test(password);
+  }
+
+  // Limpiar el formulario
   resetForm() {
     this.user = {
+      nombre: '',
+      apellido: '',
       nick: '',
       password: '',
       confirmPassword: '',
-      birthdate: ''
+      email: ''
     };
-  }
-
-  isPasswordValid(password: string): boolean {
-    const passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{1,12}$/; 
-    return passwordPattern.test(password);
-  }
-
-  isDateValid(date: string): boolean {
-    const currentDate = new Date();
-    const selectedDate = new Date(date);
-    return selectedDate <= currentDate; 
-  }
-
-  isAgeInRange(date: string): boolean {
-    const currentDate = new Date();
-    const selectedDate = new Date(date);
-    
-    const minDate = new Date(currentDate.getFullYear() - 10, currentDate.getMonth(), currentDate.getDate());
-    
-    return selectedDate <= minDate; 
+    this.errorMessage = ''; // Limpiar mensaje de error
   }
 }
-
