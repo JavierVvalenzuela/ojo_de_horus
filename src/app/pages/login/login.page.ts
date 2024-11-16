@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, ModalController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 import { ServicioBDService } from '../../services/servicio-bd.service';
 import { Usuario } from '../../model/usuario';
 import { filter, take } from 'rxjs';
@@ -18,9 +18,7 @@ export class LoginPage implements OnInit {
 
   constructor(
     private navCtrl: NavController,
-    private servicioBD: ServicioBDService,
-    private modalController: ModalController
-  ) {}
+    private servicioBD: ServicioBDService  ) {}
 
   async ngOnInit() {
     await this.loadUsers();
@@ -47,12 +45,12 @@ export class LoginPage implements OnInit {
 
   async onSubmit() {
     if (!this.isNickValid(this.nick_u)) {
-      this.errorMessage = 'El nombre de usuario no puede exceder los 15 caracteres.';
+      this.errorMessage = 'El nombre de usuario o la contraseña son incorrectos.';
       return;
     }
 
     if (!this.isPasswordValid(this.password)) {
-      this.errorMessage = 'La contraseña debe contener una letra mayúscula, un número, un carácter especial y tener entre 1 y 12 caracteres.';
+      this.errorMessage = 'El nombre de usuario o la contraseña son incorrectos.';
       return;
     }
 

@@ -1,23 +1,23 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Crear Comunidad</ion-title>
+    <ion-title color="dark">Crear Comunidad</ion-title> <!-- Color para el título del header -->
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="page-crear-comunidad"> <!-- Clase añadida al ion-content -->
   <form (ngSubmit)="crearComunidad()">
     <ion-item>
-      <ion-label position="floating">Nombre de la Comunidad</ion-label>
+      <ion-label position="floating" color="primary">Nombre de la Comunidad</ion-label>
       <ion-input type="text" placeholder="Ej. Comunidad FIFA" [(ngModel)]="nombre" name="nombre" required></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Descripción</ion-label>
+      <ion-label position="floating" color="primary">Descripción</ion-label>
       <ion-textarea placeholder="Describe el propósito de la comunidad" [(ngModel)]="descripcion" name="descripcion" required></ion-textarea>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Categoría</ion-label>
+      <ion-label position="floating" color="primary">Categoría</ion-label>
       <ion-select [(ngModel)]="categoria" name="categoria" placeholder="Seleccionar una categoría">
         <ion-select-option value="deportes">Deportes</ion-select-option>
         <ion-select-option value="shooter">Shooter</ion-select-option>
@@ -31,23 +31,23 @@
     </ion-item>
 
     <ion-item>
-      <ion-label>Privacidad</ion-label>
+      <ion-label color="primary">Privacidad</ion-label>
       <ion-toggle [(ngModel)]="privacidad" name="privacidad" color="primary"></ion-toggle>
     </ion-item>
     
     <ion-item>
-      <ion-label position="floating">Reglas</ion-label>
+      <ion-label position="floating" color="primary">Reglas</ion-label>
       <ion-textarea placeholder="Especifica las normas y reglas de la comunidad" [(ngModel)]="reglas" name="reglas"></ion-textarea>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Ubicación</ion-label>
+      <ion-label position="floating" color="primary">Ubicación</ion-label>
       <ion-input type="text" placeholder="Ej. Ciudad, País" [(ngModel)]="ubicacion" name="ubicacion"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label>Seleccionar Imagen</ion-label>
-      <ion-button expand="full" (click)="selectImage()">Seleccionar Imagen</ion-button>
+      <ion-label color="primary">Seleccionar Imagen</ion-label>
+      <ion-button expand="full" (click)="selectImage()" color="warning">Seleccionar Imagen</ion-button> <!-- Botón dorado -->
     </ion-item>
 
     <ion-item *ngIf="communityImage">
@@ -55,8 +55,7 @@
       <img [src]="communityImage" alt="Imagen seleccionada" width="100%" />
     </ion-item>
 
-    <ion-button expand="block" color="medium" class="cancel-button" (click)="cancelar()">Cancelar</ion-button>
-    <ion-button expand="block" type="submit" color="primary">Crear Comunidad</ion-button>
+    <ion-button expand="block" color="danger" class="cancel-button" (click)="cancelar()">Cancelar</ion-button> <!-- Botón rojo -->
+    <ion-button expand="block" type="submit" color="warning">Crear Comunidad</ion-button> <!-- Botón dorado -->
   </form>
 </ion-content>
-

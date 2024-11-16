@@ -1,93 +1,81 @@
+ion-header {
+  background-color: #f4c542; /* Fondo dorado en el header */
+  color: #fff; /* Texto blanco */
+  font-family: Georgia, 'Times New Roman', Times, serif; /* Fuente modificada */
+  text-align: center; /* Aseguramos que el texto esté centrado */
+}
+
 .page-crear-comunidad {
-    background-color: #000000;
-    color: white;
-    --background: transparent;
+  --background: #000000; /* Fondo negro */
+  --color: #ffffff; /* Texto blanco */
+  padding: 10px;
+  
+
+  form {
+    ion-item {
+      --background: #000000; /* Fondo oscuro para los inputs */
+      --highlight-color: #f4c542; /* Color dorado para resaltar los campos */
+      --color: #fff; /* Texto blanco */
+      margin-bottom: 15px;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+
+      ion-label {
+        color: #f4c542; /* Etiquetas doradas */
+        font-family: Georgia, 'Times New Roman', Times, serif;
+      }
+
+      ion-input, ion-textarea, ion-select {
+        --color: #fff; /* Color de texto blanco */
+        --border-radius: 10px; /* Bordes redondeados */
+        font-family: Georgia, 'Times New Roman', Times, serif;
+      }
+    }
     
-    ion-header {
-      --background: #000000;
-      margin-bottom: 20px;
-      --background: transparent;
+    .cancel-button {
+      background-color: #ff0000; /* Rojo para el botón cancelar */
+      color: #fff;
+      border-radius: 20px; /* Bordes redondeados */
+      margin-top: 10px;
+      font-family: Georgia, 'Times New Roman', Times, serif;
     }
-  
-    ion-toolbar {
-      --background: #000000;
-      ion-title {
-        color: gold;
-        margin-bottom: 20px;
-        --background: transparent;
-      }
+
+    .crear-button {
+      background-color: #f4c542; /* Dorado para el botón crear comunidad */
+      color: #fff;
+      border-radius: 20px; /* Bordes redondeados */
+      margin-top: 10px;
+      font-family: Georgia, 'Times New Roman', Times, serif;
     }
-  
-    ion-content {
-      padding: 20px;
-      form {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-      }
-  
-      ion-item {
-        --background: #000000;
-        --border-radius: 10px;
-        margin-bottom: 15px;
-        --background: transparent;
-  
-        ion-label {
-          color: gold;
-          font-weight: bold;
-        }
-  
-        ion-input,
-        ion-textarea,
-        ion-select {
-          --background: #000;
-          --border-radius: 10px;
-          --border-color: gold;
-          --color: white;
-          margin-top: 5px;
-          --background: transparent;
-        }
-  
-        ion-input {
-          --placeholder-color: rgb(255, 255, 255);
-        }
-  
-        ion-textarea {
-          --placeholder-color: rgb(255, 255, 255);
-        }
-  
-        ion-select {
-          --background: #000;
-          --border-radius: 10px;
-          --color: white;
-        }
-  
-        ion-button {
-          --background: gold;
-          --color: black;
-          --border-radius: 5px;
-        }
-  
-        .cancel-button {
-          --background: red;
-          --color: white;
-          --border-radius: 5px;
-        }
-  
-        /* Mover (privacidad) al lado derecho */
-        ion-toggle {
-          margin-left: auto;
-        }
-      }
-  
-      ion-button {
-        margin-top: 10px;
-      }
-  
-      ion-item img {
+
+    .image-preview-container {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      img {
         max-width: 100%;
-        border-radius: 10px;
+        border-radius: 10px; /* Bordes redondeados para la imagen */
       }
     }
   }
-  
+
+  ion-button {
+    --border-radius: 20px; /* Bordes redondeados en los botones */
+    margin-top: 10px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+
+  ion-select {
+    --border-radius: 10px; /* Bordes redondeados en select */
+  }
+
+  ion-toggle {
+    --border-radius: 10px; /* Bordes redondeados en el toggle */
+  }
+
+  /* Asegurar que el botón "Seleccionar Imagen" también esté redondeado */
+  ion-button.select-image-button {
+    --border-radius: 20px; /* Bordes redondeados */
+    background-color: #f4c542; /* Dorado */
+    color: #fff;
+  }
+}

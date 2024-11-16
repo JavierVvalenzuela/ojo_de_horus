@@ -1,14 +1,16 @@
 ion-header {
     background-color: #d4af37; /* Fondo dorado */
     color: #000000; /* Texto negro */
+    font-family: Georgia, 'Times New Roman', Times, serif;
   
     ion-toolbar {
       --background: transparent; /* Fondo transparente del toolbar para heredar el dorado */
       color: #000; /* Color del texto e iconos dentro del toolbar */
+      font-family: Georgia, 'Times New Roman', Times, serif;
+  
   
       ion-title,
       ion-buttons,
-      ion-searchbar,
       ion-button {
         color: #000; /* Asegura que el texto e iconos sean negros */
         font-family: Georgia, 'Times New Roman', Times, serif;
@@ -18,11 +20,9 @@ ion-header {
       ion-back-button {
         color: #000; /* Iconos del menú y back en negro */
         background-color: #d4af37; /* Fondo dorado para los botones */
-      }
+        font-family: Georgia, 'Times New Roman', Times, serif;
   
-      ion-searchbar {
-        --background: #ffffff; /* Fondo blanco para el cuadro de búsqueda */
-        --color: #000; /* Texto negro dentro del searchbar */
+  
       }
   
       ion-button {
@@ -37,14 +37,18 @@ ion-header {
     --background: #000; /* Fondo negro */
     color: #FFD700; /* Texto dorado */
     font-family: Georgia, 'Times New Roman', Times, serif;
+    
   
     .comunidad-header {
       display: flex;
       align-items: center;
       padding: 20px;
-      background-color: #222; /* Fondo oscuro */
+      background-color: #000000; /* Fondo oscuro */
       border-radius: 8px;
       margin: 15px;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+  
+
   
       .community-image {
         width: 80px;
@@ -58,42 +62,54 @@ ion-header {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+  
       }
   
       .community-name {
         font-size: 24px;
         font-weight: bold;
         color: #FFD700; /* Dorado */
+        font-family: Georgia, 'Times New Roman', Times, serif;
+  
       }
   
       .community-description {
-        color: #FFD700; /* Dorado */
+        color: #ffffff; /* blanco */
         font-size: 18px;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+  
       }
     }
   
     .community-info {
       padding: 20px;
-      background-color: #333; /* Fondo gris oscuro */
+      background-color: #000000; /* Fondo oscuro */
       border-radius: 8px;
       margin: 10px 0;
       color: #FFD700; /* Texto dorado */
+      font-family: Georgia, 'Times New Roman', Times, serif;
+  
   
       p {
         font-size: 18px;
         font-weight: normal;
         color: #FFD700; /* Dorado */
+        font-family: Georgia, 'Times New Roman', Times, serif;
+  
       }
   
       /* Bordes dorados en las secciones editables */
       ion-input,
       ion-textarea,
       ion-select {
-        --background: #222; /* Fondo oscuro para los campos */
+        --background: #363636; /* Fondo oscuro para los campos */
         --border-radius: 10px;
         --color: #FFD700; /* Bordes dorados */
         --placeholder-color: #FFD700; /* Color dorado para el texto de placeholder */
         --padding-start: 10px;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+  
       }
     }
   
@@ -102,12 +118,16 @@ ion-header {
       justify-content: space-between;
       padding: 15px;
       margin-top: 20px;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+  
     }
   
     .edit-buttons ion-button {
       --background: #d4af37; /* Fondo dorado para los botones de edición */
       --color: #000; /* Texto negro */
       border-radius: 10px; /* Bordes redondeados */
+      font-family: Georgia, 'Times New Roman', Times, serif;
+  
     }
   
     /* Bordes dorados en la imagen cuando está en edición */
