@@ -12,11 +12,10 @@ const mockSQLite = {
 
 const mockServicioBD = {
   getUsuario: jasmine.createSpy('getUsuario').and.returnValue(Promise.resolve({})),
-  
 };
 
 describe('LoginPage', () => {
-  let componente: LoginPage;
+  let component: LoginPage;
   let fixture: ComponentFixture<LoginPage>;
 
   beforeEach(async () => {
@@ -30,36 +29,36 @@ describe('LoginPage', () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(LoginPage);
-    componente = fixture.componentInstance;
+    component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(componente).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   it('debería devolver true si el nombre de usuario es válido (entre 5 y 15 caracteres)', () => {
-    const resultado = componente.isNickValid('usuarioValido');  
+    const resultado = component.isNickValid('usuarioValido');  
     expect(resultado).toBeTrue();
   });
   
   it('debería devolver false si el nombre de usuario tiene menos de 5 caracteres', () => {
-    const resultado = componente.isNickValid('usr');  
+    const resultado = component.isNickValid('usr');  
     expect(resultado).toBeFalse();
   });
   
   it('debería devolver false si el nombre de usuario excede los 15 caracteres', () => {
-    const result = componente.isNickValid('unNombreDeUsuarioExcedente');
+    const result = component.isNickValid('unNombreDeUsuarioExcedente');
     expect(result).toBeFalse();  
   });
   
   it('debería devolver true si la contraseña cumple con el patrón requerido', () => {
-    const resultado = componente.isPasswordValid('Contraseña1!'); 
+    const resultado = component.isPasswordValid('Contraseña1!'); 
     expect(resultado).toBeTrue();
   });
   
   it('debería devolver false si la contraseña no cumple con el patrón requerido (sin mayúscula)', () => {
-    const resultado = componente.isPasswordValid('contraseña1!');  
+    const resultado = component.isPasswordValid('contraseña1!');  
     expect(resultado).toBeFalse();
   });
 });
