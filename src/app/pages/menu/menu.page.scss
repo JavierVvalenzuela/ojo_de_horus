@@ -36,12 +36,20 @@ ion-content {
   .post-item {
     border: 2px solid #d4af37; /* Borde dorado */
     border-radius: 10px; /* Bordes redondeados */
-    padding: 15px; /* Espaciado interno */
+    background-color: #000;
+    --background: transparent;
     margin-bottom: 20px; /* Espaciado entre publicaciones */
   }
 
-  h2{
+  h2 {
     font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+
+  ion-input {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    border: 2px solid #d4af37; /* Borde dorado */
+    border-radius: 10px; /* Bordes redondeados */
+    margin-top: 5%;
   }
 
   .card-custom {
@@ -54,6 +62,7 @@ ion-content {
     p {
       color: #ffffff;
       font-size: medium;
+      font-family: Georgia, 'Times New Roman', Times, serif;
     }
     
     ion-card-title {
@@ -114,5 +123,21 @@ ion-content {
   ion-button.publish {
     --background: #d4af37; /* Botón dorado */
     border-radius: 20px; /* Bordes más redondeados */
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin-top: 5%;
+  }
+
+  /* Cambios para el ícono */
+  .heart-icon {
+    color: black; /* Color inicial */
+    transition: transform 0.5s ease, color 0.5s ease; /* Transición para la animación */
+  }
+
+  .heart-icon.liked {
+    color:#ff0000; /* Color al estar pulsado */
+  }
+
+  .like-button:active .heart-icon {
+    transform: scale(1.2); /* Zoom al pulsar */
   }
 }

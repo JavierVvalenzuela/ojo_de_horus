@@ -28,11 +28,10 @@ export class RegistroPage implements OnInit {
   ngOnInit() { }
 
   async onSubmit() {
-    this.errorMessage = '';  // Limpiar mensaje de error antes de cada envío
+    this.errorMessage = '';
 
-    // Mostrar la alerta de prueba y esperar a que se cierre
     await this.servicioBD.presentAlert("1", "1"); //esto fue para revisar hasta donde llegaba al igual que el de abajo, depues cuando se arregle borrar
-    //revisar validaciones ya que no está dejando llegar al insert en BD
+    //revisa validaciones ya que no está dejando llegar al insert en BD
 
     // Validar longitud y formato del nombre de usuario
     if (this.user.nick.length < 5 || this.user.nick.length > 15) {
@@ -51,7 +50,6 @@ export class RegistroPage implements OnInit {
       this.errorMessage = 'La confirmación de la contraseña no coincide.';
       return;
     }
-
    
     await this.servicioBD.presentAlert("1", "2");  // borrar despues
 

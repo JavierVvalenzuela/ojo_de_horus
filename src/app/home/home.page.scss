@@ -47,6 +47,7 @@ ion-content {
       font-size: 2rem;
       font-weight: bold;
       color: #cc9226; /* Color dorado para el título */
+      font-family: Georgia, 'Times New Roman', Times, serif;
     }
   }
 
@@ -81,7 +82,7 @@ ion-content {
       line-height: 1.6;
       margin-bottom: 15px;
       color: #fff; /* Color blanco para el texto */
-      padding: 4%;
+      padding: 0%;
       border: 5px solid #cc9226; /* Borde dorado */
     }
 
@@ -92,9 +93,11 @@ ion-content {
   }
 
   ion-button {
-    margin-top: 20px;
     background-color: #cc9226; /* Fondo dorado para el botón */
+    margin-left: 30%;
+    margin-right: 30%;
     color: #000; /* Texto negro para el botón */
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
 }
 

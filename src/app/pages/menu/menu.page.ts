@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-menu',
+  selector: 'app-menu',  // Asegúrate de que el selector sea el correcto
   templateUrl: './menu.page.html',
   styleUrls: ['./menu.page.scss'],
 })
@@ -9,10 +9,26 @@ export class MenuPage {
   postMessage: string = '';
   selectedImage: File | null = null;
   selectedImageSrc: string | null = null;
-  posts: { name: string; message: string; image: string | null }[] = [
-    { name: 'Diego', message: 'Ya me he pasado el juego de sonic, puedo afirmar que los creadores realizaron este juego pensando en la comunidad. :D', image: 'https://sonic-city.net/wp-content/uploads/2023/09/event_230913_01_eye-400x200.jpg' },
-    { name: 'Maria', message: 'Buen juego, si no es el goty estará muy cerca de serlo.', image: 'https://bloximages.newyork1.vip.townnews.com/dailytitan.com/content/tncms/assets/v3/editorial/1/72/1729f514-750b-11ed-9197-63ac3554bf6d/638ea5dbb40ba.image.jpg?resize=400%2C200' },
-    { name: 'Juan', message: 'Me encanta el fortnite, lo juego todo el día....', image: 'https://i0.wp.com/magicvalleycomiccon.com/wp-content/uploads/2024/07/Fortnite.jpg?fit=400%2C200&ssl=1' },
+
+  posts: { name: string; message: string; image: string | null; liked: boolean }[] = [
+    {
+      name: 'Diego',
+      message: 'Chicos ya salio la skin de la leyenda del gaming en fortnite, me veo en la obligación de vender a mi gato para comprarla #GraciasRubius. :D',
+      image: 'assets/img/Rubius-fortnite.jpg',
+      liked: false,
+    },
+    {
+      name: 'Maria',
+      message: 'Sonic Frontiers está siendo un buen juego hasta ahora, espero que el DLC continue mejorando la experiencia.',
+      image: 'assets/img/Sonic.jpg',
+      liked: false,
+    },
+    {
+      name: 'Javier',
+      message: 'Me quiero matar gente. #Desinstalar',
+      image: 'assets/img/lolaso.jpg',
+      liked: false,
+    },
   ];
 
   onImageSelected(event: Event): void {
@@ -33,6 +49,7 @@ export class MenuPage {
         name: 'Tú',
         message: this.postMessage,
         image: this.selectedImageSrc,
+        liked: false,
       };
       this.posts.unshift(newPost);
       this.postMessage = '';
@@ -41,7 +58,8 @@ export class MenuPage {
     }
   }
 
-  likePost(): void {
-    console.log('Post liked!');
+  likePost(post: { name: string; message: string; image: string | null; liked: boolean }): void {
+    post.liked = !post.liked;
+    console.log(`Post by ${post.name} liked status: ${post.liked}`);
   }
 }
