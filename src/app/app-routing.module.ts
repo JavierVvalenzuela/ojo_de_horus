@@ -56,8 +56,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/politicas-usuario/politicas-usuario.module').then( m => m.PoliticasUsuarioPageModule)
   },
   {
-    path: 'comentarios',
-    loadChildren: () => import('./pages/comentarios/comentarios.module').then( m => m.ComentariosPageModule)
+    path: 'comentarios/:id',
+    loadChildren: () => import('./pages/comentarios/comentarios.module').then(m => m.ComentariosPageModule),    
   },
   {
     path: 'configuraciones',

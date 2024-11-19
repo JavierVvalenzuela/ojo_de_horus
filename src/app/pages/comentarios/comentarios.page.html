@@ -1,13 +1,38 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>comentarios</ion-title>
+    <ion-title>Comentarios</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">comentarios</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <!-- Sección para mostrar el post seleccionado -->
+  <div class="post-details">
+    <h2>{{ post?.name }}</h2>
+    <p>{{ post?.message }}</p>
+    
+    <!-- Mostrar la imagen del post -->
+    <img *ngIf="post?.image" [src]="post?.image" alt="Imagen del post" class="post-image" />
+  </div>
+
+  <!-- Sección para agregar un nuevo comentario -->
+  <ion-item>
+    <ion-input 
+      [(ngModel)]="newComment" 
+      placeholder="Escribe tu comentario..." 
+      lines="full">
+    </ion-input>
+  </ion-item>
+
+  <ion-button expand="full" (click)="addComment()">Agregar Comentario</ion-button>
+
+  <!-- Sección para mostrar los comentarios existentes -->
+  <div class="comments-section">
+    <h3>Comentarios:</h3>
+    <ion-list>
+      <ion-item *ngFor="let comment of comments">
+        <ion-label>{{ comment }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>
+

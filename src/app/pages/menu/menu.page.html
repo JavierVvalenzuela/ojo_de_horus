@@ -34,26 +34,31 @@
   </ion-item>
 
   <!-- Ejemplo de publicaciones existentes -->
-  <ion-card *ngFor="let post of posts" class="card-custom">
+  <ion-card *ngFor="let post of posts; let i = index" class="card-custom">
     <ion-card-header>
       <ion-card-title><ion-icon name="person-circle"></ion-icon> {{ post.name }}</ion-card-title>
       <p>{{ post.message }}</p>
     </ion-card-header>
     <ion-card-content>
-      <img *ngIf="post.image" [src]="post.image" alt="Publicación de {{ post.name }}" style="width: 100%; margin-bottom: 8px;">
+      <!-- Imagen de la publicación, con enlace para redirigir a comentarios -->
+      <img *ngIf="post.image" 
+           [src]="post.image" 
+           alt="Publicación de {{ post.name }}" 
+           style="width: 100%; margin-bottom: 8px;"
+           (click)="viewComments(post)">
       <div class="button-group">
         <div class="left-buttons">
           <ion-button color="primary" (click)="likePost(post)" class="like-button">
             <ion-icon 
               [name]="post.liked ? 'heart' : 'heart-outline'" 
               [class.liked]="post.liked" 
-              class="heart-icon"
-            ></ion-icon>
+              class="heart-icon">
+            </ion-icon>
             Me Gusta
           </ion-button>
-          <ion-button color="secondary">
+          <ion-button color="secondary" [routerLink]="['/comentarios', post.id]">
             <ion-icon name="chatbubble"></ion-icon>
-            Comentario
+            Comentarios
           </ion-button>
         </div>
         <ion-button class="right-button" color="tertiary">
