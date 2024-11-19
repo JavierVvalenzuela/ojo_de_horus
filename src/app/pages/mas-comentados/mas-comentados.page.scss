@@ -27,6 +27,14 @@ ion-content {
   background-color: #000000; /* Fondo negro */
   --background: transparent;
 
+  h1{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    border: 2px solid #d4af37; /* Borde dorado */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgb(255, 174, 0); /* Sombra ligera */
+    text-align: center
+  }
+
   .post-item {
     border: 2px solid #d4af37; /* Borde dorado */
     border-radius: 10px; /* Bordes redondeados */

@@ -19,14 +19,14 @@ export class MasComentadosPage {
     },
     {
       name: 'Maria',
-      message: 'Este DLC de Elden Ring es brutal, ¿quién más está jugando? #FromSoftware',
-      image: 'assets/img/elden-ring-dlc.jpg',
+      message: 'El counter 2 me va a voler la cabez literalmente :c.',
+      image: 'assets/img/cs2.jpeg',
       liked: false,
     },
     {
       name: 'Javier',
       message: '¿Qué tal este bug en el último update de Valorant? Increíble #RageQuit',
-      image: 'assets/img/valorant-bug.jpg',
+      image: 'assets/img/valo.png',
       liked: false,
     },
   ];

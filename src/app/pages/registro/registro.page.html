@@ -21,11 +21,11 @@
         <ion-input 
           type="text" 
           required 
-          [(ngModel)]="user.nombre" 
-          name="firstName">
+          [(ngModel)]="user.nombre_u" 
+          name="nombre_u">
         </ion-input>
       </ion-item>
-      <div *ngIf="errorMessage && user.nombre === ''" class="error-message">{{ errorMessage }}</div>
+      <div *ngIf="errorMessage && user.nombre_u === ''" class="error-message">{{ errorMessage }}</div>
 
       <!-- Apellido -->
       <ion-item>
@@ -33,11 +33,11 @@
         <ion-input 
           type="text" 
           required 
-          [(ngModel)]="user.apellido" 
-          name="lastName">
+          [(ngModel)]="user.apellido_u" 
+          name="apellido_u">
         </ion-input>
       </ion-item>
-      <div *ngIf="errorMessage && user.apellido === ''" class="error-message">{{ errorMessage }}</div>
+      <div *ngIf="errorMessage && user.apellido_u === ''" class="error-message">{{ errorMessage }}</div>
 
       <!-- Nombre de Usuario -->
       <ion-item>
@@ -46,7 +46,7 @@
           type="text" 
           required 
           [(ngModel)]="user.nick_u" 
-          name="nick">
+          name="nick_u">
         </ion-input>
       </ion-item>
       <div *ngIf="errorMessage && user.nick_u === ''" class="error-message">{{ errorMessage }}</div>
@@ -57,37 +57,55 @@
         <ion-input 
           type="email" 
           required 
-          [(ngModel)]="user.email" 
-          name="email">
+          [(ngModel)]="user.correo_u" 
+          name="correo_u">
         </ion-input>
       </ion-item>
-      <div *ngIf="errorMessage && user.email === ''" class="error-message">{{ errorMessage }}</div>
+      <div *ngIf="errorMessage && user.correo_u === ''" class="error-message">{{ errorMessage }}</div>
 
       <!-- Contraseña -->
       <ion-item>
         <ion-label position="stacked" class="spaced-label">Contraseña</ion-label>
         <ion-input 
-          type="password" 
+          [type]="passwordVisible ? 'text' : 'password'"
           required 
-          [(ngModel)]="user.password" 
-          name="password">
+          [(ngModel)]="user.contrasena_u" 
+          name="contrasena_u">
         </ion-input>
+        <ion-icon 
+          name="eye" 
+          slot="end" 
+          (click)="togglePasswordVisibility()"
+          [color]="passwordVisible ? 'primary' : 'medium'">
+        </ion-icon>
       </ion-item>
-      <div *ngIf="errorMessage && user.password === ''" class="error-message">{{ errorMessage }}</div>
+      <div *ngIf="errorMessage && user.contrasena_u === ''" class="error-message">{{ errorMessage }}</div>
 
       <!-- Confirmación de Contraseña -->
       <ion-item>
         <ion-label position="stacked" class="spaced-label">Confirmar Contraseña</ion-label>
         <ion-input 
-          type="password" 
+          [type]="confirmPasswordVisible ? 'text' : 'password'"
           required 
-          [(ngModel)]="user.confirmPassword" 
+          [(ngModel)]="user.razon_ban_u" 
           name="confirmPassword">
         </ion-input>
+        <ion-icon 
+          name="eye" 
+          slot="end" 
+          (click)="toggleConfirmPasswordVisibility()"
+          [color]="confirmPasswordVisible ? 'primary' : 'medium'">
+        </ion-icon>
       </ion-item>
-      <div *ngIf="errorMessage && (user.confirmPassword !== user.password)" class="error-message">{{ errorMessage }}</div>
+      <div *ngIf="errorMessage && user.razon_ban_u !== user.contrasena_u" class="error-message">
+        Las contraseñas no coinciden.
+      </div>
+      <div *ngIf="errorMessage && !isPasswordValid(user.contrasena_u)" class="error-message">
+        La contraseña debe tener entre 8 y 30 caracteres, incluir una mayúscula y un carácter especial.
+      </div>
 
-      <ion-button expand="full" type="submit" [disabled]="!registroForm.form.valid">Registrar</ion-button>
+      <!-- Botón de Registro -->
+      <ion-button expand="full" (click)="onSubmit()">Registrar</ion-button>
     </form>
   </div>
 </ion-content>
@@ -95,9 +113,11 @@
 <!-- Estilo para los mensajes de error -->
 <style>
   .error-message {
-    color: red; /* Cambia el color a lo que prefieras */
-    font-size: 12px; /* Tamaño del texto de error */
-    margin-top: 5px; /* Espaciado superior */
+    color: red; 
+    font-size: 12px; 
+    margin-top: 5px; 
     font-family: Georgia, 'Times New Roman', Times, serif;
   }
 </style>
+
+

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { ServicioBDService } from '../../services/servicio-bd.service'; 
+import { ServicioBDService } from '../../services/servicio-bd.service';
 import { Usuario } from '../../model/usuario';
 
 @Component({
@@ -9,74 +9,107 @@ import { Usuario } from '../../model/usuario';
   styleUrls: ['./registro.page.scss'],
 })
 export class RegistroPage implements OnInit {
-  user: any = {
-    nombre: '',
-    apellido: '',
-    nick: '',
-    password: '',
-    confirmPassword: '',
-    email: ''
-  };
+  // Instancia del modelo Usuario
+  user: Usuario = new Usuario();
 
-  errorMessage: string = '';  
-  usuariosRegistrados: Usuario[] = []; 
+  // Campo para la confirmación de contraseña
+  confirmarContrasena: string = '';
 
-  constructor(private navCtrl: NavController, private servicioBD: ServicioBDService) { 
-    this.resetForm();
-  }
+  // Mensaje de error
+  errorMessage: string = '';
+
+  // Variables para controlar la visibilidad de las contraseñas
+  passwordVisible: boolean = false;
+  confirmPasswordVisible: boolean = false;
+
+  constructor(private navCtrl: NavController, private servicioBD: ServicioBDService) { }
 
   ngOnInit() { }
 
-  async onSubmit() {
+  onSubmit() {
+    console.log('El botón fue presionado');
     this.errorMessage = '';
 
-    await this.servicioBD.presentAlert("1", "1"); //esto fue para revisar hasta donde llegaba al igual que el de abajo, depues cuando se arregle borrar
-    //revisa validaciones ya que no está dejando llegar al insert en BD
-
-    // Validar longitud y formato del nombre de usuario
-    if (this.user.nick.length < 5 || this.user.nick.length > 15) {
-      this.errorMessage = 'El nombre de usuario debe tener entre 5 y 15 caracteres.';
+    // Validaciones
+    if (this.user.nombre_u.length < 3 || this.user.nombre_u.length > 20) {
+      this.errorMessage = 'El nombre debe tener entre 3 y 20 caracteres.';
+      console.log(this.errorMessage);
       return;
     }
 
-    // Validar contraseña
-    if (!this.isPasswordValid(this.user.password)) {
-      this.errorMessage = 'La contraseña debe tener entre 8 y 15 caracteres, incluir al menos una mayúscula y un carácter especial.';
+    if (this.user.apellido_u.length < 3 || this.user.apellido_u.length > 20) {
+      this.errorMessage = 'El apellido debe tener entre 3 y 20 caracteres.';
+      console.log(this.errorMessage);
       return;
     }
 
-    // Confirmar que las contraseñas coinciden
-    if (this.user.password !== this.user.confirmPassword) {
-      this.errorMessage = 'La confirmación de la contraseña no coincide.';
+    if (this.user.nick_u.length < 5 || this.user.nick_u.length > 30) {
+      this.errorMessage = 'El nick debe tener entre 5 y 30 caracteres.';
+      console.log(this.errorMessage);
       return;
     }
-   
-    await this.servicioBD.presentAlert("1", "2");  // borrar despues
 
-    // Insertar el usuario en la base de datos
-    this.servicioBD.insertarUsuario(this.user.nombre, this.user.apellido, this.user.nick, this.user.email, this.user.password, 3, 'A');
+    if (!this.isPasswordValid(this.user.contrasena_u)) {
+      this.errorMessage = 'La contraseña debe tener entre 8 y 30 caracteres, incluir una mayúscula y un carácter especial.';
+      console.log(this.errorMessage);
+      return;
+    }
 
-    // Limpiar el formulario después de registrar el usuario
-    this.resetForm();
-    alert('Usuario registrado correctamente.');
+    if (this.user.contrasena_u !== this.confirmarContrasena) {
+      this.errorMessage = 'Las contraseñas no coinciden.';
+      console.log(this.errorMessage);
+      return;
+    }
+    this.servicioBD.presentAlert("1","2")
+
+    // Establecer valores adicionales del usuario antes de enviarlo
+    this.user.estado_cuenta_u = 'A'; // estado de cuenta del usuario por defecto
+    this.user.id_rol = 3;            // rol por defecto del usuario: usuario
+
+    console.log('Datos del usuario:', this.user);
+    console.log('Completando registro...');
+    
+    // Llamada al servicio para registrar el usuario
+    this.servicioBD.insertarUsuario(
+      this.user.nombre_u,
+      this.user.apellido_u,
+      this.user.nick_u,
+      this.user.correo_u,
+      this.user.contrasena_u,
+      this.user.id_rol,
+      this.user.estado_cuenta_u
+    ).then(() => {
+      console.log('Usuario registrado correctamente.');
+      alert('Usuario registrado correctamente.');
+      this.navCtrl.navigateRoot('/login');
+      this.resetForm();
+    }).catch((error) => {
+      console.error('Error al registrar el usuario:', error);
+      this.errorMessage = 'Hubo un problema al registrar el usuario. Intenta nuevamente.';
+    });
   }
 
-  // Validación de la contraseña
+  // Función para validar la contraseña
   isPasswordValid(password: string): boolean {
-    const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,15}$/;
+    // Expresión regular que valida contraseñas con al menos una mayúscula, un carácter especial y una longitud entre 8 y 30 caracteres
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,30}$/;
     return passwordRegex.test(password);
   }
 
-  // Limpiar el formulario
+  // Función para alternar la visibilidad de la contraseña
+  togglePasswordVisibility() {
+    this.passwordVisible = !this.passwordVisible;
+  }
+
+  // Función para alternar la visibilidad de la confirmación de contraseña
+  toggleConfirmPasswordVisibility() {
+    this.confirmPasswordVisible = !this.confirmPasswordVisible;
+  }
+
+  // Método para resetear el formulario
   resetForm() {
-    this.user = {
-      nombre: '',
-      apellido: '',
-      nick: '',
-      password: '',
-      confirmPassword: '',
-      email: ''
-    };
-    this.errorMessage = ''; // Limpiar mensaje de error
+    this.user = new Usuario(); // Reiniciar los valores del modelo Usuario
+    this.confirmarContrasena = ''; // Reiniciar el campo de confirmar contraseña
+    this.errorMessage = '';
   }
 }

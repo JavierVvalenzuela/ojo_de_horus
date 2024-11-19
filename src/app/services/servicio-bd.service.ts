@@ -142,27 +142,30 @@ export class ServicioBDService {
     return user !== null;
   }
 
-  insertarUsuario(nombre: string, apellido: string, nick_u: string, correo: string, contrasena: string, idRol: number, estado: string) {
-    //verificar que no existe un nick parecido
-    this.database.executeSql('SELECT * FROM usuario WHERE nick_u = ?',[nick_u]).then(res=>{
-      if(res.rows.length > 0){
-        this.presentAlert("Registro", "El usuario ya esta registrado");
-      }
-      else{
-        //puedo insertar ya que el usuario no existe
-        this.database.executeSql('INSERT INTO usuario(nombre_u, apellido_u, nick_u, correo_u, contrasena_u, estado_cuenta_u, id_rol) VALUES (?,?,?,?,?,?,?)',[nombre,apellido,nick_u,correo,contrasena,estado,idRol]).then(data=>{
-          this.presentAlert("Registro", "Usuario Registrado Correctamente");
-          this.router.navigate(['/login']);
-        }).catch((e:any)=>{
-          this.presentAlert('Error insert usuario', JSON.stringify(e));
-        })
-      }
-    }).catch((e:any)=>{
-      this.presentAlert('Error insert inicio', JSON.stringify(e));
-    })
+  insertarUsuario(nombre: string, apellido: string, nick_u: string, correo: string, contrasena: string, idRol: number, estado: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      // Verificar que no exista un nick similar
+      this.database.executeSql('SELECT * FROM usuario WHERE nick_u = ?', [nick_u]).then(res => {
+        if (res.rows.length > 0) {
+          this.presentAlert("Registro", "El usuario ya está registrado");
+          reject('Usuario ya registrado');
+        } else {
+          // Insertar si no existe
+          this.database.executeSql('INSERT INTO usuario(nombre_u, apellido_u, nick_u, correo_u, contrasena_u, estado_cuenta_u, id_rol) VALUES (?,?,?,?,?,?,?)', 
+          [nombre, apellido, nick_u, correo, contrasena, estado, idRol]).then(() => {
+            this.presentAlert("Registro", "Usuario Registrado Correctamente");
+            resolve();
+          }).catch((error: any) => {
+            this.presentAlert('Error insert usuario', JSON.stringify(error));
+            reject(error);
+          });
+        }
+      }).catch((error: any) => {
+        this.presentAlert('Error al verificar usuario', JSON.stringify(error));
+        reject(error);
+      });
+    });
   }
-
-  
 
   async actualizarUsuario(usuario: Usuario) {
     const query = `UPDATE USUARIO SET nombre_u = ?, apellido_u = ?, correo_u = ?, contrasena_u = ?, estado_cuenta_u = ?, razon_ban_u = ? WHERE id_usuario = ?`;

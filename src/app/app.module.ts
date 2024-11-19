@@ -10,6 +10,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 import { RecoverPasswordModalComponent } from './components/recover-password-modal/recover-password-modal.component'; // Actualiza la ruta aquí
+import { ServicioBDService } from './services/servicio-bd.service';
+
 
 @NgModule({
   declarations: [AppComponent, RecoverPasswordModalComponent],
@@ -18,6 +20,7 @@ import { RecoverPasswordModalComponent } from './components/recover-password-mod
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     NativeStorage,
     SQLite,
+    ServicioBDService,
     provideAnimationsAsync()
   ],
   bootstrap: [AppComponent],
