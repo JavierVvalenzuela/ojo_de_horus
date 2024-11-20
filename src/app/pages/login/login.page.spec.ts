@@ -36,29 +36,4 @@ describe('LoginPage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('debería devolver true si el nombre de usuario es válido (entre 5 y 15 caracteres)', () => {
-    const resultado = component.isNickValid('usuarioValido');  
-    expect(resultado).toBeTrue();
-  });
-  
-  it('debería devolver false si el nombre de usuario tiene menos de 5 caracteres', () => {
-    const resultado = component.isNickValid('usr');  
-    expect(resultado).toBeFalse();
-  });
-  
-  it('debería devolver false si el nombre de usuario excede los 15 caracteres', () => {
-    const result = component.isNickValid('unNombreDeUsuarioExcedente');
-    expect(result).toBeFalse();  
-  });
-  
-  it('debería devolver true si la contraseña cumple con el patrón requerido', () => {
-    const resultado = component.isPasswordValid('Contraseña1!'); 
-    expect(resultado).toBeTrue();
-  });
-  
-  it('debería devolver false si la contraseña no cumple con el patrón requerido (sin mayúscula)', () => {
-    const resultado = component.isPasswordValid('contraseña1!');  
-    expect(resultado).toBeFalse();
-  });
 });

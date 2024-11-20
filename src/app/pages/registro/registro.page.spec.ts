@@ -62,7 +62,7 @@ describe('RegistroPage', () => {
     expect(component.confirmPasswordVisible).toBeTrue(); 
 
     component.toggleConfirmPasswordVisibility();
-    expect(component.confirmPasswordVisible).toBeFalse(); 
-  });
+    expect(component.confirmPasswordVisible).toBeFalse();
+  });
 
 });
