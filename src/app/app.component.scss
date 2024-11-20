@@ -7,11 +7,12 @@ ion-avatar {
       font-size: 16px;
       transition: color 0.5s ease; /* Transición suave del color */
       font-family: Georgia, 'Times New Roman', Times, serif;
+      color: #000000;
     }
 
   ion-item {
     --background: transparent;
-    color: goldenrod; /* Color del texto */
+    color:#d4af37; /* Color del texto */
     margin: 5px 0; /* Separación de botones*/
     font-size: 17px; /* Tamaño del texto */
     font-family: Georgia, 'Times New Roman', Times, serif;
@@ -19,12 +20,12 @@ ion-avatar {
     ion-icon {
       margin-right: 10px;
       font-size: 20px; /* Tamaño de los íconos */
-      color:#f0b906; /* Color de los íconos */
+      color:#d4af37; /* Color de los íconos */
       transition: color 0.5s ease; /* Transición suave del color */
     }
   
     &:hover {
-        --background: #f0b906; /* Color del fondo al pasar el mouse */
+        --background: #d4af37; /* Color del fondo al pasar el mouse */
         
         ion-icon {
           color: black; /* Cambiar el color del ícono a negro al pasar el mouse */
@@ -39,7 +40,7 @@ ion-avatar {
   
 
   ion-menu {
-    --ion-toolbar-background: #ffc400; /* Fondo de la toolbar del menú */
+    --ion-toolbar-background: #d4af37; /* Fondo de la toolbar del menú */
     --ion-text-color: #000000; /* Color de texto al pasar el mouse */
     }
   
@@ -64,4 +65,9 @@ ion-avatar {
   .logo-img {
     width: 80px; /* Ajusta este valor para hacer el logo más pequeño o más grande */
     height: auto; /* Mantiene la proporción del logo */
+  }
+  ion-content{
+    ion-label{
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
   }

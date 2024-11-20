@@ -22,7 +22,7 @@
 
       <ion-item>
         <ion-label position="stacked">Contraseña</ion-label>
-        <ion-input type="password" required [(ngModel)]="password" name="password"></ion-input>
+        <ion-input type="password" required [(ngModel)]="contrasena_u" name="password"></ion-input>
       </ion-item>
 
       <p *ngIf="errorMessage" class="error-message">
@@ -30,7 +30,7 @@
       </p>
 
       <ion-button expand="full" type="submit" [disabled]="!loginForm.form.valid">Iniciar Sesión</ion-button>
-      <ion-button expand="full" [routerDirection]="'root'" [routerLink]="'/registro'">Registrarse</ion-button>
+      <ion-button expand="full" routerLink="/registro">Registrarse</ion-button>
     </form>
   </div>
 </ion-content>

@@ -1,20 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.page.html',
   styleUrls: ['./menu.page.scss'],
 })
-export class MenuPage {
+export class MenuPage implements OnInit {
   postMessage: string = '';
   selectedImage: File | null = null;
   selectedImageSrc: string | null = null;
+  isLoggedIn: boolean = false; // Controla si el usuario está logueado
 
-  // Posts con un campo id agregado para cada publicación
   posts: { id: number; name: string; message: string; image: string | null; liked: boolean }[] = [
     {
-      id: 1, // ID único para cada post
+      id: 1,
       name: 'Diego',
       message: 'Chicos ya salio la skin de la leyenda del gaming en fortnite, me veo en la obligación de vender a mi gato para comprarla #GraciasRubius. :D',
       image: 'assets/img/Rubius-fortnite.jpg',
@@ -36,9 +37,14 @@ export class MenuPage {
     },
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
-  // Función para manejar la selección de imagen
+  ngOnInit(): void {
+    this.authService.getLoginStatus().subscribe((status) => {
+      this.isLoggedIn = status; // Actualiza el estado de inicio de sesión
+    });
+  }
+
   onImageSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
@@ -51,11 +57,10 @@ export class MenuPage {
     }
   }
 
-  // Función para publicar un nuevo post
   publishPost(): void {
     if (this.postMessage || this.selectedImageSrc) {
       const newPost = {
-        id: this.posts.length + 1, // Generación de un ID único para el nuevo post
+        id: this.posts.length + 1,
         name: 'Tú',
         message: this.postMessage,
         image: this.selectedImageSrc,
@@ -68,16 +73,17 @@ export class MenuPage {
     }
   }
 
-  // Función para ver los comentarios del post
   viewComments(post: any): void {
-    // Ahora pasamos el objeto completo 'post' a la ruta de comentarios
     this.router.navigate(['/comentarios', post.id], { state: { post: post } });
   }
 
-  // Función para dar like a una publicación
   likePost(post: { id: number; name: string; message: string; image: string | null; liked: boolean }): void {
     post.liked = !post.liked;
     console.log(`Post by ${post.name} liked status: ${post.liked}`);
   }
-}
 
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
+}

@@ -6,7 +6,20 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-searchbar slot="end" placeholder="Buscar"></ion-searchbar>
-    <ion-button slot="end" [routerDirection]="'root'" [routerLink]="'/login'">Inicio de sesión</ion-button>
+    <!-- Botón de inicio de sesión o cerrar sesión basado en isLoggedIn -->
+    <ion-button 
+      slot="end" 
+      *ngIf="!isLoggedIn" 
+      [routerDirection]="'root'" 
+      [routerLink]="'/login'">
+      Inicio de sesión
+    </ion-button>
+    <ion-button 
+      slot="end" 
+      *ngIf="isLoggedIn" 
+      (click)="logout()">
+      Cerrar sesión
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -36,16 +49,19 @@
   <!-- Ejemplo de publicaciones existentes -->
   <ion-card *ngFor="let post of posts; let i = index" class="card-custom">
     <ion-card-header>
-      <ion-card-title><ion-icon name="person-circle"></ion-icon> {{ post.name }}</ion-card-title>
+      <ion-card-title>
+        <ion-icon name="person-circle"></ion-icon> {{ post.name }}
+      </ion-card-title>
       <p>{{ post.message }}</p>
     </ion-card-header>
     <ion-card-content>
       <!-- Imagen de la publicación, con enlace para redirigir a comentarios -->
-      <img *ngIf="post.image" 
-           [src]="post.image" 
-           alt="Publicación de {{ post.name }}" 
-           style="width: 100%; margin-bottom: 8px;"
-           (click)="viewComments(post)">
+      <img 
+        *ngIf="post.image" 
+        [src]="post.image" 
+        alt="Publicación de {{ post.name }}" 
+        style="width: 100%; margin-bottom: 8px;"
+        (click)="viewComments(post)">
       <div class="button-group">
         <div class="left-buttons">
           <ion-button color="primary" (click)="likePost(post)" class="like-button">
@@ -69,3 +85,4 @@
     </ion-card-content>
   </ion-card>
 </ion-content>
+

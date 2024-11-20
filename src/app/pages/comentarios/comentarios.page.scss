@@ -1,24 +1,50 @@
+ion-header {
+  background-color: #d4af37; /* Fondo dorado */
+  color: #000; /* Texto negro */
+  
+  ion-toolbar {
+    --background: transparent; /* Fondo transparente del toolbar para que herede el dorado */
+    color: #000; /* Color del texto e iconos dentro del toolbar */
+
+    ion-title, ion-buttons, ion-searchbar, ion-button {
+      color: #000; /* Asegurarse de que el texto e iconos sean negros */
+    }
+
+    ion-menu-button, ion-back-button {
+      color: #000; /* Iconos del menú y back en negro */
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    ion-searchbar {
+      --background: #fff; /* Fondo blanco del cuadro de búsqueda */
+      --color: #000; /* Texto negro dentro del searchbar */
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    ion-button {
+      --background: #000000; /* Fondo blanco para el botón de inicio de sesión */
+      color: #fff;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      border-radius: 10px; /* Bordes redondeados */
+    }
+  }
+}
+
 /* Fondo negro para toda la página */
 ion-content {
     background-color: black;
     color: white;
     -background: transparent;
     font-family: Georgia, 'Times New Roman', Times, serif;
-  }
-  
-  /* Estilo para el header (barra superior) */
-  ion-header {
-    background-color: gold;  /* Fondo dorado para el header */
-    -background: transparent;
-  }
-  
-  ion-toolbar {
-    color: black;  /* Texto negro en la barra del header */
+    --background: transparent;
   }
   
   /* Estilo para los detalles del post */
   .post-details {
+    margin-top: 20px;
     margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
     border: 2px solid gold;  /* Borde dorado */
     border-radius: 10px;
     padding: 15px;
@@ -31,6 +57,7 @@ ion-content {
     color: gold;
     font-size: 1.8em;
     margin-bottom: 10px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
   
   /* Mensaje del post en blanco */
@@ -38,6 +65,7 @@ ion-content {
     color: white;
     font-size: 1.2em;
     margin-bottom: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
   
   /* Estilo para la imagen del post */
@@ -59,21 +87,25 @@ ion-content {
     color: gold;
     font-size: 1.5em;
     margin-bottom: 15px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
   
   /* Estilo para los elementos de la lista de comentarios */
   ion-list {
-    padding-left: 0;
+    padding-right: 10px;
+    background-color: #000;
   }
   
   ion-item {
     background-color: transparent;
-    border-bottom: 1px solid rgba(255, 215, 0, 0.3); /* Línea dorada suave para cada comentario */
+    padding-top: 10px;
+    border-bottom: 1px solid rgb(255, 217, 0); /* Línea dorada suave para cada comentario */
   }
   
   /* Estilo para el botón de agregar comentario */
   ion-button {
-    background-color: gold;
+    background-color:#d4af37;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     color: black;
     border-radius: 25px;
     margin-top: 20px;
@@ -85,20 +117,24 @@ ion-content {
     box-shadow: 0 4px 6px rgba(255, 215, 0, 0.4); /* Sombra dorada en el botón */
   }
   
-  ion-button:hover {
-    background-color: #ffd700b0; /* Efecto hover con dorado más suave */
-  }
-  
   /* Estilo para el input de comentario */
-  ion-item {
-    --background: rgba(255, 255, 255, 0.1);
-    --border-radius: 8px;
-    --padding-start: 15px;
-    --padding-end: 15px;
+  ion-item{
+    --background: rgb(0, 0, 0);
+    border-radius: 10px;
+    -background: transparent;
   }
   
   ion-input {
     color: white;
     font-size: 1.1em;
   }
+
+  .comments-section{
+    ion-label{
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+
+
+}
   

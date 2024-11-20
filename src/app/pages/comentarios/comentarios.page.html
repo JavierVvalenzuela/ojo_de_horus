@@ -1,9 +1,14 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Comentarios</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-searchbar slot="end" placeholder="Buscar"></ion-searchbar>
+    <ion-button slot="end" [routerDirection]="'root'" [routerLink]="'/login'">Inicio de sesión</ion-button>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
   <!-- Sección para mostrar el post seleccionado -->
   <div class="post-details">
@@ -23,7 +28,7 @@
     </ion-input>
   </ion-item>
 
-  <ion-button expand="full" (click)="addComment()">Agregar Comentario</ion-button>
+  <ion-button expand="full" (click)="addComment()" color="none">Agregar Comentario</ion-button>
 
   <!-- Sección para mostrar los comentarios existentes -->
   <div class="comments-section">

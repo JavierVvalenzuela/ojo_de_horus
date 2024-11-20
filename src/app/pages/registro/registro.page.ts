@@ -12,9 +12,6 @@ export class RegistroPage implements OnInit {
   // Instancia del modelo Usuario
   user: Usuario = new Usuario();
 
-  // Campo para la confirmación de contraseña
-  confirmarContrasena: string = '';
-
   // Mensaje de error
   errorMessage: string = '';
 
@@ -36,17 +33,26 @@ export class RegistroPage implements OnInit {
       console.log(this.errorMessage);
       return;
     }
+    else{
+      this.errorMessage = 'El nombre del usuario debe conterne entre 3 y 20 caracteres'
+    }
 
     if (this.user.apellido_u.length < 3 || this.user.apellido_u.length > 20) {
       this.errorMessage = 'El apellido debe tener entre 3 y 20 caracteres.';
       console.log(this.errorMessage);
       return;
     }
+    else{
+      this.errorMessage = 'El apellido del usuario debe conterne entre 3 y 20 caracteres'
+    }
 
     if (this.user.nick_u.length < 5 || this.user.nick_u.length > 30) {
       this.errorMessage = 'El nick debe tener entre 5 y 30 caracteres.';
       console.log(this.errorMessage);
       return;
+    }
+    else{
+      this.errorMessage = 'El nick del usuario debe conterne entre 3 y 20 caracteres'
     }
 
     if (!this.isPasswordValid(this.user.contrasena_u)) {
@@ -55,12 +61,11 @@ export class RegistroPage implements OnInit {
       return;
     }
 
-    if (this.user.contrasena_u !== this.confirmarContrasena) {
+    if (this.user.contrasena_u !== this.user.razon_ban_u) {
       this.errorMessage = 'Las contraseñas no coinciden.';
       console.log(this.errorMessage);
       return;
     }
-    this.servicioBD.presentAlert("1","2")
 
     // Establecer valores adicionales del usuario antes de enviarlo
     this.user.estado_cuenta_u = 'A'; // estado de cuenta del usuario por defecto
@@ -109,7 +114,6 @@ export class RegistroPage implements OnInit {
   // Método para resetear el formulario
   resetForm() {
     this.user = new Usuario(); // Reiniciar los valores del modelo Usuario
-    this.confirmarContrasena = ''; // Reiniciar el campo de confirmar contraseña
     this.errorMessage = '';
   }
 }
