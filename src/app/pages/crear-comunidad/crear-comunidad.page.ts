@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-crear-comunidad',
@@ -11,38 +11,28 @@ export class CrearComunidadPage {
   nombre: string = '';
   descripcion: string = '';
   categoria: string = '';
-  privacidad: boolean = false;
+  privacidad: boolean = true;
   reglas: string = '';
   ubicacion: string = '';
-  communityImage: string | null = null;  // Para almacenar la imagen seleccionada
+  communityImage: string | null = null;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private toastController: ToastController) {}
 
-  async selectImage() {
-    try {
-      const image = await Camera.getPhoto({
-        quality: 90,
-        source: CameraSource.Photos,  // Usar Photos para seleccionar desde la galería
-        correctOrientation: true,
-        resultType: CameraResultType.Uri,  // Usamos Uri para obtener la URL de la imagen
+  async crearComunidad() {
+    // Validación de campos obligatorios
+    if (!this.nombre || !this.descripcion || !this.categoria) {
+      // Muestra el mensaje de error si falta algún campo obligatorio
+      const toast = await this.toastController.create({
+        message: 'Por favor, completa todos los campos obligatorios.',
+        duration: 2000,
+        color: 'danger',
       });
-
-      if (image && image.webPath) {
-        this.communityImage = image.webPath;  // Almacena la imagen como una URL
-      } else {
-        console.error('No se seleccionó ninguna imagen');
-      }
-    } catch (error) {
-      console.error('Error al seleccionar la imagen:', error);
+      await toast.present();
+      return; // No continúa con la creación de la comunidad
     }
-  }
 
-  cancelar() {
-    this.router.navigate(['/comunidad']);
-  }
-
-  crearComunidad() {
-    console.log('Comunidad creada con los siguientes datos:', {
+    // Lógica para crear la comunidad y navegar a la página de la comunidad
+    const comunidad = {
       nombre: this.nombre,
       descripcion: this.descripcion,
       categoria: this.categoria,
@@ -50,19 +40,11 @@ export class CrearComunidadPage {
       reglas: this.reglas,
       ubicacion: this.ubicacion,
       communityImage: this.communityImage,
-    });
+    };
 
-    // Redirige a la página `MiComunidad` y pasa los datos de la comunidad como estado
+    // Navega a la página de "mi-comunidad" con los datos de la comunidad
     this.router.navigate(['/mi-comunidad'], {
-      state: {
-        nombre: this.nombre,
-        descripcion: this.descripcion,
-        categoria: this.categoria,
-        privacidad: this.privacidad,
-        reglas: this.reglas,
-        ubicacion: this.ubicacion,
-        communityImage: this.communityImage,
-      },
-    });
-  }
+      state: comunidad,
+    });
+  }
 }

@@ -36,4 +36,33 @@ describe('RegistroPage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
+  it('debería devolver true si la contraseña cumple con el patrón requerido', () => {
+    const resultado = component.isPasswordValid('Diego.170'); 
+    expect(resultado).toBeTrue();
+  });
+  
+  it('debería devolver false si la contraseña no cumple con el patrón requerido (sin mayúscula)', () => {
+    const resultado = component.isPasswordValid('contraseña1!');  
+    expect(resultado).toBeFalse();
+  });
+
+  it('debería alternar la visibilidad de la contraseña', () => {
+    component.passwordVisible = false; 
+    component.togglePasswordVisibility();
+    expect(component.passwordVisible).toBeTrue(); 
+
+    component.togglePasswordVisibility();
+    expect(component.passwordVisible).toBeFalse(); 
+  });
+
+  it('debería alternar la visibilidad de la confirmación de contraseña', () => {
+    component.confirmPasswordVisible = false; 
+    component.toggleConfirmPasswordVisibility();
+    expect(component.confirmPasswordVisible).toBeTrue(); 
+
+    component.toggleConfirmPasswordVisibility();
+    expect(component.confirmPasswordVisible).toBeFalse(); 
+  });
+
 });
