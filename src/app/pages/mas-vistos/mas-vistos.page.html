@@ -1,89 +1,38 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Mas vistos</ion-title>
+    <ion-title>Más Vistos</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
       <ion-back-button></ion-back-button>
     </ion-buttons>
-
-    <!-- Barra de búsqueda fuera de los botones de navegación -->
     <ion-searchbar slot="end" placeholder="Buscar"></ion-searchbar>
-
-    <!-- Botón de inicio de sesión fuera de los botones de navegación -->
-    <ion-button slot="end" [routerDirection]="'root'" [routerLink]="'/login'">Inicio de sesión</ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
+  <!-- Ejemplo de publicaciones -->
   <h1>Más Vistos</h1>
-  <!-- Primera tarjeta -->
-  <ion-card class="card-custom">
+   
+  <ion-card *ngFor="let post of posts" class="card-custom">
     <ion-card-header>
-      <ion-card-title><ion-icon name="person-circle"></ion-icon> Diego</ion-card-title>
+      <ion-card-title><ion-icon name="eye"></ion-icon> {{ post.name }}</ion-card-title>
+      <p>{{ post.message }}</p>
     </ion-card-header>
     <ion-card-content>
-      <img src="assets/img/over.jpg" alt="Publicación de Diego">
+      <img *ngIf="post.image" [src]="post.image" alt="Publicación de {{ post.name }}" style="width: 100%; margin-bottom: 8px;">
       <div class="button-group">
         <div class="left-buttons">
-          <ion-button color="primary">
-            <ion-icon name="heart"></ion-icon>
-            Like
+          <ion-button color="primary" (click)="likePost(post)" class="like-button">
+            <ion-icon 
+              [name]="post.liked ? 'heart' : 'heart-outline'" 
+              [class.liked]="post.liked" 
+              class="heart-icon"
+            ></ion-icon>
+            Me Gusta
           </ion-button>
-          <ion-button color="secondary">
-            <ion-icon name="chatbubble"></ion-icon>
-            Comentario
-          </ion-button>
-        </div>
-        <ion-button class="right-button" color="tertiary">
-          <ion-icon name="share-social"></ion-icon>
-          Compartir
-        </ion-button>
-      </div>
-    </ion-card-content>
-  </ion-card>
-
-  <!-- Segunda tarjeta -->
-  <ion-card class="card-custom">
-    <ion-card-header>
-      <ion-card-title><ion-icon name="person-circle"></ion-icon> Maria</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <img src="assets/img/cs2.jpeg" alt="Publicación de Maria">
-      <div class="button-group">
-        <div class="left-buttons">
-          <ion-button color="primary">
-            <ion-icon name="heart"></ion-icon>
-            Like
-          </ion-button>
-          <ion-button color="secondary">
-            <ion-icon name="chatbubble"></ion-icon>
-            Comentario
-          </ion-button>
-        </div>
-        <ion-button class="right-button" color="tertiary">
-          <ion-icon name="share-social"></ion-icon>
-          Compartir
-        </ion-button>
-      </div>
-    </ion-card-content>
-  </ion-card>
-
-  <!-- Tercera tarjeta -->
-  <ion-card class="card-custom">
-    <ion-card-header>
-      <ion-card-title><ion-icon name="person-circle"></ion-icon> Juan</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <img src="assets/img/wwe.avif" alt="Publicación de Juan">
-      <div class="button-group">
-        <div class="left-buttons">
-          <ion-button color="primary">
-            <ion-icon name="heart"></ion-icon>
-            Like
-          </ion-button>
-          <ion-button color="secondary">
-            <ion-icon name="chatbubble"></ion-icon>
-            Comentario
+          <ion-button color="secondary" (click)="commentPost(post)" class="comment-button">
+            <ion-icon name="chatbubble-ellipses"></ion-icon>
+            Comentar
           </ion-button>
         </div>
         <ion-button class="right-button" color="tertiary">

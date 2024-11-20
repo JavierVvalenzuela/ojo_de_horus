@@ -1,54 +1,68 @@
 ion-header {
   background-color: #d4af37; /* Fondo dorado */
   color: #000; /* Texto negro */
-
+  
   ion-toolbar {
     --background: transparent; /* Fondo transparente del toolbar para que herede el dorado */
     color: #000; /* Color del texto e iconos dentro del toolbar */
-    font-family: Georgia, 'Times New Roman', Times, serif;
 
-    ion-title, ion-buttons, ion-searchbar, ion-button {
-      color: #000; /* Asegurarse de que el texto e icono sean negros */
-      font-family: Georgia, 'Times New Roman', Times, serif;
+    ion-title, ion-buttons, ion-searchbar {
+      color: #000; /* Asegurarse de que el texto e iconos sean negros */
     }
 
     ion-menu-button, ion-back-button {
       color: #000; /* Iconos del menú y back en negro */
+      font-family: Georgia, 'Times New Roman', Times, serif;
     }
 
     ion-searchbar {
       --background: #fff; /* Fondo blanco del cuadro de búsqueda */
       --color: #000; /* Texto negro dentro del searchbar */
-    }
-
-    ion-button {
-      --background: #000000; /* Fondo blanco para el botón de inicio de sesión */
-      color: #000; /* Texto negro en el botón */
-      border-radius: 10px; /* Bordes redondeados */
+      font-family: Georgia, 'Times New Roman', Times, serif;
     }
   }
 }
 
-ion-content { 
-  background-color: #000; /* Fondo negro */
-  color: #fff; /* Texto blanco */
+ion-content {
+  background-color: #000000; /* Fondo negro */
   --background: transparent;
 
   h1{
     color: #fff;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    text-align: center;
-    border: 4px solid #d4af37;
-    font-size: 60px;
-    padding-bottom: 10px;
-    padding-top: 10px;
+    border: 2px solid #d4af37; /* Borde dorado */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgb(255, 174, 0); /* Sombra ligera */
+    text-align: center
+  }
+
+  .post-item {
+    border: 2px solid #d4af37; /* Borde dorado */
+    border-radius: 10px; /* Bordes redondeados */
+    background-color: #000;
+    --background: transparent;
+    margin-bottom: 20px; /* Espaciado entre publicaciones */
+  }
+
+  ion-input {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    border: 2px solid #d4af37; /* Borde dorado */
+    border-radius: 10px; /* Bordes redondeados */
+    margin-top: 5%;
   }
 
   .card-custom {
     margin-bottom: 20px;
     border: 2px solid #d4af37; /* Borde dorado */
     border-radius: 10px; /* Bordes redondeados */
-    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: #000;
+
+    p {
+      color: #ffffff;
+      font-size: medium;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
 
     ion-card-title {
       font-size: 1.4rem;
@@ -82,19 +96,23 @@ ion-content {
           margin-right: 10px;
           color: #000; /* Texto del botón negro */
           --background: #d4af37; /* Botones dorados */
-          border-radius: 10px;
+          border-radius: 10px; /* Bordes redondeados */
           font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        .heart-icon {
+          color: #000000; /* Corazón dorado */
+        }
+
+        .comment-button {
+          color: #000;
+          background-color: #d4af37;
         }
       }
 
       .right-button {
-        margin-left: auto;
-
-        ion-button {
-          color: #000; /* Texto del botón negro */
-          --background: #d4af37; /* Botón dorado */
-          border-radius: 10px;
-        }
+        background-color: #d4af37;
+        color: #000;
       }
     }
   }
