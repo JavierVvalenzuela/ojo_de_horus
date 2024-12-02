@@ -34,6 +34,7 @@ ion-content {
   --background: transparent;
 
   .post-item {
+    color:#000;
     border: 2px solid #d4af37; /* Borde dorado */
     border-radius: 10px; /* Bordes redondeados */
     background-color: #000;
@@ -46,11 +47,12 @@ ion-content {
   }
 
   ion-input {
-    color: #dadada;
+    color: #ffffff;
     font-family: Georgia, 'Times New Roman', Times, serif;
     border: 2px solid #d4af37; /* Borde dorado */
     border-radius: 10px; /* Bordes redondeados */
     margin-top: 5%;
+    --background: transparent;
   }
 
   .card-custom {
@@ -115,10 +117,14 @@ ion-content {
     }
   }
 
-  ion-button.image-upload {
+  ion-button.image-upload,
+  ion-button.camera-upload {
     --background: transparent; /* Fondo transparente */
     color: #d4af37; /* Color dorado para el icono */
     border: none; /* Sin borde */
+    ion-icon {
+      font-size: 20px; /* Tamaño del ícono */
+    }
   }
 
   ion-button.publish {

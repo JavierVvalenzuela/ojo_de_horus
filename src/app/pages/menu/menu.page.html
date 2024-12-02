@@ -37,11 +37,20 @@
       <ion-input placeholder="¿En qué estás pensando hoy?" lines="full" [(ngModel)]="postMessage"></ion-input>
 
       <div class="button-group">
+        <!-- Botón para publicar -->
         <ion-button expand="full" class="publish" (click)="publishPost()">Publicar</ion-button>
-        <ion-button class="image-upload" (click)="fileInput.click()">
-          <ion-icon name="image"></ion-icon>
+
+        <!-- Botón para subir desde galería -->
+        <ion-button class="image-upload" (click)="openGallery()">
+          <ion-icon name="images"></ion-icon>
+          Galería
         </ion-button>
-        <input type="file" #fileInput accept="image/*" (change)="onImageSelected($event)" style="display: none;">
+
+        <!-- Botón para abrir la cámara -->
+        <ion-button class="camera-upload" (click)="openCamera()">
+          <ion-icon name="camera"></ion-icon>
+          Cámara
+        </ion-button>
       </div>
     </ion-label>
   </ion-item>
@@ -85,4 +94,3 @@
     </ion-card-content>
   </ion-card>
 </ion-content>
-

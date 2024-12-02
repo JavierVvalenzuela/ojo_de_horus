@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { Camera, CameraResultType } from '@capacitor/camera';
 
 @Component({
   selector: 'app-crear-comunidad',
@@ -18,20 +19,42 @@ export class CrearComunidadPage {
 
   constructor(private router: Router, private toastController: ToastController) {}
 
+  // Método para abrir la cámara y capturar una imagen
+  async selectImage() {
+    try {
+      const image = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: CameraResultType.Uri, // Usar URI para cargar la imagen en el navegador
+      });
+      this.communityImage = image.webPath || null; // Asignar la imagen capturada a la variable
+    } catch (error) {
+      const toast = await this.toastController.create({
+        message: 'No se pudo capturar la imagen.',
+        duration: 2000,
+        color: 'danger',
+      });
+      await toast.present();
+    }
+  }
+
+  // Método para cancelar la creación de la comunidad
+  cancelar() {
+    this.router.navigate(['/home']); // Navegar a la página de inicio
+  }
+
+  // Método para crear una comunidad
   async crearComunidad() {
-    // Validación de campos obligatorios
     if (!this.nombre || !this.descripcion || !this.categoria) {
-      // Muestra el mensaje de error si falta algún campo obligatorio
       const toast = await this.toastController.create({
         message: 'Por favor, completa todos los campos obligatorios.',
         duration: 2000,
         color: 'danger',
       });
       await toast.present();
-      return; // No continúa con la creación de la comunidad
+      return;
     }
 
-    // Lógica para crear la comunidad y navegar a la página de la comunidad
     const comunidad = {
       nombre: this.nombre,
       descripcion: this.descripcion,
@@ -42,7 +65,6 @@ export class CrearComunidadPage {
       communityImage: this.communityImage,
     };
 
-    // Navega a la página de "mi-comunidad" con los datos de la comunidad
     this.router.navigate(['/mi-comunidad'], {
       state: comunidad,
     });
