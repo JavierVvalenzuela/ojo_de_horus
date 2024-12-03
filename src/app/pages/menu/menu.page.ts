@@ -90,53 +90,53 @@ export class MenuPage implements OnInit {
   }
 
   // Publicar un nuevo post
-  async publishPost(): Promise<void> {
-    console.log('Publicar post invocado');
-    if (!this.isLoggedIn) {
-      await this.showLoginAlert();
+async publishPost(): Promise<void> {
+  console.log('Publicar post invocado');
+  if (!this.isLoggedIn) {
+    await this.showLoginAlert();
+    return;
+  }
+
+  if (this.postMessage || this.selectedImageSrc) {
+    console.log('Preparando datos del nuevo post...');
+    const loggedUserId = localStorage.getItem('loggedInUserId');
+    const loggedUserNick = localStorage.getItem('loggedInUserNick');
+
+    if (!loggedUserId || !loggedUserNick) {
+      console.error('Usuario no autenticado.');
       return;
     }
-  
-    if (this.postMessage || this.selectedImageSrc) {
-      console.log('Preparando datos del nuevo post...');
-      const loggedUserId = localStorage.getItem('loggedInUserId');
-      const loggedUserNick = localStorage.getItem('loggedInUserNick');
-  
-      if (!loggedUserId || !loggedUserNick) {
-        console.error('Usuario no autenticado.');
-        return;
-      }
-  
-      const newPost = {
-        id: this.posts.length + 1,
-        name: loggedUserNick,
-        message: this.postMessage,
-        image: this.selectedImageSrc,
-        liked: false,
-      };
-  
-      console.log('Nuevo post:', newPost);
-  
-      // Agregar el nuevo post a la lista
-      this.posts.unshift(newPost);
-  
-      // Limpiar los campos
-      this.postMessage = '';
-      this.selectedImage = null;
-      this.selectedImageSrc = null;
-  
-      // Guardar en base de datos o backend
-      try {
-        await this.servicioBD.createPost(newPost);
-        console.log('Post guardado en la base de datos');
-      } catch (error) {
-        console.error('Error al guardar el post:', error);
-      }
-    } else {
-      console.warn('No hay contenido para publicar');
+
+    const newPost = {
+      id: this.posts.length + 1,
+      name: loggedUserNick,
+      message: this.postMessage,
+      image: this.selectedImageSrc,
+      liked: false,
+    };
+
+    console.log('Nuevo post:', newPost);
+
+    // Agregar el nuevo post a la lista
+    this.posts.unshift(newPost);
+
+    // Limpiar los campos
+    this.postMessage = '';
+    this.selectedImage = null;
+    this.selectedImageSrc = null;
+
+    // Guardar en base de datos o backend
+    try {
+      await this.servicioBD.createPost(newPost);
+      console.log('Post guardado en la base de datos');
+    } catch (error) {
+      console.error('Error al guardar el post:', error);
     }
+  } else {
+    console.warn('No hay contenido para publicar');
   }
-  
+}
+
 
   // Mostrar alerta cuando el usuario no está logueado
   async showLoginAlert(): Promise<void> {

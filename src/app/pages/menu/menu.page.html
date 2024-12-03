@@ -39,8 +39,7 @@
 
       <div class="button-group">
         <!-- Botón para publicar, solo si hay mensaje o imagen -->
-        <button (click)="publishPost()">Publicar</button>
-
+        <ion-button *ngIf="postMessage || selectedImageSrc" expand="full" class="publish" (click)="publishPost()">Publicar</ion-button>
 
         <!-- Botón para subir desde galería -->
         <ion-button class="image-upload" (click)="openGallery()">
