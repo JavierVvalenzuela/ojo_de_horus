@@ -38,16 +38,21 @@ export class ServicioBDService {
     id_rol INTEGER NOT NULL, 
     FOREIGN KEY(id_rol) REFERENCES ROL(id_rol)
   );`;
+
   tablaPost: string = `CREATE TABLE IF NOT EXISTS POST (id_post INTEGER PRIMARY KEY AUTOINCREMENT, titulo_post VARCHAR(50) NOT NULL, contenido_post TEXT NOT NULL, f_creacion_post DATE NOT NULL, imagen_post BLOB, id_usuario INTEGER NOT NULL, id_estado INTEGER NOT NULL, FOREIGN KEY(id_usuario) REFERENCES USUARIO(id_usuario), FOREIGN KEY(id_estado) REFERENCES ESTADO(id_estado));`;
   tablaComentario: string = `CREATE TABLE IF NOT EXISTS COMENTARIO (id_coment INTEGER PRIMARY KEY AUTOINCREMENT, contenido_coment TEXT NOT NULL, f_creacion_coment DATE NOT NULL, imagen_coment BLOB, id_estado INTEGER NOT NULL, id_post INTEGER NOT NULL, FOREIGN KEY(id_estado) REFERENCES ESTADO(id_estado), FOREIGN KEY(id_post) REFERENCES POST(id_post));`;
   tablaPostCategoria: string = `CREATE TABLE IF NOT EXISTS POST_CATEGORIA (id_post_c INTEGER PRIMARY KEY AUTOINCREMENT, id_categoria INTEGER NOT NULL, id_post INTEGER NOT NULL, FOREIGN KEY(id_categoria) REFERENCES CATEGORIA(id_categoria), FOREIGN KEY(id_post) REFERENCES POST(id_post));`;
   tablaFavoritos: string = `CREATE TABLE IF NOT EXISTS FAVORITOS (id_fav INTEGER PRIMARY KEY AUTOINCREMENT, f_creacion_fav DATE NOT NULL, id_usuario INTEGER NOT NULL, id_post INTEGER NOT NULL, FOREIGN KEY(id_usuario) REFERENCES USUARIO(id_usuario), FOREIGN KEY(id_post) REFERENCES POST(id_post));`;
-  
+  tablaPreguntas: string = "CREATE TABLE IF NOT EXISTS PREGUNTAS (id_preg INTEGER PRIMARY KEY AUTOINCREMENT, nombre_preg VARCHAR(50) NOT NULL);";
+
   //insert automaticos
   insertRol1: string = "INSERT or IGNORE INTO rol(id_rol,nombre_rol) VALUES (1,'Administrador')";
   insertRol2: string = "INSERT or IGNORE INTO rol(id_rol,nombre_rol) VALUES (2,'Moderador')";
   insertRol3: string = "INSERT or IGNORE INTO rol(id_rol,nombre_rol) VALUES (3,'Usuario')";
   insertuser: string = "INSERT or IGNORE INTO usuario(id_usuario, nombre_u, apellido_u, nick_u, correo_u, contrasena_u, estado_cuenta_u, id_rol) VALUES(1,'Diego', 'Mellado', 'Diego_170', 'diego@example.com', 'DiegoMj.170','A',1)";
+  insertPregunta1: string = "INSERT or IGNORE INTO preguntas(id_preg, nombre_preg) VALUES (1,'¿Cuál es el nombre de tu primera mascota?')";
+  insertPregunta2: string = "INSERT or IGNORE INTO preguntas(id_preg, nombre_preg) VALUES (2,'¿En qué escuela primaria estudiaste?')";
+  insertPregunta3: string = "INSERT or IGNORE INTO preguntas(id_preg, nombre_preg) VALUES (3,'¿En qué ciudad naciste?')";
 
   private listadoUsuarios = new BehaviorSubject<Usuario[]>([]);
   private isBDReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -102,12 +107,17 @@ export class ServicioBDService {
       await this.database.executeSql(this.tablaComentario, []);
       await this.database.executeSql(this.tablaPostCategoria, []);
       await this.database.executeSql(this.tablaFavoritos, []);
+      await this.database.executeSql(this.tablaPreguntas, []);
 
       await this.database.executeSql(this.insertRol1, []);
       await this.database.executeSql(this.insertRol2, []);
       await this.database.executeSql(this.insertRol3, []);
       await this.database.executeSql(this.insertuser, []);
+      await this.database.executeSql(this.insertPregunta1, []);
+      await this.database.executeSql(this.insertPregunta2, []);
+      await this.database.executeSql(this.insertPregunta3, []);
       this.isBDReady.next(true);
+
       //await this.createInitialUser();
     } catch (e: any) {
       this.presentAlert('Error de Tablas', `No se pudieron crear las tablas: ${e.message}`);
@@ -270,16 +280,32 @@ export class ServicioBDService {
     }
   }
 
-  async obtenerPreguntaSeguridad(nick: string): Promise<string | null> {
-    const query = 'SELECT pregunta_seguridad FROM USUARIO WHERE nick_u = ?';
-    try {
-      const result = await this.database.executeSql(query, [nick]);
-      return result.rows.length > 0 ? result.rows.item(0).pregunta_seguridad : null;
-    } catch (e: any) {
-      this.presentAlert('Error', `No se pudo obtener la pregunta de seguridad: ${e.message}`);
+async obtenerPreguntaSeguridad(nick: string): Promise<string | null> {
+  // Validamos que el nick no esté vacío o sea inválido
+  if (!nick || nick.trim() === '') {
+    this.presentAlert('Error', 'El nick es inválido.');
+    return null;
+  }
+
+  const query = 'SELECT pregunta_seguridad FROM USUARIO WHERE nick_u = ?';
+  try {
+    const result = await this.database.executeSql(query, [nick]);
+
+    // Verificamos si se obtuvo una respuesta válida
+    if (result.rows.length > 0) {
+      return result.rows.item(0).pregunta_seguridad;
+    } else {
+      this.presentAlert('Error', 'No se encontró la pregunta de seguridad para este usuario.');
       return null;
     }
+  } catch (e: any) {
+    // En caso de error, presentamos una alerta con el mensaje de error
+    console.error('Error al obtener la pregunta de seguridad:', e);  // Para ayudar a depurar
+    this.presentAlert('Error', `No se pudo obtener la pregunta de seguridad: ${e.message || e}`);
+    return null;
   }
+}
+
 
   async verificarRespuestaSeguridad(nick: string, respuesta: string): Promise<boolean> {
     const query = 'SELECT respuesta_seguridad FROM USUARIO WHERE nick_u = ?';
