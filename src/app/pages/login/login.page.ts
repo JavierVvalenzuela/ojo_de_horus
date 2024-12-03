@@ -28,7 +28,7 @@ export class LoginPage implements OnInit {
   async loadUsers() {
     this.servicioBD.dbState()
       .pipe(
-        filter(ready => ready),
+        filter((ready) => ready),
         take(1)
       )
       .subscribe(async () => {
@@ -47,6 +47,9 @@ export class LoginPage implements OnInit {
         } else {
           // Guarda el usuario logueado en el almacenamiento local
           localStorage.setItem('loggedInUserId', user.id_usuario.toString());
+          localStorage.setItem('loggedInUserNick', user.nick_u); // Guarda también el nick
+          localStorage.setItem('isLoggedIn', 'true'); // Indicador de sesión activa
+
           this.navCtrl.navigateRoot('/home'); // Redirige al menú principal
         }
       } else {

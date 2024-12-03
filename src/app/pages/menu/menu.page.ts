@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { ServicioBDService } from '../../services/servicio-bd.service'; // Para manejar base de datos
+import { ServicioBDService } from '../../services/servicio-bd.service';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { AlertController } from '@ionic/angular';
 
@@ -17,7 +17,6 @@ export class MenuPage implements OnInit {
   isLoggedIn: boolean = false; // Controla si el usuario está logueado
   nick_u: string = ''; // Nickname del usuario logueado
 
-  // Lista de publicaciones existentes
   posts: { id: number; name: string; message: string; image: string | null; liked: boolean }[] = [
     {
       id: 1,
@@ -45,115 +44,116 @@ export class MenuPage implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private servicioBD: ServicioBDService, // Servicio para manejar base de datos
-    private alertController: AlertController // Controlador de alertas
+    private servicioBD: ServicioBDService,
+    private alertController: AlertController
   ) {}
 
   ngOnInit(): void {
-    // Suscribirse al estado de inicio de sesión
-    this.authService.getLoginStatus().subscribe((status) => {
-      this.isLoggedIn = status; // Actualiza el estado de inicio de sesión
+    this.subscribeToLoginStatus();
+    this.checkLoggedInUser();
+  }
 
-      // Recuperar el nick del usuario logueado desde el almacenamiento local si está logueado
+  // Suscribirse al estado de inicio de sesión
+  private subscribeToLoginStatus(): void {
+    this.authService.getLoginStatus().subscribe((status) => {
+      this.isLoggedIn = status;
       if (this.isLoggedIn) {
         this.nick_u = localStorage.getItem('loggedInUserNick') || '';
+      } else {
+        this.nick_u = '';
       }
     });
   }
 
-  // Maneja la selección de imágenes desde la galería del sistema
+  // Verificar el estado de inicio de sesión al cargar la página
+  private checkLoggedInUser(): void {
+    const loggedInUserId = localStorage.getItem('loggedInUserId');
+    const loggedInUserNick = localStorage.getItem('loggedInUserNick');
+    this.isLoggedIn = !!loggedInUserId; // El usuario está logueado si el ID está presente
+    this.nick_u = loggedInUserNick || '';
+  }
+
   async openGallery(): Promise<void> {
     try {
       const image = await Camera.getPhoto({
         quality: 90,
-        resultType: CameraResultType.DataUrl, // Devuelve la imagen como Data URL
-        source: CameraSource.Photos, // Fuente: Galería
+        resultType: CameraResultType.DataUrl,
+        source: CameraSource.Photos,
       });
-      this.selectedImageSrc = image.dataUrl || null; // Almacena la imagen seleccionada
+      this.selectedImageSrc = image.dataUrl || null;
     } catch (error) {
       console.error('Error al abrir la galería:', error);
     }
   }
 
-  // Abre la cámara del dispositivo
   async openCamera(): Promise<void> {
     try {
       const image = await Camera.getPhoto({
         quality: 90,
-        resultType: CameraResultType.DataUrl, // Devuelve la imagen como Data URL
-        source: CameraSource.Camera, // Fuente: Cámara
+        resultType: CameraResultType.DataUrl,
+        source: CameraSource.Camera,
       });
-      this.selectedImageSrc = image.dataUrl || null; // Almacena la imagen capturada
+      this.selectedImageSrc = image.dataUrl || null;
     } catch (error) {
       console.error('Error al abrir la cámara:', error);
     }
   }
 
-  // Publicar un nuevo post
-async publishPost(): Promise<void> {
-  console.log('Publicar post invocado');
-  if (!this.isLoggedIn) {
-    await this.showLoginAlert();
-    return;
-  }
-
-  if (this.postMessage || this.selectedImageSrc) {
-    console.log('Preparando datos del nuevo post...');
-    const loggedUserId = localStorage.getItem('loggedInUserId');
-    const loggedUserNick = localStorage.getItem('loggedInUserNick');
-
-    if (!loggedUserId || !loggedUserNick) {
-      console.error('Usuario no autenticado.');
+  async publishPost(): Promise<void> {
+    if (!this.isLoggedIn) {
+      await this.showLoginAlert();
       return;
     }
 
-    const newPost = {
-      id: this.posts.length + 1,
-      name: loggedUserNick,
-      message: this.postMessage,
-      image: this.selectedImageSrc,
-      liked: false,
-    };
+    if (this.postMessage || this.selectedImageSrc) {
+      const loggedUserId = localStorage.getItem('loggedInUserId');
+      const loggedUserNick = localStorage.getItem('loggedInUserNick');
 
-    console.log('Nuevo post:', newPost);
+      if (!loggedUserId || !loggedUserNick) {
+        console.error('Usuario no autenticado.');
+        return;
+      }
 
-    // Agregar el nuevo post a la lista
-    this.posts.unshift(newPost);
+      const newPost = {
+        id: this.posts.length + 1,
+        name: loggedUserNick,
+        message: this.postMessage,
+        image: this.selectedImageSrc,
+        liked: false,
+      };
 
-    // Limpiar los campos
-    this.postMessage = '';
-    this.selectedImage = null;
-    this.selectedImageSrc = null;
+      this.posts.unshift(newPost);
 
-    // Guardar en base de datos o backend
-    try {
-      await this.servicioBD.createPost(newPost);
-      console.log('Post guardado en la base de datos');
-    } catch (error) {
-      console.error('Error al guardar el post:', error);
+      this.postMessage = '';
+      this.selectedImage = null;
+      this.selectedImageSrc = null;
+
+      try {
+        await this.servicioBD.createPost(newPost);
+      } catch (error) {
+        console.error('Error al guardar el post:', error);
+      }
+    } else {
+      console.warn('No hay contenido para publicar');
     }
-  } else {
-    console.warn('No hay contenido para publicar');
   }
-}
 
-
-  // Mostrar alerta cuando el usuario no está logueado
   async showLoginAlert(): Promise<void> {
     const alert = await this.alertController.create({
-      header: 'No estás logueado',
-      message: 'Parece que actualmente no te encuentras logueado, prueba iniciar sesión o registrarte para compartir tu contenido con el mundo.',
+      header: '¡No has iniciado sesión!',
+      message:
+        'Parece que actualmente no te encuentras logueado, prueba iniciar sesión o registrarte para compartir tu contenido con el mundo.',
       buttons: [
         {
           text: 'Iniciar Sesión',
           handler: () => {
-            this.router.navigate(['/login']); // Redirige a la ventana de login
+            this.router.navigate(['/login']);
           },
         },
         {
           text: 'Registrarse',
           handler: () => {
-            this.router.navigate(['/registro']); // Redirige a la ventana de registro
+            this.router.navigate(['/registro']);
           },
         },
       ],
@@ -162,20 +162,19 @@ async publishPost(): Promise<void> {
     await alert.present();
   }
 
-  // Navegar a la vista de comentarios de un post específico
   viewComments(post: any): void {
     this.router.navigate(['/comentarios', post.id], { state: { post: post } });
   }
 
-  // Alternar el estado "Me Gusta" de una publicación
   likePost(post: { id: number; name: string; message: string; image: string | null; liked: boolean }): void {
-    post.liked = !post.liked; // Alternar estado
+    post.liked = !post.liked;
     console.log(`Post by ${post.name} liked status: ${post.liked}`);
   }
 
-  // Cerrar sesión
   logout(): void {
-    this.authService.logout(); // Llamar al servicio de logout
-    this.router.navigate(['/login']); // Redirigir al login
+    this.authService.logout();
+    localStorage.removeItem('loggedInUserId');
+    localStorage.removeItem('loggedInUserNick');
+    this.router.navigate(['/login']);
   }
 }
