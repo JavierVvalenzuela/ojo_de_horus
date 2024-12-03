@@ -11,6 +11,10 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class ServicioBDService {
+  createPost(newPost: { id: number; name: string; message: string; image: string | null; liked: boolean; }) {
+    throw new Error('Method not implemented.');
+  }
+  dbService: any;
   resetPassword(nick_: string, newPassword: string) {
     throw new Error('Method not implemented.');
   }
@@ -178,6 +182,25 @@ export class ServicioBDService {
       this.presentAlert('Error', `Error al actualizar usuario: ${e.message}`);
     }
   }
+
+  async createPublicacion(publicacion: any): Promise<boolean> {
+    if (!publicacion.titulo || !publicacion.contenido || !publicacion.fecha || !publicacion.usuario_id || !publicacion.estado_id) {
+      console.error('Error: Datos incompletos para crear la publicación');
+      return false;
+    }
+  
+    try {
+      const result = await this.database.executeSql(
+        'INSERT INTO POST (titulo_post, contenido_post, f_creacion_post, imagen_post, id_usuario, id_estado) VALUES (?, ?, ?, ?, ?, ?)',
+        [publicacion.titulo, publicacion.contenido, publicacion.fecha, publicacion.imagen || null, publicacion.usuario_id, publicacion.estado_id]
+      );
+      return result && result.rowsAffected > 0;
+    } catch (error) {
+      console.error('Error al crear la publicación', error);
+      return false;
+    }
+  }
+  
 
   async asignarRolUsuario(nick: string, idRol: number) {
     const query = `UPDATE USUARIO SET id_rol = ? WHERE nick_u = ?`;

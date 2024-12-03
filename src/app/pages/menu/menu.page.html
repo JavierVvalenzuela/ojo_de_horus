@@ -24,6 +24,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+  <!-- Formulario para crear una publicación -->
   <ion-item class="post-item">
     <ion-avatar slot="start">
       <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="Avatar">
@@ -37,8 +38,9 @@
       <ion-input placeholder="¿En qué estás pensando hoy?" lines="full" [(ngModel)]="postMessage"></ion-input>
 
       <div class="button-group">
-        <!-- Botón para publicar -->
-        <ion-button expand="full" class="publish" (click)="publishPost()">Publicar</ion-button>
+        <!-- Botón para publicar, solo si hay mensaje o imagen -->
+        <button (click)="publishPost()">Publicar</button>
+
 
         <!-- Botón para subir desde galería -->
         <ion-button class="image-upload" (click)="openGallery()">
@@ -55,7 +57,7 @@
     </ion-label>
   </ion-item>
 
-  <!-- Ejemplo de publicaciones existentes -->
+  <!-- Lista de publicaciones -->
   <ion-card *ngFor="let post of posts; let i = index" class="card-custom">
     <ion-card-header>
       <ion-card-title>
@@ -64,7 +66,7 @@
       <p>{{ post.message }}</p>
     </ion-card-header>
     <ion-card-content>
-      <!-- Imagen de la publicación, con enlace para redirigir a comentarios -->
+      <!-- Imagen de la publicación con enlace para redirigir a comentarios -->
       <img 
         *ngIf="post.image" 
         [src]="post.image" 
@@ -94,3 +96,4 @@
     </ion-card-content>
   </ion-card>
 </ion-content>
+

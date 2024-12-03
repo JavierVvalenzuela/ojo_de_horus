@@ -1,12 +1,13 @@
 ion-header {
-  background-color: #cc9226; /* Fondo dorado para el header */
+  background-color: #d4af37; /* Fondo dorado para el header */
   color: #000;               /* Color del texto negro para el header */
   font-family: Georgia, 'Times New Roman', Times, serif; /* Fuente aplicada al header */
 }
 
 ion-toolbar {
-  --background: #cc9226; /* Fondo dorado para la barra de herramientas */
+  --background: #d4af37; /* Fondo dorado para la barra de herramientas */
   font-family: Georgia, 'Times New Roman', Times, serif; /* Fuente aplicada a la barra de herramientas */
+  color: #000;
 }
 
 ion-menu-button {
@@ -33,7 +34,7 @@ ion-content.content-bg {
     max-width: 600px;        /* Ancho máximo del card */
     margin: 20px;
     padding: 20px;
-    box-shadow: 0 4px 8px rgb(255, 153, 0); /* Sombra dorada */
+    box-shadow: 0 4px 8px rgb(255, 196, 0); /* Sombra dorada */
     display: flex;
     flex-direction: column;
     gap: 15px;               /* Espacio entre los elementos del card */
