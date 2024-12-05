@@ -108,9 +108,18 @@ const routes: Routes = [
     loadChildren: () => import('./pages/mi-comunidad/mi-comunidad.module').then( m => m.MiComunidadPageModule)
   },
   {
+    path: 'recuperar',
+    loadChildren: () => import('./pages/recuperar/recuperar.module').then( m => m.RecuperarPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
+  },  {
+    path: 'responder-preg',
+    loadChildren: () => import('./pages/responder-preg/responder-preg.module').then( m => m.ResponderPregPageModule)
   }
+
+
 ];
 
 @NgModule({

@@ -8,7 +8,7 @@ import { ServicioBDService } from '../../services/servicio-bd.service';
   styleUrls: ['./seguridad.page.scss'],
 })
 export class SeguridadPage implements OnInit {
-  selectedQuestion: string = ''; // Inicializamos la variable
+  selectedQuestion: number = 0; // Inicializamos la variable
   securityAnswer: string = '';
 
   constructor(

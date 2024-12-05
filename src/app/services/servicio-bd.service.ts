@@ -30,7 +30,7 @@ export class ServicioBDService {
     nick_u VARCHAR(50) NOT NULL UNIQUE, 
     correo_u VARCHAR(100) NOT NULL, 
     contrasena_u VARCHAR(50) NOT NULL, 
-    pregunta_seguridad VARCHAR(255),
+    pregunta_seguridad INTEGER(10),
     respuesta_seguridad VARCHAR(255),
     imagen_perfil_u BLOB, 
     estado_cuenta_u CHAR(1) NOT NULL, 
@@ -49,7 +49,7 @@ export class ServicioBDService {
   insertRol1: string = "INSERT or IGNORE INTO rol(id_rol,nombre_rol) VALUES (1,'Administrador')";
   insertRol2: string = "INSERT or IGNORE INTO rol(id_rol,nombre_rol) VALUES (2,'Moderador')";
   insertRol3: string = "INSERT or IGNORE INTO rol(id_rol,nombre_rol) VALUES (3,'Usuario')";
-  insertuser: string = "INSERT or IGNORE INTO usuario(id_usuario, nombre_u, apellido_u, nick_u, correo_u, contrasena_u, estado_cuenta_u, id_rol) VALUES(1,'Diego', 'Mellado', 'Diego_170', 'diego@example.com', 'DiegoMj.170','A',1)";
+  insertuser: string = "INSERT or IGNORE INTO usuario (nombre_u, apellido_u, nick_u, correo_u, contrasena_u, estado_cuenta_u, id_rol) VALUES('Diego', 'Mellado', 'Diego_170', 'diego@example.com', 'DiegoMj.170','A',1)";
   insertPregunta1: string = "INSERT or IGNORE INTO preguntas(id_preg, nombre_preg) VALUES (1,'¿Cuál es el nombre de tu primera mascota?')";
   insertPregunta2: string = "INSERT or IGNORE INTO preguntas(id_preg, nombre_preg) VALUES (2,'¿En qué escuela primaria estudiaste?')";
   insertPregunta3: string = "INSERT or IGNORE INTO preguntas(id_preg, nombre_preg) VALUES (3,'¿En qué ciudad naciste?')";
@@ -268,7 +268,7 @@ export class ServicioBDService {
     }
   }
 
-  async actualizarPreguntaSeguridad(nick: string, pregunta: string, respuesta: string) {
+  async actualizarPreguntaSeguridad(nick: string, pregunta: number, respuesta: string) {
     const query = `UPDATE USUARIO SET pregunta_seguridad = ?, respuesta_seguridad = ? WHERE nick_u = ?`;
     
     try {
@@ -281,19 +281,31 @@ export class ServicioBDService {
   }
 
 async obtenerPreguntaSeguridad(nick: string): Promise<string | null> {
+  const query = `SELECT pregunta_seguridad FROM USUARIO WHERE nick_u = ?`;
   // Validamos que el nick no esté vacío o sea inválido
-  if (!nick || nick.trim() === '') {
-    this.presentAlert('Error', 'El nick es inválido.');
-    return null;
-  }
-
-  const query = 'SELECT pregunta_seguridad FROM USUARIO WHERE nick_u = ?';
   try {
     const result = await this.database.executeSql(query, [nick]);
 
     // Verificamos si se obtuvo una respuesta válida
     if (result.rows.length > 0) {
-      return result.rows.item(0).pregunta_seguridad;
+      const num_pregunta = result.rows.item(0).pregunta_seguridad;
+      const query_preg = `SELECT nombre_preg FROM preguntas WHERE id_preg = ?`;
+      try {
+        const result_preg = await this.database.executeSql(query_preg, [num_pregunta]);
+    
+        // Verificamos si se obtuvo una respuesta válida
+        if (result_preg.rows.length > 0) {
+          return result_preg.rows.item(0).nombre_preg;
+        } else {
+          this.presentAlert('Error', 'No se encontró la pregunta de seguridad para este usuario.');
+          return null;
+        }
+      } catch (e: any) {
+        // En caso de error, presentamos una alerta con el mensaje de error
+        console.error('Error al obtener la pregunta de seguridad:', e);  // Para ayudar a depurar
+        this.presentAlert('Error', `No se pudo obtener la pregunta de seguridad: ${e.message || e}`);
+        return null;
+      }
     } else {
       this.presentAlert('Error', 'No se encontró la pregunta de seguridad para este usuario.');
       return null;
