@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Iniciar Sesión</ion-title>
+    <ion-title>Recuperar contraseña</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
       <ion-back-button></ion-back-button>
@@ -20,8 +20,8 @@
         <ion-input type="text" required [(ngModel)]="nick_u" name="nick"></ion-input>
       </ion-item>
 
-      <ion-button expand="full" type="submit" [disabled]="!loginForm.form.valid">Aceptar</ion-button>
-      <ion-button expand="full" routerLink="/login">Cancelar</ion-button>
+      <ion-button class="btn-aceptar" expand="full" type="submit" [disabled]="!loginForm.form.valid">Aceptar</ion-button>
+      <ion-button class="btn-cancelar" expand="full" routerLink="/login">Cancelar</ion-button>
     </form>
   </div>
 
@@ -33,8 +33,9 @@
         <ion-input type="text" required [(ngModel)]="respuesta_preg" name="resp_preg"></ion-input>
       </ion-item>
 
-      <ion-button expand="full" type="submit" [disabled]="!loginForm.form.valid">Aceptar</ion-button>
-      <ion-button expand="full" routerLink="/login">Cancelar</ion-button>
+      <ion-button class="btn-aceptar" expand="full" type="submit" [disabled]="!loginForm.form.valid">Aceptar</ion-button>
+      <ion-button class="btn-cancelar" expand="full" routerLink="/login">Cancelar</ion-button>
+
     </form>
   </div>
   

@@ -1,0 +1,66 @@
+// Estilo general del encabezado
+ion-header {
+  --background: black;
+  --color: white;
+}
+
+ion-toolbar {
+  --background: #d4af37;
+  --color: rgb(2, 2, 2);
+}
+
+ion-title {
+  color: rgb(0, 0, 0);
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+// Estilos para el contenido del formulario
+ion-content {
+  --background: black;
+  color: #d4af37;
+
+  .ion-padding {
+    padding: 20px;
+  }
+}
+
+// Estilos para los elementos del formulario
+ion-item {
+  --background: transparent;
+  --border-color: #d4af37; // Borde dorado en los campos
+  --color: rgb(255, 255, 255);
+  margin-bottom: 15px;
+
+
+  ion-label {
+    color: white;
+    font-weight: bold;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+
+  ion-select, ion-input {
+    --background: transparent;
+    --color: white;
+    --placeholder-color: black; // Color gris para el placeholder
+    border: 1px solid #d4af37; // Borde dorado en los inputs
+    border-radius: 10px;
+    padding: 10px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+}
+
+// Estilos para el botón de guardar
+ion-button {
+  --background: #d4af37;
+  --color: black;
+  --border-radius: 10px;
+  --box-shadow: 0px 4px 6px rgba(255, 196, 0, 0.836);
+  font-weight: bold;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  margin-left: 50px;
+  margin-right: 50px;
+
+  &:hover {
+    --background: $color-boton-hover;
+  }
+}

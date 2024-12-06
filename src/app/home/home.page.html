@@ -3,7 +3,6 @@
     <ion-title></ion-title>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
-      <ion-back-button></ion-back-button>
     </ion-buttons>
 
     <!-- Barra de búsqueda fuera del ion-buttons -->
@@ -59,5 +58,11 @@
   </div>
 
   <!-- Botón para explorar contenido -->
-  <ion-button expand="full" color="none" (click)="navigateToMenu()">Explorar contenido</ion-button>
+  <ion-button expand="full" color="none" (click)="navigateToMenu()" *ngIf="isAdmin()">Explorar contenido</ion-button>
+
+  <!-- Botón para ir a la ventana de administrador -->
+  <ion-button *ngIf="isAdmin()" expand="full" color="tertiary" (click)="navigateToAdmin()">
+    Ir a Administración
+  </ion-button>
 </ion-content>
+

@@ -1,0 +1,111 @@
+:host {
+    --ion-background-color: black;
+  }
+  
+  ion-header {
+    background: linear-gradient(to right, #d4af37, #b8860b); /* Degradado dorado */
+    color: white;
+  }
+  
+  ion-toolbar {
+    --background: transparent;
+  }
+  
+  ion-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+  
+  ion-content {
+    padding: 16px;
+    color: white;
+  
+    .tab-content {
+      margin-top: 16px;
+  
+      h2 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-align: center;
+        color: #d4af37; /* Dorado */
+        margin-bottom: 16px;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+      }
+    }
+  
+    ion-list {
+      background-color: #1a1a1a; /* Gris oscuro */
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+    }
+  
+    ion-item {
+      background: transparent;
+      --border-color: #d4af37; /* Borde dorado */
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 8px;
+      border-radius: 8px;
+  
+      ion-label {
+        color: white;
+  
+        h3 {
+          font-size: 1.2rem;
+          font-weight: bold;
+          color: #d4af37;
+          font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+  
+        p {
+          font-size: 0.9rem;
+          color: #ffffff; /* Texto gris claro */
+          font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+      }
+  
+      ion-button {
+        font-size: 0.9rem;
+        margin-left: 8px;
+        border-radius: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        &.ion-color {
+          background-color: #d4af37; /* Verde */
+          --color: rgb(0, 0, 0);
+        }
+  
+        &.ion-color-danger {
+          --background: #ff4500; /* Rojo brillante */
+          --color: white;
+        }
+      }
+    }
+  
+    ion-segment {
+      background-color: #000000; /* Fondo gris oscuro */
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(255, 187, 0, 0.5);
+      font-family: Georgia, 'Times New Roman', Times, serif;
+  
+      ion-segment-button {
+        --color-checked: #d4af37; /* Dorado */
+        --color: white;
+        --background: transparent;
+  
+        &.segment-button-checked {
+          background-color: #d4af37; /* Fondo dorado al seleccionar */
+          color: black;
+        }
+  
+        ion-label {
+          font-size: 1rem;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  

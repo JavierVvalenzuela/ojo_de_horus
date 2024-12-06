@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { AlertController, Platform } from '@ionic/angular';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import { Usuario } from '../model/usuario';
 import { Router } from '@angular/router';
@@ -11,13 +11,30 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class ServicioBDService {
-  createPost(newPost: { id: number; name: string; message: string; image: string | null; liked: boolean; }) {
+
+  private usuarioLogueado = {
+    nombre_u: 'Diego',
+    apellido_u: 'Mellado',
+    nick_u: 'Diego_170',
+    correo_u: 'diego@example.com',
+    contrasena_u: 'DiegoMj.170',
+    estado_cuenta_u: 'activo',
+    id_rol: 1, // Administrador
+  };
+  
+  obtenerUsuarioLogueado(): Observable<any> {
+    return of(this.usuarioLogueado); 
+  }
+
+  createPost(_newPost: { id: number; name: string; message: string; image: string | null; liked: boolean; }) {
     throw new Error('Method not implemented.');
   }
   dbService: any;
-  resetPassword(nick_: string, newPassword: string) {
+  resetPassword(_nick_: string, _newPassword: string) {
     throw new Error('Method not implemented.');
   }
+
+  
   public database!: SQLiteObject;
 
   tablaRol: string = "CREATE TABLE IF NOT EXISTS ROL (id_rol INTEGER PRIMARY KEY AUTOINCREMENT, nombre_rol VARCHAR(50) NOT NULL);";

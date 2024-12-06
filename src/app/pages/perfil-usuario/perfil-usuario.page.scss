@@ -1,79 +1,120 @@
+// Estilo general del encabezado
 ion-header {
-  background-color: #d4af37; /* Fondo dorado para el header */
-  color: #000;               /* Color del texto negro para el header */
-  font-family: Georgia, 'Times New Roman', Times, serif; /* Fuente aplicada al header */
+  --background: #d4af37;
+  --color: white;
 }
 
 ion-toolbar {
-  --background: #d4af37; /* Fondo dorado para la barra de herramientas */
-  font-family: Georgia, 'Times New Roman', Times, serif; /* Fuente aplicada a la barra de herramientas */
-  color: #000;
+  --background: gold;
+  --color: black;
 }
 
-ion-menu-button {
-  --color: #000000; /* Color del texto del botón negro */
+ion-title {
+  color: black;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+ion-list{
+  background-color: #000000;
+  --background: transparent;
 }
 
-ion-content.content-bg {
+// Estilos para el contenido
+.content-bg {
+  --background: black;
+  color: rgb(0, 0, 0);
+}
+
+.content-wrapper {
   display: flex;
-  justify-content: center; /* Centra horizontalmente */
-  align-items: center;     /* Centra verticalmente */
-  padding: 0;             /* Elimina el padding adicional */
-  background-color: #000; /* Fondo negro para toda la ventana */
-  --background: #000000;
-  font-family: Georgia, 'Times New Roman', Times, serif; /* Fuente aplicada a todo el contenido */
+  justify-content: center;
+  padding: 20px;
+}
 
-  .content-wrapper {
-    display: flex;
-    justify-content: center;
-    width: 100%;
+// Estilos para la tarjeta de perfil
+.profile-card {
+  --background: black;
+  --box-shadow: 0 4px 10px rgba(255, 187, 0, 0.801);
+  border-radius: 10px;
+  padding: 20px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.profile-avatar {
+  border: 3px solid gold;
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+}
+
+ion-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+ion-item {
+  --background: transparent;
+  --border-color: gold;
+  --color: rgb(255, 255, 255);
+  margin-bottom: 15px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  
+
+  ion-label {
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    
   }
 
-  .profile-card {
-    width: 100%;
-    max-width: 600px;        /* Ancho máximo del card */
-    margin: 20px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgb(255, 196, 0); /* Sombra dorada */
-    display: flex;
-    flex-direction: column;
-    gap: 15px;               /* Espacio entre los elementos del card */
-    background-color: #000000; /* Fondo negro para el card */
-    border: 2px solid #d4af37; /* Borde dorado para el card */
-    border-radius: 10px;     /* Bordes redondeados */
-
-    .profile-avatar {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;  /* Redondea el avatar */
-    }
-
-    ion-item {
-      --highlight-height: 2px;
-      --highlight-color: #cc9226; /* Color de resaltado dorado */
-      font-family: Georgia, 'Times New Roman', Times, serif; /* Fuente aplicada a los items */
-    }
-
-    ion-input {
-      --padding-start: 0;
-      color: #000000; /* Color del texto del input */
-      background-color: #fdfdfd; /* Fondo claro para el input */
-      border: 1px solid #d4af37; /* Borde dorado para el input */
-      border-radius: 5px; /* Bordes redondeados para el input */
-      font-family: Georgia, 'Times New Roman', Times, serif; /* Fuente aplicada al input */
-    }
-
-    ion-card-header {
-      ion-item {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        color: #000000; /* Color del texto del header */
-        font-family: Georgia, 'Times New Roman', Times, serif; /* Fuente aplicada al header del card */
-      }
-    }
+  ion-input {
+    --background: transparent;
+    --color: $color-texto;
+    --placeholder-color: #000000;
+    border: 1px solid gold;
+    border-radius: 10px;
+    padding: 10px;
   }
 }
 
+// Estilos para el botón de editar
+ion-button {
+  --background: gold;
+  --color: rgb(255, 255, 255);
+  --border-radius: 100%;
+  --box-shadow: 0px 4px 6px rgba(240, 165, 4, 0.842);
+
+  &:hover {
+    --background: gold ;
+
+  }
+
+  ion-icon {
+    font-size: 20px;
+  }
+}
+
+// Estilos para los botones de acción (Guardar y Cancelar)
+ion-button[expand="block"] {
+  background-color: gold  ;
+  color: black;
+  margin-top: 10px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+
+
+
+  &:hover {
+    --background: darken($color-boton, 10%);
+  }
+}
+
+// Estilos para los elementos cuando están en modo de edición
+ion-input[readonly] {
+  background-color: #000000;
+  color: #000000;
+  
+}
 
 

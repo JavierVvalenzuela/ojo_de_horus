@@ -1,0 +1,98 @@
+ion-header {
+    background-color: #d4af37;
+  
+    ion-toolbar {
+      --background: transparent;
+  
+      ion-title {
+        color: black;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+      }
+  
+      ion-buttons {
+        ion-menu-button,
+        ion-back-button {
+          color: black; /* Iconos dorados */
+        }
+      }
+    }
+  }
+  
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+
+    .logo-img {
+      width: 150px; /* Tamaño reducido */
+      height: auto;
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+  }
+
+  .login-content {
+    background-color: black;
+    color: white;
+    height: 100%;
+    --background: transparent;
+  
+    .form-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 20px;
+      padding: 20px;
+      border: 2px solid #d4af37; /* Borde dorado */
+      border-radius: 15px; /* Bordes redondeados */
+      box-shadow: 0 0 10px 2px rgb(255, 187, 0); /* Sombra dorada */
+      background-color: black;
+  
+      ion-item {
+        margin-bottom: 15px;
+        color: white;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        background-color: black;
+        --background: transparent;
+        border-radius: 10px;
+        box-shadow: 0 0 10px 2px rgb(255, 196, 0); /* Sombra dorada */
+  
+        ion-label {
+          color: white;
+          font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+  
+        ion-input {
+          color: white;
+          font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+      }
+  
+      ion-button {
+        --background: transparent !important; /* Elimina el fondo azul */
+        --border-radius: 20px; /* Bordes redondeados */
+        width: 100%;
+        margin-top: 10px;
+        text-align: center;
+        
+
+  
+        &.btn-aceptar {
+          --background: #d4af37 !important; /* Fondo dorado */
+          --color: black !important; /* Texto negro */
+          --border-radius: 20px;
+          font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+  
+        &.btn-cancelar {
+          --background: rgb(189, 12, 12) !important; /* Fondo rojo */
+          --color: white !important; /* Texto blanco */
+          --border-radius: 20px;
+          font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+  }
+ }
+}
+  

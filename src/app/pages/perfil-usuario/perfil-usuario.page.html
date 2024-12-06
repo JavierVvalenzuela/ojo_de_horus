@@ -22,8 +22,8 @@
           </ion-label>
           <!-- Botón de editar perfil -->
           <ion-buttons slot="end">
-            <ion-button *ngIf="!isEditing" color="primary" (click)="startEdit()">
-              <ion-icon name="create-outline"></ion-icon>
+            <ion-button *ngIf="!isEditing" color="none" (click)="startEdit()">
+              <ion-icon name="pencil"></ion-icon>
             </ion-button>
           </ion-buttons>
         </ion-item>
@@ -91,10 +91,10 @@
 
         <!-- Botones de acción -->
         <div *ngIf="isEditing">
-          <ion-button color="danger" expand="block" (click)="cancelEdit()">
+          <ion-button color="none" expand="block" (click)="cancelEdit()">
             Cancelar
           </ion-button>
-          <ion-button color="success" expand="block" (click)="saveChanges()">
+          <ion-button color="none" expand="block" (click)="saveChanges()">
             Guardar
           </ion-button>
         </div>
