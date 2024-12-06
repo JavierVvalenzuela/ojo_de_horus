@@ -1,21 +1,32 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
-
+import { TestBed } from '@angular/core/testing';
 import { HomePage } from './home.page';
+import { ServicioBDService } from '../services/servicio-bd.service';
+import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 
 describe('HomePage', () => {
   let component: HomePage;
-  let fixture: ComponentFixture<HomePage>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [HomePage],
-      imports: [IonicModule.forRoot()]
+      providers: [
+        {
+          provide: ServicioBDService,
+          useValue: {
+            someMethod: jasmine.createSpy('someMethod').and.returnValue(Promise.resolve()),
+          },
+        },
+        {
+          provide: SQLite,
+          useValue: {
+            create: jasmine.createSpy('create').and.returnValue(Promise.resolve({})),
+          },
+        },
+      ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(HomePage);
+    const fixture = TestBed.createComponent(HomePage);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
